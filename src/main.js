@@ -21,17 +21,22 @@ import * as ElIconModules from '@element-plus/icons-vue'
 import vue3videoPlay from "vue3-video-play"; // 引入组件
 import "vue3-video-play/dist/style.css"; // 引入css
 
+// import axios from "axios";
 
+import axios from "@/http/http";
 
+import store from '@/store/index'
 
 const app = createApp(App)
 
-
+app.config.globalProperties.$axios = axios;
+app.config.globalProperties.$axios = axios;
+// app.use(axios)
 
 // 使用配置的路由
 app.use(routerIndex)
 
-
+app.use(store)
 
 app.use(vue3videoPlay)
 
@@ -44,4 +49,5 @@ for (const iconName in ElIconModules) {
     }
 }
 
+// console.log(app)
 app.mount('#app')

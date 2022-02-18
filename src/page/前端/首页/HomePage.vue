@@ -2,7 +2,7 @@
   <el-container>
     <el-header height="auto">
       <el-row :gutter="20">
-        <el-col :span="3" :offset="1">
+        <el-col :span="3">
           <router-link :to="{name:'HomePage'}"><div class="grid-content bg-purple">
             <div class="demo-image">
               <div class="block">
@@ -67,6 +67,8 @@ export default {
   text-align: center;
   line-height: 40px;
   height: auto;
+  /*margin: 0;*/
+  /*padding: 0;*/
 }
 .el-main {
   background-color: #E9EEF3;
@@ -90,11 +92,11 @@ body > .el-container {
   line-height: 320px;
 }
 .el-row {
+  padding: 0;
+  margin: 0;
   margin-bottom: 20px;
   padding-top: 20px;
-&:last-child {
-   margin-bottom: 0;
- }
+  /*margin-left: 0px;*/
 }
 .el-col {
   /*height: 30px;*/

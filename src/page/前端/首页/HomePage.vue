@@ -11,18 +11,18 @@
               </div>
             </div>
           </div>
-        </router-link>
+          </router-link>
         </el-col>
         <el-col :span="3" v-for="item in homePageData" :key="item.id">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-          <router-link :to="{name:item.url.slice(1)}" active-class="active">{{ item.type }}</router-link>
-        </div>
+            <router-link :to="{name:item.url.slice(1)}" active-class="active">{{ item.type }}</router-link>
+          </div>
         </el-col>
-<!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
-<!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
+        <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
+        <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="1"><div class="grid-content bg-purple"><i class="el-icon-edit"></i></div></el-col>
-        <el-col :span="2"><div class="grid-content bg-purple">登录/注册</div></el-col>
+        <el-col :span="2"><router-link :to="{name: 'UserLoginPage'}"><div class="grid-content bg-purple">登录/注册</div></router-link></el-col>
       </el-row>
 
 
@@ -36,11 +36,9 @@
 
 <script>
 import axios from 'axios'
-
 export default {
   name: 'HomePage',
   components: {
-
   },
   data() {
     return {
@@ -78,16 +76,13 @@ export default {
   padding: 0;
   /*height: 100%;*/
 }
-
 body > .el-container {
   margin-bottom: 40px;
 }
-
 .el-container:nth-child(5) .el-aside,
 .el-container:nth-child(6) .el-aside {
   line-height: 260px;
 }
-
 .el-container:nth-child(7) .el-aside {
   line-height: 320px;
 }
@@ -104,7 +99,6 @@ body > .el-container {
   height: auto;
   width: auto;
   border-radius: 4px;
-
 }
 .bg-purple-dark {
   background: #99a9bf;

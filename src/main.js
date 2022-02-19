@@ -30,7 +30,7 @@ import store from '@/store/index'
 const app = createApp(App)
 
 app.config.globalProperties.$axios = axios;
-app.config.globalProperties.$axios = axios;
+// app.config.globalProperties.$axios = axios;
 // app.use(axios)
 
 // 使用配置的路由

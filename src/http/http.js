@@ -41,7 +41,7 @@ axios.interceptors.response.use(Response => {
     //错误提醒
     endLoading();
     ElMessage.error(error.response.data);
-
+    console.log(error + "王程翔")
     /*获取错误状态码*/
     const  { status } =error.response;
     if(status == 401){

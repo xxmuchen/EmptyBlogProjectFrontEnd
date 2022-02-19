@@ -1,7 +1,6 @@
 <template>
   <el-container>
     <el-main>
-
         <div class="registBox">
           <el-upload
               class="avatar-uploader"
@@ -81,15 +80,20 @@
                 </div>
               </el-form-item>
               <el-form-item label="用户地址" prop="location">
-                <el-cascader
-                    size="large"
-                    :options="options"
-                    v-model="ruleForm.location"
-                    @change="handleChange">
-                </el-cascader>
+                <div class="address">
+                  <el-cascader
+                      size="large"
+                      :options="options"
+                      v-model="ruleForm.location"
+                      @change="handleChange">
+                  </el-cascader>
+                </div>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" class="submit" @click="onSubmit" :disabled="isDisabled">Submit</el-button>
+                <router-link :to="{
+              name: 'UserRegistPage'
+            }"><el-tag class="ml-2" type="success">免费注册</el-tag></router-link>
 <!--                <el-button>Cancel</el-button>-->
               </el-form-item>
             </el-form>
@@ -102,6 +106,7 @@
   import { regionData  } from 'element-china-area-data'
   import {reactive} from "vue";
   import axios from "axios";
+  import {ElMessage} from "element-plus";
 
   export default {
     name: 'UserRegistPage',
@@ -251,6 +256,7 @@
 
       onSubmit() {
         // console.log(this.ruleForm.avatar)
+        const _this = this
           axios
               .post('http://localhost:8081/api/registUser' , {
                 userName: this.ruleForm.userName,
@@ -261,12 +267,26 @@
                 birthday: this.ruleForm.birthday,
                 avatar: this.ruleForm.avatar,
                 location: this.ruleForm.location.toString()
-              }).then(response => (console.log(response)))
+
+              }).then(response => {
+                  ElMessage({
+                    message: response.data,
+                    type: 'success',
+                  })
+                setTimeout(function (){
+                  _this.$router.push({name: 'UserLoginPage'})
+                } , 3000)
+
+          })
       }
     }
   }
 </script>
-<style>
+<style scoped>
+.el-container{
+  width: 100%;
+  height: 100%;
+}
 .el-main {
   background-color: #E9EEF3;
   color: #333;
@@ -301,10 +321,12 @@ body > .el-container {
   /*line-height: 320px;*/
 }
 .avatar-uploader {
-  margin-left: 130px;
-  margin-bottom: 20px;
+  padding-left: 130px;
+  padding-bottom: 20px;
+  /*margin-left: 130px;*/
+  /*margin-bottom: 20px;*/
 }
-.avatar-uploader .el-upload {
+.avatar-uploader ::v-deep(.el-upload) {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
@@ -326,7 +348,26 @@ body > .el-container {
   height: 178px;
   display: block;
 }
+.block { width: 100%}
+.block ::v-deep(.el-input){
+  width: 100%;
+}
+.block  ::v-deep(.el-input__inner) {
+  width: 100%;
+}
+.address {
+  width: 100%;
+  /*height: auto;*/
+}
+.address ::v-deep(.el-cascader) {
+  width: 100%;
+}
+
 .submit {
   margin-left: 50px;
+}
+.el-tag {
+  margin-left: 60px;
+  font-size: 13px;
 }
 </style>

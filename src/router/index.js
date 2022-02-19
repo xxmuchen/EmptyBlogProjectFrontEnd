@@ -28,6 +28,7 @@ import GriphicPageHomePageDisplay from "@/components/前端组件/图文页组�
 import GriphicPageDetailPageDisplay from "@/components/前端组件/图文页组件/GriphicPageDetailPageDisplay";
 // import VLogPageDisplay from '@/components/前端组件/Vlog页组件/VLogPageDisplay'
 import UserRegistPage from '@/page/前端/注册页/UserRegistPage'
+import UserLoginPage from "@/page/前端/登录页/UserLoginPage";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -93,6 +94,11 @@ const routes = [
         name: 'UserRegistPage',
         path: '/UserRegistPage',
         component: UserRegistPage
+    },
+    {
+        name: 'UserLoginPage',
+        path: '/UserLoginPage',
+        component: UserLoginPage
     }
 ];
 

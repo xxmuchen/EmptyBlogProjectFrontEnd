@@ -24,10 +24,12 @@
           </div>
           <div class="userOperation">
             <div class="operation">
-              点赞(使用图标)
+              <i class="iconfont icon-xihuan" v-show="!isLike" @click="saveDiaryStar"></i>
+              <i class="iconfont icon-xiai" v-show="isLike" @click="cancelDiaryStar"></i>
             </div>
             <div class="operation">
-              收藏(使用图标)
+              <i class="iconfont icon-shoucang2" v-show="!isCollect"></i>
+              <i class="iconfont icon-shoucang1" v-show="isCollect"></i>
             </div>
           </div>
         </div>
@@ -48,9 +50,9 @@
     data() {
       return {
         diary: {},
-        BgColor: {
-
-        }
+        BgColor: {},
+        isLike: false,
+        isCollect: false
       }
     },
     methods: {
@@ -64,10 +66,16 @@
           }).then(response => {
             console.log(response.data)
             this.diary = response.data
-            this.BgColor = { background: this.diary.bgColor}
-            console.log(this.BgColor)
+            // this.BgColor = { background: this.diary.bgColor}
+            // console.log(this.BgColor)
           })
         }
+      },
+      saveDiaryStar() {
+        this.isLike = true;
+      },
+      cancelDiaryStar() {
+        this.isLike = false;
       }
     },
     // 获取日记数据
@@ -115,7 +123,7 @@
   .headInfo {
     width: 100%;
     height: 100px;
-    background: red;
+    background: gray;
     padding: 0;
     margin: 0;
     /*padding-top: 30px;*/
@@ -126,7 +134,7 @@
   .diaryTitle {
     height: auto;
     width: 100%;
-    background: green;
+    /*background: green;*/
     display: flex;
     /*margin-top: 30px;*/
     justify-content:center;
@@ -155,7 +163,7 @@
     margin: 0;
     width: 100%;
     height: auto;
-    background: green;
+    /*background: green;*/
     /*padding-left: 10px;*/
     /*margin-left: 10px;*/
   }
@@ -164,7 +172,7 @@
     margin: 0;
     width: 93%;
     height: auto;
-    background: yellow;
+    /*background: yellow;*/
     /*padding-left: 40px;*/
     /*padding-right: 30px;*/
     word-wrap:break-word;
@@ -178,18 +186,19 @@
     /*justify-content:center;*/
     /*align-items:center;*/
     margin-top: 30px;
-    margin-left: 3.3%;
+    margin-left: 2.5%;
     /*padding-left: 10px;*/
   }
   .operation {
     width: 50px;
     height: 50px;
-    background: red;
+    /*background: red;*/
     display:flex;
     justify-content:center;
     align-items:center;
     border-radius: 100px;
-    margin-left: 10px;
+    margin-right: 10px;
+    /*margin-left: ;*/
     /*margin-right: -1.8;*/
     /*margin-right: 10px;*/
     /*margin-right: 100px;*/

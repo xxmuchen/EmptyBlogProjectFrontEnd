@@ -21,7 +21,7 @@
     name: 'UserLoginAvatarAndNameDisplay',
     data() {
       return {
-        isShow: true,
+        isShow: false,
         circleUrl: 'http://localhost:8080/images/UserAvatar/5a80caaa-c618-4646-b971-821090486b35284196389.jpg',
         userName: ''
       }
@@ -37,6 +37,10 @@
               this.circleUrl = response.data.avatar
             }
             this.userName = response.data.userName
+            this.isShow = true
+          }).catch(error => {
+              console.log(error)
+              this.isShow = false;
           })
         }
       }

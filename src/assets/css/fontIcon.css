@@ -1,8 +1,8 @@
 @font-face {
     font-family: "iconfont"; /* Project id 3078533 */
-    src: url('//at.alicdn.com/t/font_3078533_gw0xs6yoezl.woff2?t=1645374591784') format('woff2'),
-    url('//at.alicdn.com/t/font_3078533_gw0xs6yoezl.woff?t=1645374591784') format('woff'),
-    url('//at.alicdn.com/t/font_3078533_gw0xs6yoezl.ttf?t=1645374591784') format('truetype');
+    src: url('//at.alicdn.com/t/font_3078533_n3s37fana9.woff2?t=1645468331135') format('woff2'),
+    url('//at.alicdn.com/t/font_3078533_n3s37fana9.woff?t=1645468331135') format('woff'),
+    url('//at.alicdn.com/t/font_3078533_n3s37fana9.ttf?t=1645468331135') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,26 @@
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shoucang1:before {
+    content: "\e661";
+    font-size: 2.7em;
+}
+
+.icon-xihuan:before {
+    content: "\e86f";
+    font-size: 3em;
+}
+
+.icon-shoucang2:before {
+    content: "\e602";
+    font-size: 2.7em;
+}
+
+.icon-xiai:before {
+    content: "\e601";
+    font-size: 3em;
 }
 
 .icon-iconset0468:before {

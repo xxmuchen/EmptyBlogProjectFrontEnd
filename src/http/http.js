@@ -57,13 +57,16 @@ axios.interceptors.response.use(Response => {
     return Response;
 },error => {
     //错误提醒
+    // eslint-disable-next-line no-debugger
+    // debugger
     endLoading();
-    console.log(error)
+    console.log(error.response.data)
     ElMessage.error(error.response.data);
     // console.log(error + "王程翔")
     /*获取错误状态码*/
-    const  { status } =error.response;
-    if(status == 401){
+    const status = error.response.data.message;
+    console.log(status)
+    if(status === '401'){
         ElMessage.error("token失效，重新登录");
         /*清楚token*/
         localStorage.removeItem('eleToken');

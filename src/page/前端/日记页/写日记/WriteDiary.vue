@@ -144,6 +144,7 @@
       onSubmit() {
         //
         this.ruleForm.content = this.editor.txt.html()
+        console.log(this.ruleForm.bgColor)
         axios.post('http://localhost:8081/api/diaryInfoUpload' , {
           title: this.ruleForm.title,
           content: this.ruleForm.content,

@@ -153,9 +153,14 @@
           see: this.ruleForm.public,
           // author_id: this.$store.getters.user
         }).then(response => {
-           setTimeout(()=>{
-             ElMessage.success(response);
-           } , 3000)
+          ElMessage({
+            message: response.data,
+            type: 'success'
+          })
+           // setTimeout(()=>{
+           //   // ElMessage.success(response);
+           //
+           // } , 3000)
         })
         // console.log(this.ruleForm)
         // console.log(this.editor.txt.html());

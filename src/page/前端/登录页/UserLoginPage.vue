@@ -9,7 +9,7 @@
             <el-image
                 style="width: 150px; height: 80px"
                 :src="imageUrl"
-                fit="fit"
+                fit="fill"
             ></el-image>
           </div>
         </div>

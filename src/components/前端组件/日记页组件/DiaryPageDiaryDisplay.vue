@@ -4,10 +4,10 @@
     <el-main>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">放空日记</el-breadcrumb-item>
-        <el-breadcrumb-item v-if="typeof $route.params.name !== 'undefined'">{{ $route.params.name }}</el-breadcrumb-item>
-        <el-breadcrumb-item v-else>{{ this.name }}</el-breadcrumb-item>
-<!--        <el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
-<!--        <el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
+        <el-breadcrumb-item v-if="typeof $route.query.name !== 'undefined'">{{ $route.query.name }}</el-breadcrumb-item>
+<!--        <el-breadcrumb-item v-if="typeof $route.params.name !== 'undefined'">{{ $route.params.name }}</el-breadcrumb-item>-->
+<!--        <el-breadcrumb-item v-else>{{ this.name }}</el-breadcrumb-item>-->
+
       </el-breadcrumb>
       <el-divider></el-divider>
       <el-table
@@ -20,28 +20,30 @@
           v-on:row-click="justToDiaryDetail"
       >
         <el-table-column
-            prop="date"
+            prop="title"
             label="日记名称"
             width="800">
         </el-table-column>
 <!--        <el-divider></el-divider>-->
         <el-table-column
-            prop="name"
+            prop="authorName"
             label="作者"
             width="180">
         </el-table-column>
         <el-table-column
-            prop="address"
+            prop="updateTime"
             label="发布时间">
         </el-table-column>
       </el-table>
 
       <div class="paging">
         <div class="block">
-          <span class="demonstration">大于 7 页时的效果</span>
+<!--          <span class="demonstration">大于 7 页时的效果</span>-->
           <el-pagination
               layout="prev, pager, next"
-              :total="1000">
+              :page-count="pageCount"
+              @current-change="currentChange"
+          >
           </el-pagination>
         </div>
       </div>
@@ -51,46 +53,45 @@
   </el-container>
 </template>
 <script>
+  // import axios from "axios";
+
+  import axios from "axios";
+
   export default {
     name: 'DiaryPageDiaryDisplay',
     props: ['name'],
     data() {
       return {
-        tableData: [{
-          id:1,
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id:2,
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          id:3,
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          id:4,
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        tableData: [],
+        currentPage: 1,
+        pageCount: 0
       }
     },
     methods: {
       justToDiaryDetail(row) {
-        console.log(row.id);
-        this.$router.push({name: 'DiaryPageDiaryDetail'});
+        // console.log(row.id);
+        this.$router.push({name: 'DiaryPageDiaryDetail' , query:{diaryId: row.id}});
       },
-      getNewDiaryListDisplay() {
-
+      currentChange(currentIndex){
+        // console.log(currentIndex)
+        this.getNewDiaryListFirstPageDisplay(currentIndex)
+      },
+      getNewDiaryListFirstPageDisplay(currentIndex) {
+        axios.get('http://localhost:8081/api/newDiaryListDisplay' , {
+          params: {
+            currentIndex
+          }
+        }).then(response => {
+          this.tableData = response.data.records
+          this.pageCount = response.data.pages
+          console.log(this.tableData[0].authorId)
+        })
       }
     },
     mounted() {
-      console.log(this.name)
-      console.log(this.$route.params.name)
+      // console.log(this.name)
+      // console.log(this.$route.params.name)
+      this.getNewDiaryListFirstPageDisplay(1)
     }
   }
 </script>

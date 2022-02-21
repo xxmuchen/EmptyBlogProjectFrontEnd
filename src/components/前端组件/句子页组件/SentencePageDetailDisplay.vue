@@ -138,27 +138,17 @@ body > .el-container {
   align-items: center;
   padding: 0;
   margin: 0;
-  /*margin-left: 10px;*/
-  /*padding-left: 10px;*/
 }
 .sentenceMain {
   width: 100%;
   min-height: 280px;
   height: auto;
-  /*background: yellow;*/
-
-  /*padding-left: 30px;*/
 }
 .sentenceContent {
   width: 100%;
   min-height: 140px;
   height: auto;
   display: flex;
-  /*padding-left: 30px;*/
-  /*align-items: end;!*实现水平居中*!*/
-  /*justify-content:center;*/
-  /*text-align: end;*/
-  /*background: greenyellow;*/
 }
 .sentenceContentBox {
   width: 500px;
@@ -170,19 +160,9 @@ body > .el-container {
 }
 .sentenceContentAuthor {
   width: 100%;
-  /*min-height: 70px;*/
   text-align: right;
-  /*padding-right: 30px;*/
-  /*margin-right: -30px;*/
   margin-left: -180px;
-  /*float: right;*/
-  /*display: flex;*/
-  /*align-items:center;!*实现水平居中*!*/
-  /*justify-content:right;*/
-  /*text-align: center;*/
-  /*padding-left: 30px;*/
-  /*margin-right: 30px;*/
-  /*border-bottom: 1px solid lightgray;*/
+
 }
 .sentenceContentUserOperation {
   width: 100%;

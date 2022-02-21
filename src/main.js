@@ -21,7 +21,7 @@ import * as ElIconModules from '@element-plus/icons-vue'
 import vue3videoPlay from "vue3-video-play"; // 引入组件
 import "vue3-video-play/dist/style.css"; // 引入css
 
-// import axios from "axios";
+
 
 import axios from "@/http/http";
 
@@ -30,7 +30,10 @@ import store from '@/store/index'
 // import wangEditor from "wangeditor/src/wangEditor";
 
 
+
 const app = createApp(App)
+
+
 
 app.config.globalProperties.$axios = axios;
 // app.config.globalProperties.$axios = axios;

@@ -3,6 +3,21 @@ import { ElLoading } from 'element-plus';   /*elementUI的loading*/
 import { ElMessage } from 'element-plus';   /*elementUI消息提醒*/
 /*import { Message,Loading } from 'element-ui';  也可以这样解构赋值*/
 import router from '../router/index'
+import JSON_BIG from "json-bigint";
+
+
+axios.defaults.transformResponse = (data => {
+
+    // 对data（后台的原始数据）进行转换
+    try {
+        return JSON_BIG.parse(data)
+    }catch (e) {
+        return data
+    }
+
+})
+
+
 
 
 let loading;
@@ -22,6 +37,7 @@ function endLoading () {
 axios.interceptors.request.use(config => {
     //加载动画
     startLoading();
+
     /*判断token存在   登录拦截*/
     if(localStorage.eleToken){
         /*设置统一的header*/
@@ -36,12 +52,15 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(Response => {
     //结束加载动画
     endLoading();
+    // eslint-disable-next-line no-debugger
+    // debugger
     return Response;
 },error => {
     //错误提醒
     endLoading();
+    console.log(error)
     ElMessage.error(error.response.data);
-    console.log(error + "王程翔")
+    // console.log(error + "王程翔")
     /*获取错误状态码*/
     const  { status } =error.response;
     if(status == 401){
@@ -56,6 +75,15 @@ axios.interceptors.response.use(Response => {
 })
 
 
+// axios.defaults.transformResponse = [data => {
+//     try{
+//         return JSON_BIG.parse(data)
+//     }catch (err) {
+//         return {
+//             data
+//         }
+//     }
+// }]
 
 
 export default axios;

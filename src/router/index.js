@@ -29,6 +29,7 @@ import GriphicPageDetailPageDisplay from "@/components/前端组件/图文页组
 // import VLogPageDisplay from '@/components/前端组件/Vlog页组件/VLogPageDisplay'
 import UserRegistPage from '@/page/前端/注册页/UserRegistPage'
 import UserLoginPage from "@/page/前端/登录页/UserLoginPage";
+import WriteDiary from "@/page/前端/日记页/写日记/WriteDiary";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -60,8 +61,22 @@ const routes = [
         redirect: '/DiaryPage/DiaryPageHomeDisplay',
         children: [
             {name:'DiaryPageHomeDisplay' , path: 'DiaryPageHomeDisplay', component: DiaryPageHomeDisplay},
-            {name:'DiaryPageDiaryDisplay' , path: 'DiaryPageDiaryDisplay', component: DiaryPageDiaryDisplay},
-            { name:'DiaryPageDiaryDetail' , path: 'DiaryPageDiaryDetail', component: DiaryPageDiaryDetailDisplay }
+            {
+                name:'DiaryPageDiaryDisplay' ,
+                path: 'DiaryPageDiaryDisplay',
+                component: DiaryPageDiaryDisplay,
+                props() {
+                    return {
+                        name: '最新日记'
+                    }
+                }
+            },
+            {
+                name:'DiaryPageDiaryDetail' ,
+                path: 'DiaryPageDiaryDetail',
+                component: DiaryPageDiaryDetailDisplay
+
+            }
         ]
     },
     {
@@ -99,6 +114,11 @@ const routes = [
         name: 'UserLoginPage',
         path: '/UserLoginPage',
         component: UserLoginPage
+    },
+    {
+        name: 'WriteDiary',
+        path: '/WriteDiary',
+        component: WriteDiary
     }
 ];
 

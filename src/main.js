@@ -27,6 +27,9 @@ import axios from "@/http/http";
 
 import store from '@/store/index'
 
+// import wangEditor from "wangeditor/src/wangEditor";
+
+
 const app = createApp(App)
 
 app.config.globalProperties.$axios = axios;
@@ -41,6 +44,8 @@ app.use(store)
 app.use(vue3videoPlay)
 
 app.use(ElementPlus)
+
+// app.use(wangEditor)
 
 for (const iconName in ElIconModules) {
     if (Reflect.has(ElIconModules, iconName)) {

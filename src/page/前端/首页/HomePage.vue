@@ -20,15 +20,17 @@
         </el-col>
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
-        <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
+        <el-col :span="2"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="1"><div class="grid-content bg-purple"><i class="el-icon-edit"></i></div></el-col>
-        <el-col :span="2"><router-link :to="{name: 'UserLoginPage'}"><div class="grid-content bg-purple">登录/注册</div></router-link></el-col>
+        <el-col :span="3"><div class="grid-content bg-purple"><UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay></div></el-col>
       </el-row>
 
 
     </el-header>
     <el-main>
-      <router-view></router-view>
+
+        <router-view></router-view>
+
     </el-main>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -36,9 +38,11 @@
 
 <script>
 import axios from 'axios'
+import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
 export default {
   name: 'HomePage',
   components: {
+    UserLoginAvatarAndNameDisplay
   },
   data() {
     return {

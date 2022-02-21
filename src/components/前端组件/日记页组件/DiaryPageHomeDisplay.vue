@@ -25,25 +25,12 @@
             <div>
               <el-tag class="newDiaryMore">更多 >></el-tag>
             </div>
-            <div class="newDiaryContent">
+            <div class="newDiaryContent" v-for="item in newDiaryDisplayThreePieces" :key="item.id">
               <el-row :gutter="20">
-                <el-col :span="6" :offset="1"><div class="grid-content bg-purple">123</div></el-col>
-                <el-col :span="3" :offset="13"><div class="grid-content bg-purple">作者</div></el-col>
+                <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
+                <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorId }}</div></el-col>
               </el-row>
             </div>
-          <div class="newDiaryContent">
-            <el-row :gutter="20">
-              <el-col :span="6" :offset="1"><div class="grid-content bg-purple">123</div></el-col>
-              <el-col :span="3" :offset="13"><div class="grid-content bg-purple">作者</div></el-col>
-            </el-row>
-          </div>
-<!--          <div class="newDiaryContent">-->
-            <el-row :gutter="20">
-              <el-col :span="6" :offset="1"><div class="grid-content bg-purple">123</div></el-col>
-              <el-col :span="3" :offset="13"><div class="grid-content bg-purple">作者</div></el-col>
-            </el-row>
-<!--          </div>-->
-
         </div>
 <!--      推荐日记-->
       <div class="newDiary">
@@ -108,12 +95,27 @@
   </el-container>
 </template>
 <script>
+  import axios from "axios";
+
   export default {
     name: '',
     data() {
       return {
-        url: 'https://img0.baidu.com/it/u=2639026559,1072757904&fm=253&fmt=auto&app=138&f=JPEG?w=1600&h=500'
+        url: 'https://img0.baidu.com/it/u=2639026559,1072757904&fm=253&fmt=auto&app=138&f=JPEG?w=1600&h=500',
+        newDiaryDisplayThreePieces: []
       }
+    },
+    methods: {
+      /*获取最新的三条日记*/
+      diaryHomePageNewDiaryDisplayThreePieces() {
+        axios.get('http://localhost:8081/api/diaryHomePageNewDiaryDisplayThreePieces').then(response => {
+          this.newDiaryDisplayThreePieces = response.data
+          console.log(response.data)
+        })
+      }
+    },
+    mounted() {
+      this.diaryHomePageNewDiaryDisplayThreePieces()
     }
   }
 </script>

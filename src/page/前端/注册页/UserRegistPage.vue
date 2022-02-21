@@ -92,8 +92,8 @@
               <el-form-item>
                 <el-button type="primary" class="submit" @click="onSubmit" :disabled="isDisabled">Submit</el-button>
                 <router-link :to="{
-              name: 'UserRegistPage'
-            }"><el-tag class="ml-2" type="success">免费注册</el-tag></router-link>
+                  name: 'UserLoginPage'
+                 }"><el-tag class="ml-2" type="success">用户登录</el-tag></router-link>
 <!--                <el-button>Cancel</el-button>-->
               </el-form-item>
             </el-form>

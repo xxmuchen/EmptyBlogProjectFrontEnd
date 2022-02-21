@@ -4,7 +4,8 @@
     <el-main>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">放空日记</el-breadcrumb-item>
-        <el-breadcrumb-item>{{ $route.params.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="typeof $route.params.name !== 'undefined'">{{ $route.params.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item v-else>{{ this.name }}</el-breadcrumb-item>
 <!--        <el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
 <!--        <el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
       </el-breadcrumb>
@@ -52,6 +53,7 @@
 <script>
   export default {
     name: 'DiaryPageDiaryDisplay',
+    props: ['name'],
     data() {
       return {
         tableData: [{
@@ -81,7 +83,14 @@
       justToDiaryDetail(row) {
         console.log(row.id);
         this.$router.push({name: 'DiaryPageDiaryDetail'});
+      },
+      getNewDiaryListDisplay() {
+
       }
+    },
+    mounted() {
+      console.log(this.name)
+      console.log(this.$route.params.name)
     }
   }
 </script>
@@ -127,7 +136,8 @@
 }
 
 .el-breadcrumb {
-  margin-top: 30px;
+  margin-left: 0px;
+  /*margin-top: 30px;*/
   /*margin-left: 40px;*/
 }
 

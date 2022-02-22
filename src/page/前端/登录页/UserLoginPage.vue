@@ -149,6 +149,8 @@ export default {
             /*解析token中的信息*/
             const decoded = jwt(token);
             /*存储至vuex*/
+            // eslint-disable-next-line no-debugger
+            debugger
             this.$store.dispatch("setAuthenticated",!decoded === '')  //decoded空，函数返回真，取反假
             this.$store.dispatch("setUser",decoded)
 

@@ -46,9 +46,8 @@
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="1"><div class="grid-content bg-purple"><i class="el-icon-edit"></i></div></el-col>
-        <el-col :span="2"><div class="grid-content bg-purple">登录/注册</div></el-col>
+        <el-col :span="3"><div class="grid-content bg-purple"><UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay></div></el-col>
       </el-row>
-
 
     </el-header>
     <el-main>
@@ -58,8 +57,13 @@
   </el-container>
 </template>
 <script>
+  import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
+
   export default {
     name: 'DiaryPage',
+    components: {
+      UserLoginAvatarAndNameDisplay
+    },
     data() {
       return {
         url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png'

@@ -28,7 +28,7 @@
             <div class="newDiaryContent" v-for="item in newDiaryDisplayThreePieces" :key="item.id">
               <el-row :gutter="20">
                 <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
-                <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorId }}</div></el-col>
+                <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
               </el-row>
             </div>
         </div>

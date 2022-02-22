@@ -46,6 +46,7 @@
   import axios from "axios";
   import {ElMessage} from "element-plus";
 
+
   export default {
     name: 'DiaryPageDiaryDetailDisplay.vue',
     data() {
@@ -68,7 +69,7 @@
             this.hasAlreadLike(diary_id)
             this.hasAlreadCollect(diary_id)
             // console.log(this.diary)
-            // this.BgColor = { background: this.diary.bgColor}
+            this.BgColor = { background: this.diary.bgColor}
             // console.log(this.BgColor)
           })
         }
@@ -125,17 +126,20 @@
       },
       hasAlreadLike(diary_id){
         // console.log(this.diary.id)
-        axios.get('/hasAlreadLike' , {
-          params: {
-            diaryId:diary_id
-          }
-        }).then(response => {
+        let eleToken = localStorage.getItem('eleToken')
+        if (eleToken !== null) {
+          axios.get('/hasAlreadLike' , {
+            params: {
+              diaryId:diary_id
+            }
+          }).then(response => {
             if (response.data === 'like') {
               this.isLike = true;
             }else {
               this.isLike = false;
             }
-        })
+          })
+        }
       },
       hasAlreadCollect(diary_id){
         console.log(this.diary.id)

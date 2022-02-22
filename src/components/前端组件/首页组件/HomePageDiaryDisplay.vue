@@ -58,7 +58,7 @@
       }
     },
     mounted() {
-      axios.get('http://localhost:8081/api/HomePageDiaryDisplay').then(response => {
+      axios.get('/HomePageDiaryDisplay').then(response => {
         this.homePageDisplay = response.data
         this.homePageDisplayType = this.homePageDisplay.type
         this.homePageInfoContent = this.homePageDisplay.homePageInfoContent;

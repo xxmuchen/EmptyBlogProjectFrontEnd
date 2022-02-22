@@ -54,7 +54,7 @@ export default {
 
   },
   mounted() {
-    axios.get('http://localhost:8081/api/HomePageSentenceDisplay').then(response => {
+    axios.get('/HomePageSentenceDisplay').then(response => {
       this.homePageDisplay = response.data
       this.homePageDisplayType = this.homePageDisplay.type
       this.homePageInfoContent = this.homePageDisplay.homePageInfoContent;

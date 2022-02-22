@@ -108,7 +108,7 @@
     methods: {
       /*获取最新的三条日记*/
       diaryHomePageNewDiaryDisplayThreePieces() {
-        axios.get('http://localhost:8081/api/diaryHomePageNewDiaryDisplayThreePieces').then(response => {
+        axios.get('/diaryHomePageNewDiaryDisplayThreePieces').then(response => {
           this.newDiaryDisplayThreePieces = response.data
           console.log(response.data)
         })

@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://localhost:8081/api/index').then(response => {
+    axios.get('/index').then(response => {
       // if(strtoupper($_SERVER['REQUEST_METHOD'])== 'OPTIONS'){ // 遇到options直接返回
       //   exit;
       // }

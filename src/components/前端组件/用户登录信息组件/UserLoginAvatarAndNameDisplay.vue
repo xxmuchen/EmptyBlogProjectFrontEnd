@@ -31,7 +31,7 @@
       getAvatorAndUserName() {
        let eleToken = localStorage.getItem('eleToken')
         if (eleToken !== null) {
-          axios.post('http://localhost:8081/api/getAvatarAndUserName').then(response => {
+          axios.post('/getAvatarAndUserName').then(response => {
             // console.log(response)
             if (response.data.avatar !== ''){
               this.circleUrl = response.data.avatar

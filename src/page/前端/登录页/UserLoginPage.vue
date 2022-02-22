@@ -135,7 +135,7 @@ export default {
 
       // console.log(this.ruleForm.avatar)
       axios
-          .post('http://localhost:8081/api/userLogin',{
+          .post('/userLogin',{
             userName: this.ruleForm.userName,
             password: this.ruleForm.password
       })

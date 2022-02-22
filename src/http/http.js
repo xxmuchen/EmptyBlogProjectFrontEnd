@@ -77,7 +77,7 @@ axios.interceptors.response.use(Response => {
     return Promise.reject(error);
 })
 
-
+axios.defaults.baseURL = 'http://localhost:8081/api/'
 // axios.defaults.transformResponse = [data => {
 //     try{
 //         return JSON_BIG.parse(data)

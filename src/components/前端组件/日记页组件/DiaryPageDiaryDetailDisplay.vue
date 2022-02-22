@@ -28,8 +28,8 @@
               <i class="iconfont icon-xiai" v-show="isLike" @click="cancelDiaryStar"></i>
             </div>
             <div class="operation">
-              <i class="iconfont icon-shoucang2" v-show="!isCollect"></i>
-              <i class="iconfont icon-shoucang1" v-show="isCollect"></i>
+              <i class="iconfont icon-shoucang2" v-show="!isCollect" @click="saveDiaryCollection"></i>
+              <i class="iconfont icon-shoucang1" v-show="isCollect" @click="cancelDiaryCollection"></i>
             </div>
           </div>
         </div>
@@ -44,6 +44,7 @@
 </template>
 <script>
   import axios from "axios";
+  import {ElMessage} from "element-plus";
 
   export default {
     name: 'DiaryPageDiaryDetailDisplay.vue',
@@ -56,26 +57,99 @@
       }
     },
     methods: {
-      getDiaryByDiaryId(diaryId) {
-
+      getDiaryByDiaryId(diary_id) {
         if (typeof this.diaryId !== undefined) {
-          axios.get('http://localhost:8081/api/getDiaryByDiaryId' , {
+          axios.get('/getDiaryByDiaryId' , {
             params: {
-              diaryId
+              diaryId: diary_id
             }
           }).then(response => {
-            console.log(response.data)
             this.diary = response.data
+            this.hasAlreadLike(diary_id)
+            this.hasAlreadCollect(diary_id)
+            // console.log(this.diary)
             // this.BgColor = { background: this.diary.bgColor}
             // console.log(this.BgColor)
           })
         }
       },
       saveDiaryStar() {
-        this.isLike = true;
+        // console.log(this.diary.id)
+        axios.post('/saveDiaryStar' , {
+          diaryId: this.diary.id
+        }).then(response => {
+          this.isLike = true;
+          // console.log(response)
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
       },
       cancelDiaryStar() {
-        this.isLike = false;
+        axios.post('/cancelDiaryStar', {
+          diaryId: this.diary.id
+        }).then(response => {
+          this.isLike = false;
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+
+      },
+      saveDiaryCollection() {
+        // console.log(this.diary.id)
+        axios.post('/saveDiaryCollection' , {
+          diaryId: this.diary.id
+        }).then(response => {
+          this.isCollect = true;
+          // console.log(response)
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+      },
+      cancelDiaryCollection() {
+        axios.post('/cancelDiaryCollection', {
+          diaryId: this.diary.id
+        }).then(response => {
+          this.isCollect = false;
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+
+      },
+      hasAlreadLike(diary_id){
+        // console.log(this.diary.id)
+        axios.get('/hasAlreadLike' , {
+          params: {
+            diaryId:diary_id
+          }
+        }).then(response => {
+            if (response.data === 'like') {
+              this.isLike = true;
+            }else {
+              this.isLike = false;
+            }
+        })
+      },
+      hasAlreadCollect(diary_id){
+        console.log(this.diary.id)
+        axios.get('/hasAlreadCollect' , {
+          params: {
+            diaryId:diary_id
+          }
+        }).then(response => {
+          if (response.data === 'collect') {
+            this.isCollect = true;
+          }else {
+            this.isCollect = false;
+          }
+        })
       }
     },
     // 获取日记数据
@@ -83,6 +157,7 @@
       // console.log(this.$route.query.diaryId)
       // console.log(typeof this.$route.query.diaryId)
       this.getDiaryByDiaryId(this.$route.query.diaryId)
+      // this.hasAlreadLike()
     }
   }
 </script>

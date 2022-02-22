@@ -258,7 +258,7 @@
         // console.log(this.ruleForm.avatar)
         const _this = this
           axios
-              .post('http://localhost:8081/api/registUser' , {
+              .post('/registUser' , {
                 userName: this.ruleForm.userName,
                 password: this.ruleForm.password,
                 sex: this.ruleForm.sex,

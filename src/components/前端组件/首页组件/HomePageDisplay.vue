@@ -42,7 +42,7 @@
       }
     },
     mounted() {
-      axios.get('http://localhost:8081/api/HomePageDisplay').then(response => {
+      axios.get('/HomePageDisplay').then(response => {
         this.homePageDisplay = response.data
         // console.log(response.data)
         this.homePageInfoContent = this.homePageDisplay.homePageInfoContent;

@@ -77,7 +77,7 @@
         this.getNewDiaryListFirstPageDisplay(currentIndex)
       },
       getNewDiaryListFirstPageDisplay(currentIndex) {
-        axios.get('http://localhost:8081/api/newDiaryListDisplay' , {
+        axios.get('/newDiaryListDisplay' , {
           params: {
             currentIndex
           }

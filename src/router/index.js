@@ -30,6 +30,7 @@ import GriphicPageDetailPageDisplay from "@/components/前端组件/图文页组
 import UserRegistPage from '@/page/前端/注册页/UserRegistPage'
 import UserLoginPage from "@/page/前端/登录页/UserLoginPage";
 import WriteDiary from "@/page/前端/日记页/写日记/WriteDiary";
+import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -119,6 +120,11 @@ const routes = [
         name: 'WriteDiary',
         path: '/WriteDiary',
         component: WriteDiary
+    },
+    {
+        name: 'ObserveComponent',
+        path: '/ObserveComponent',
+        component: ObserveComponent
     }
 ];
 

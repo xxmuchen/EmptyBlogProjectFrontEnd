@@ -4,7 +4,7 @@
     <el-main>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">放空日记</el-breadcrumb-item>
-        <el-breadcrumb-item v-if="typeof $route.query.name !== 'undefined'">{{ $route.query.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="typeof $route.query.diaryType !== 'undefined'">{{ $route.query.diaryType }}</el-breadcrumb-item>
 <!--        <el-breadcrumb-item v-if="typeof $route.params.name !== 'undefined'">{{ $route.params.name }}</el-breadcrumb-item>-->
 <!--        <el-breadcrumb-item v-else>{{ this.name }}</el-breadcrumb-item>-->
 
@@ -59,9 +59,9 @@
 
   export default {
     name: 'DiaryPageDiaryDisplay',
-    props: ['name'],
     data() {
       return {
+        // diaryType: '最新日记',
         tableData: [],
         currentPage: 1,
         pageCount: 0
@@ -70,7 +70,7 @@
     methods: {
       justToDiaryDetail(row) {
         // console.log(row.id);
-        this.$router.push({name: 'DiaryPageDiaryDetail' , query:{diaryId: row.id}});
+        this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
       },
       currentChange(currentIndex){
         // console.log(currentIndex)
@@ -84,14 +84,71 @@
         }).then(response => {
           this.tableData = response.data.records
           this.pageCount = response.data.pages
-          console.log(this.tableData[0].authorId)
+          // console.log(this.tableData[0].authorId)
         })
+      },
+      getRecommendDiaryListDisplay(currentIndex) {
+        axios.get('/recommendDiaryListDisplay' , {
+          params: {
+            currentIndex
+          }
+        }).then(response => {
+          this.tableData = response.data.records
+          this.pageCount = response.data.pages
+          console.log(this.tableData)
+        })
+      },
+      getTopGuestDiaryListDisplay(currentIndex) {
+        axios.get('/topGuestDiaryListDisplay' , {
+          params: {
+            currentIndex
+          }
+        }).then(response => {
+          this.tableData = response.data.records
+          this.pageCount = response.data.pages
+          console.log(this.tableData)
+        })
+      },
+      // 根据日记类型请求对应数据
+      getDiaryListDataByDiaryType(val) {
+        if (val === '最新日记') {
+          this.getNewDiaryListFirstPageDisplay(1)
+        }else if (val === '推荐日记') {
+
+          this.getRecommendDiaryListDisplay(1)
+
+        }else if (val === '顶客排行'){
+            this.getTopGuestDiaryListDisplay(1)
+        }else {
+          this.getNewDiaryListFirstPageDisplay(1)
+        }
       }
     },
     mounted() {
+      this.getDiaryListDataByDiaryType(this.$route.query.diaryType)
+      // this.getNewDiaryListFirstPageDisplay(1)
+      // this.diaryType = this.$route.query.diaryType
+
       // console.log(this.name)
       // console.log(this.$route.params.name)
-      this.getNewDiaryListFirstPageDisplay(1)
+      // if (this.$route.query.name === '最新日记') {
+      //   this.getNewDiaryListFirstPageDisplay(1)
+      // }else if (this.$route.query.name === '推荐日记') {
+      //   this.getRecommendDiaryListDisplay(1)
+      //
+      // }else if (this.$route.query.name === '顶客排行'){
+      //     console.log(123)
+      // }else {
+      //   this.getNewDiaryListFirstPageDisplay(1)
+      // }
+      // console.log(this.$route.query.diaryType)
+    },
+    watch: {
+      '$route.query.diaryType'(val) {
+        // this.diaryType = this.$route.query.diaryType
+        this.getDiaryListDataByDiaryType(val);
+        // console.log(val)
+      }
     }
   }
 </script>

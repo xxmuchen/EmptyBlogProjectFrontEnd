@@ -31,6 +31,7 @@ import UserRegistPage from '@/page/前端/注册页/UserRegistPage'
 import UserLoginPage from "@/page/前端/登录页/UserLoginPage";
 import WriteDiary from "@/page/前端/日记页/写日记/WriteDiary";
 import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
+import WriteSentence from "@/page/前端/句子页/写句子/WriteSentence";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -73,12 +74,17 @@ const routes = [
                 }
             },
             {
-                name:'DiaryPageDiaryDetail' ,
-                path: 'DiaryPageDiaryDetail',
+                name:'DiaryPageDiaryDetailDisplay' ,
+                path: 'DiaryPageDiaryDetailDisplay',
                 component: DiaryPageDiaryDetailDisplay
 
             }
         ]
+    },
+    {
+        name: 'WriteDiary',
+        path: '/WriteDiary',
+        component: WriteDiary
     },
     {
         name: 'SentencePage',
@@ -90,6 +96,11 @@ const routes = [
             {name:'SentencePageEncounterLoversDisplay' , path: 'SentencePageEncounterLoversDisplay', component: SentencePageEncounterLoversDisplay}
 
         ]
+    },
+    {
+        name: 'WriteSentence',
+        path: '/WriteSentence',
+        component: WriteSentence
     },
     {
         name: 'VLogPage',
@@ -115,11 +126,6 @@ const routes = [
         name: 'UserLoginPage',
         path: '/UserLoginPage',
         component: UserLoginPage
-    },
-    {
-        name: 'WriteDiary',
-        path: '/WriteDiary',
-        component: WriteDiary
     },
     {
         name: 'ObserveComponent',

@@ -23,21 +23,21 @@
 <!-- 通过请求不同的后端网址和路径上的不同参数,返回相同的前端页面  -->
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{name: '最新日记'}}" active-class="active">
+            <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '最新日记'}}" active-class="active">
                 最新日记
             </router-link>
           </div>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{name: '推荐日记'}}" active-class="active">
+            <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '推荐日记'}}"  active-class="active">
               推荐日记
             </router-link>
           </div>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{name: '顶客排行'}}" active-class="active">
+            <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '顶客排行'}}" active-class="active">
               顶客排行
             </router-link>
           </div>
@@ -66,8 +66,12 @@
     },
     data() {
       return {
+
         url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png'
       }
+    },
+    methods: {
+
     }
   }
 </script>

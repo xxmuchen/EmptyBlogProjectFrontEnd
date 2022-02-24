@@ -23,13 +23,15 @@
               最新日记
             </div>
             <div>
-              <el-tag class="newDiaryMore">更多 >></el-tag>
+              <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '最新日记'}}"><el-tag class="newDiaryMore">更多 >></el-tag></router-link>
             </div>
             <div class="newDiaryContent" v-for="item in newDiaryDisplayThreePieces" :key="item.id">
-              <el-row :gutter="20">
+              <router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">
+                <el-row :gutter="20">
                 <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
                 <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
-              </el-row>
+                </el-row>
+              </router-link>
             </div>
         </div>
 <!--      推荐日记-->
@@ -38,7 +40,7 @@
           推荐日记
         </div>
         <div>
-          <el-tag class="newDiaryMore">更多 >></el-tag>
+          <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '推荐日记'}}"><el-tag class="newDiaryMore">更多 >></el-tag></router-link>
         </div>
 
         <div class="recommendDiaryImage">
@@ -50,13 +52,13 @@
           </div>
         </div>
         <div class="recommendDiaryContent">
-          <div class="recommendDiaryTitle">
-            『黄土白骨』我守你百岁无忧。
-          </div>
+          <router-link :to="{name: 'DiaryPageDiaryDetailDisplay'  , query:{diaryId: recommendedDiaryDisplay.id}}">
+            <div class="recommendDiaryTitle">
+              {{ recommendedDiaryDisplay.title }}
+            </div>
+          </router-link>
           <div class="recommendDiaryPickSentence">
-            我要你知道,在这个世界上总有一个人是等着你的,
-            不管在什么时候,不管在什么地方,
-            反正你知道,总有这么个人。
+            {{ recommendedDiaryDisplay.content }}
           </div>
         </div>
 
@@ -67,27 +69,17 @@
             顶客排行
         </div>
         <div>
-          <el-tag class="newDiaryMore">更多 >></el-tag>
+          <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '顶客排行'}}"><el-tag class="newDiaryMore">更多 >></el-tag></router-link>
         </div>
-        <div class="newDiaryContent">
-          <el-row :gutter="20">
-            <el-col :span="6" :offset="1"><div class="grid-content bg-purple">123</div></el-col>
-            <el-col :span="3" :offset="13"><div class="grid-content bg-purple">作者</div></el-col>
-          </el-row>
+        <div class="newDiaryContent" v-for="item in topGuestDiaryDisplay" :key="item.id">
+          <router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">
+            <el-row :gutter="20">
+              <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
+              <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
+            </el-row>
+          </router-link>
         </div>
 
-<!--        顶客排行-->
-        <div class="newDiaryContent">
-          <el-row :gutter="20">
-            <el-col :span="6" :offset="1"><div class="grid-content bg-purple">123</div></el-col>
-            <el-col :span="3" :offset="13"><div class="grid-content bg-purple">作者</div></el-col>
-          </el-row>
-        </div>
-        <!--          <div class="newDiaryContent">-->
-        <el-row :gutter="20">
-          <el-col :span="6" :offset="1"><div class="grid-content bg-purple">123</div></el-col>
-          <el-col :span="3" :offset="13"><div class="grid-content bg-purple">作者</div></el-col>
-        </el-row>
         <!--          </div>-->
 
       </div>
@@ -102,20 +94,36 @@
     data() {
       return {
         url: 'https://img0.baidu.com/it/u=2639026559,1072757904&fm=253&fmt=auto&app=138&f=JPEG?w=1600&h=500',
-        newDiaryDisplayThreePieces: []
+        newDiaryDisplayThreePieces: [],
+        recommendedDiaryDisplay: {},
+        topGuestDiaryDisplay:[]
       }
     },
     methods: {
       /*获取最新的三条日记*/
-      diaryHomePageNewDiaryDisplayThreePieces() {
-        axios.get('/diaryHomePageNewDiaryDisplayThreePieces').then(response => {
+      getDiaryHomePageNewDiaryDisplayThreePieces() {
+        axios.get('/diaryHomePageNewDiaryDisplayFourPieces').then(response => {
           this.newDiaryDisplayThreePieces = response.data
+          console.log(response.data)
+        })
+      },
+      getDiaryHomePageRecommendDiaryDisplayOnePieces() {
+        axios.get('/diaryHomePageRecommendDiaryDisplayOnePieces').then(response => {
+          this.recommendedDiaryDisplay = response.data
+          console.log(response.data)
+        })
+      },
+      getDiaryHomePageTopGuestDiaryDisplayFourPieces() {
+        axios.get('/diaryHomePageTopGuestDiaryDisplayFourPieces').then(response => {
+          this.topGuestDiaryDisplay = response.data
           console.log(response.data)
         })
       }
     },
     mounted() {
-      this.diaryHomePageNewDiaryDisplayThreePieces()
+      this.getDiaryHomePageNewDiaryDisplayThreePieces()
+      this.getDiaryHomePageRecommendDiaryDisplayOnePieces()
+      this.getDiaryHomePageTopGuestDiaryDisplayFourPieces()
     }
   }
 </script>
@@ -274,10 +282,17 @@
   }
   .recommendDiaryPickSentence{
     width: 50%;
-    height: auto;
+    height: 110px;
     background: red;
     text-indent: 2em;
     margin-top: 50px;
+
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical; /* 表示盒子对象的子元素的排列方式 */
+    -webkit-line-clamp: 5; /* 限制文本的行数，表示文本第多少行省略 */
+    text-overflow: ellipsis;/*  打点展示 */
+    overflow: hidden;/*超出部分进行隐藏*/
     /*clear: both;*/
     /*float: right;*/
   }

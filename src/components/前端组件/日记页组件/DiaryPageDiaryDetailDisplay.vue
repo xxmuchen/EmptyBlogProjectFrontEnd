@@ -14,7 +14,7 @@
               <el-tag  size="small" >天气：{{ diary.weather }}</el-tag>
             </div>
             <div class="diaryPropertie">
-              <el-tag  size="small" >心情：{{ diary.weather }}</el-tag>
+              <el-tag  size="small" >心情：{{ diary.mood }}</el-tag>
             </div>
           </div>
         </div>
@@ -76,7 +76,9 @@
       },
       saveDiaryStar() {
         // console.log(this.diary.id)
-        axios.post('/saveDiaryStar?diaryId='+ this.diary.id).then(response => {
+        axios.post('/saveDiaryStar' , {
+          diaryId: this.diary.id
+        }).then(response => {
           this.isLike = true;
           // console.log(response)
           ElMessage({
@@ -137,22 +139,22 @@
       },
       hasAlreadCollect(diary_id){
         // console.log(this.diary.id)
-        axios.get('/hasAlreadCollect?diaryId=' + diary_id).then(response => {
-          if (response.data === 'collect') {
-            this.isCollect = true;
-          }else {
-            this.isCollect = false;
-          }
-        })
+        let eleToken = localStorage.getItem('eleToken')
+        if (eleToken !== null) {
+          axios.get('/hasAlreadCollect?diaryId=' + diary_id).then(response => {
+            if (response.data === 'collect') {
+              this.isCollect = true;
+            }else {
+              this.isCollect = false;
+            }
+          })
+        }
       }
 
     },
     // 获取日记数据
     mounted() {
-      // console.log(this.$route.query.diaryId)
-      // console.log(typeof this.$route.query.diaryId)
       this.getDiaryByDiaryId(this.$route.query.diaryId)
-      // this.hasAlreadLike()
     }
   }
 </script>

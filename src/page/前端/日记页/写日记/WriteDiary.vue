@@ -136,7 +136,7 @@
 
         this.editor.create()
 
-        this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
+        // this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
       },
       colorChange(){
         // console.log(this.$store.state.user)

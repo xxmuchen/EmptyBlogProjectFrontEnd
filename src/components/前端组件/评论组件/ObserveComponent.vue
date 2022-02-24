@@ -13,17 +13,18 @@
           </div>
           <div class="rootObserveContent">
             <el-input
-                v-model="textarea"
+                v-model="rootObserveContent"
                 :rows="2"
                 type="textarea"
                 placeholder="Please input"
+                :disabled="isDisable"
             />
           </div>
 
         </div>
         <div class="rootObserveSubmit">
-          <el-button type="primary">Submit</el-button>
-          <el-button >Cancel</el-button>
+          <el-button type="primary" @click="addRootObserve" :disabled="isDisable">Submit</el-button>
+          <el-button @click="removeRootObserveTextContent" :disabled="isDisable">Cancel</el-button>
         </div>
 
       </div>
@@ -67,15 +68,16 @@
 
                 <div class="ObserveContentReplyTextArea">
                   <el-input
-                      v-model="textarea"
+                      v-model="replyObserveContent"
                       :rows="2"
-                      type="textarea"
+                      type="replyObserveContent"
                       placeholder="Please input"
+                      :disabled="isDisable"
                   />
                 </div>
                 <div class="ObserveContentReplySubmitButton">
-                  <el-button type="primary" @click="submitReplyObserve(data.id)">Submit</el-button>
-                  <el-button @click="closeObserveContentReplySubmit">Cancel</el-button>
+                  <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisable">Submit</el-button>
+                  <el-button @click="closeObserveContentReplySubmit" :disabled="isDisable">Cancel</el-button>
                 </div>
               </div>
             </div>
@@ -90,6 +92,8 @@
 </template>
 <script>
   import axios from "axios";
+  import {ElMessage, ElMessageBox} from "element-plus";
+  import router from "@/router";
   // import JSON_BIG from "json-bigint";
 
   export default {
@@ -98,7 +102,8 @@
     data() {
       return {
         isShow: '',
-        textarea: '',
+        rootObserveContent: '',
+        replyObserveContent: '',
         circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
         dataSource: {},
         defaultProps: {
@@ -108,6 +113,37 @@
       }
     },
     methods: {
+      // 用户未登陆时禁用按钮和输入框
+      isDisable() {
+        let eleToken = localStorage.getItem('eleToken')
+        let flag =  eleToken === null
+        if (flag) {
+          return true
+        }else {
+          ElMessageBox.confirm(
+              '尊敬的用户，您需要登陆后才可以评论，请问您是否登陆?',
+              'Warning',
+              {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning',
+              }
+          ).then(() => {
+            /*跳转登录*/
+            router.push({name: 'UserLoginPage'})
+            ElMessage({
+              type: 'success',
+              message: '即将为您跳转到登陆页面'
+            })
+          }).catch(() => {
+            ElMessage({
+              type: 'info',
+              message: '登陆取消'
+            })
+          })
+          return false;
+        }
+      },
       // 查看user是否已登录，并获取user头像信息
       getAvatorAndUserName() {
         let eleToken = localStorage.getItem('eleToken')
@@ -136,6 +172,22 @@
           })
       },
 
+      /*上传rootObserve*/
+      addRootObserve() {
+        axios.post('/addDiaryObserve', {
+          type: '放空日记',
+          objId: this.obj_id,
+          observeContent: this.rootObserveContent
+        }).then(response => {
+          // console.log(response)
+          this.rootObserveContent = ''
+          this.dataSource = response.data
+        })
+      },
+
+      removeRootObserveTextContent() {
+        this.rootObserveContent = '';
+      },
       // 先通过评论tag获取该条评论的id，然后创建一个变量isShow来接收，最后根据该变量和所有评论的id进行比较，v-show为true时显示
       expandTheReplyCommentTextarea(id) {
         this.isShow = id;
@@ -143,18 +195,26 @@
       // 将isShow清空，所有的比较就都是false了
       closeObserveContentReplySubmit() {
         this.isShow = '';
+        this.replyObserveContent = ''
       },
-      submitReplyObserve(lastId) {
-        console.log(lastId)
+
+      addReplyObserve(last_id) {
+        axios.post('/addDiaryObserve', {
+          type: '放空日记',
+          objId: this.obj_id,
+          lastId: last_id,
+          observeContent: this.replyObserveContent
+        }).then(response => {
+          // console.log(response)
+          this.replyObserveContent = ''
+          this.dataSource = response.data
+        })
       }
     },
     mounted() {
       this.getAvatorAndUserName();
       this.queryObserveByBlogId(this.obj_id);
       // console.log('obj_id' , this.obj_id)
-    },
-    watch: {
-
     }
   }
 </script>

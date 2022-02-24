@@ -26,6 +26,7 @@ import "vue3-video-play/dist/style.css"; // 引入css
 import axios from "@/http/http";
 
 import store from '@/store/index'
+import mitt from "mitt";
 
 // import wangEditor from "wangeditor/src/wangEditor";
 
@@ -48,6 +49,13 @@ app.use(vue3videoPlay)
 
 app.use(ElementPlus)
 
+app.config.globalProperties.$bus = new mitt()
+//在组件A中使用事务总线触发某个动作
+// this.$bus.emit("EVENTTYPE");
+//
+//在组件B中监听动作的发生
+// this.$bus.on("EVENTTYPE",()=>{
+//     console.log("EVENTTYPE发生了")})
 // app.use(wangEditor)
 
 for (const iconName in ElIconModules) {

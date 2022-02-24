@@ -38,10 +38,10 @@
             }
             this.userName = response.data.userName
             this.isShow = true
-          }).catch(error => {
+          }).catch(() => {
             // eslint-disable-next-line no-debugger
             // debugger
-              console.log(error)
+            //   console.log(error)
               this.isShow = false;
           })
         }

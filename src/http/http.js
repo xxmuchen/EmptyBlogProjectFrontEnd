@@ -5,6 +5,14 @@ import {ElMessage} from 'element-plus';   /*elementUI消息提醒*/
 import router from '../router/index'
 import JSON_BIG from "json-bigint";
 
+// axios.defaults.transformRequest = (data => {
+//     try {
+//         console.log('axios.defaults.transformRequest' , data)
+//         return JSON_BIG.parse(data)
+//     } catch (e) {
+//         return data
+//     }
+// })
 
 axios.defaults.transformResponse = (data => {
 

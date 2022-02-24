@@ -90,9 +90,11 @@
 </template>
 <script>
   import axios from "axios";
+  // import JSON_BIG from "json-bigint";
 
   export default {
-    name: 'ObserveComponent.vue',
+    name: 'ObserveComponent',
+    props: ['obj_id'],
     data() {
       return {
         isShow: '',
@@ -126,13 +128,10 @@
         }
       },
       /*查询所有评论*/
-      queryObserveByBlogId() {
-          axios.get('/queryObserveByBlogId' , {
-            params: {
-              objId: '1495825844181909505'
-            }
-          }).then(response => {
-            console.log(response)
+      queryObserveByBlogId(obj_id) {
+
+          axios.get('/queryObserveByBlogId?objId='+ obj_id).then(response => {
+            // console.log(response)
             this.dataSource = response.data
           })
       },
@@ -151,34 +150,44 @@
     },
     mounted() {
       this.getAvatorAndUserName();
-      this.queryObserveByBlogId();
+      this.queryObserveByBlogId(this.obj_id);
+      // console.log('obj_id' , this.obj_id)
+    },
+    watch: {
+
     }
   }
 </script>
 <style scoped>
+.el-container {
+  padding: 0;
+  margin: 0;
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .common-layout .el-header,
 .common-layout .el-footer {
   background-color: #b3c0d1;
   color: var(--el-text-color-primary);
-  text-align: center;
-  line-height: 60px;
+  /*text-align: center;*/
+  /*line-height: 60px;*/
 }
 .common-layout .el-footer {
-  line-height: 60px;
+  /*line-height: 60px;*/
 }
 
 .common-layout .el-aside {
   background-color: #d3dce6;
   color: var(--el-text-color-primary);
-  text-align: center;
-  line-height: 200px;
+  /*text-align: center;*/
+  /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
   background-color: #e9eef3;
   color: var(--el-text-color-primary);
-  text-align: center;
-  line-height: 160px;
+  /*text-align: center;*/
+  /*line-height: 160px;*/
 }
 
 .common-layout > .el-container {
@@ -224,8 +233,8 @@
 .observeWhole {
   width: 100%;
   height: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
+  /*padding-left: 20px;*/
+  /*padding-right: 20px;*/
 }
 
 .parentCommentSection {

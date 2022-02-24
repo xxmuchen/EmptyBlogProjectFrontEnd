@@ -34,10 +34,11 @@
           </div>
         </div>
       </div>
-
 <!--      评论区-->
       <el-divider></el-divider>
-
+      <div>
+        <ObserveComponent :obj_id="diary.id" v-if="diary.id != null"></ObserveComponent>
+      </div>
     </el-main>
   </el-container>
 
@@ -45,10 +46,13 @@
 <script>
   import axios from "axios";
   import {ElMessage} from "element-plus";
-
+  import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent"
 
   export default {
     name: 'DiaryPageDiaryDetailDisplay.vue',
+    components: {
+      ObserveComponent
+    },
     data() {
       return {
         diary: {},
@@ -60,15 +64,11 @@
     methods: {
       getDiaryByDiaryId(diary_id) {
         if (typeof this.diaryId !== undefined) {
-          axios.get('/getDiaryByDiaryId' , {
-            params: {
-              diaryId: diary_id
-            }
-          }).then(response => {
+          axios.get('/getDiaryByDiaryId?diaryId='+diary_id).then(response => {
             this.diary = response.data
             this.hasAlreadLike(diary_id)
             this.hasAlreadCollect(diary_id)
-            // console.log(this.diary)
+            console.log(this.diary)
             this.BgColor = { background: this.diary.bgColor}
             // console.log(this.BgColor)
           })
@@ -76,9 +76,7 @@
       },
       saveDiaryStar() {
         // console.log(this.diary.id)
-        axios.post('/saveDiaryStar' , {
-          diaryId: this.diary.id
-        }).then(response => {
+        axios.post('/saveDiaryStar?diaryId='+ this.diary.id).then(response => {
           this.isLike = true;
           // console.log(response)
           ElMessage({
@@ -128,11 +126,7 @@
         // console.log(this.diary.id)
         let eleToken = localStorage.getItem('eleToken')
         if (eleToken !== null) {
-          axios.get('/hasAlreadLike' , {
-            params: {
-              diaryId:diary_id
-            }
-          }).then(response => {
+          axios.get('/hasAlreadLike?diaryId=' + diary_id).then(response => {
             if (response.data === 'like') {
               this.isLike = true;
             }else {
@@ -142,12 +136,8 @@
         }
       },
       hasAlreadCollect(diary_id){
-        console.log(this.diary.id)
-        axios.get('/hasAlreadCollect' , {
-          params: {
-            diaryId:diary_id
-          }
-        }).then(response => {
+        // console.log(this.diary.id)
+        axios.get('/hasAlreadCollect?diaryId=' + diary_id).then(response => {
           if (response.data === 'collect') {
             this.isCollect = true;
           }else {
@@ -155,6 +145,7 @@
           }
         })
       }
+
     },
     // 获取日记数据
     mounted() {
@@ -168,8 +159,8 @@
 <style scoped>
   .el-container {
     background: #99a9bf;
-    padding-left: 100px;
-    padding-right: 100px;
+    /*padding-left: 100px;*/
+    /*padding-right: 100px;*/
   }
   .el-main {
     background-color: #E9EEF3;

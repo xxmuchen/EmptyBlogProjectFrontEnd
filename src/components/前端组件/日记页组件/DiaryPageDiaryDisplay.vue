@@ -126,22 +126,6 @@
     },
     mounted() {
       this.getDiaryListDataByDiaryType(this.$route.query.diaryType)
-      // this.getNewDiaryListFirstPageDisplay(1)
-      // this.diaryType = this.$route.query.diaryType
-
-      // console.log(this.name)
-      // console.log(this.$route.params.name)
-      // if (this.$route.query.name === '最新日记') {
-      //   this.getNewDiaryListFirstPageDisplay(1)
-      // }else if (this.$route.query.name === '推荐日记') {
-      //   this.getRecommendDiaryListDisplay(1)
-      //
-      // }else if (this.$route.query.name === '顶客排行'){
-      //     console.log(123)
-      // }else {
-      //   this.getNewDiaryListFirstPageDisplay(1)
-      // }
-      // console.log(this.$route.query.diaryType)
     },
     watch: {
       '$route.query.diaryType'(val) {

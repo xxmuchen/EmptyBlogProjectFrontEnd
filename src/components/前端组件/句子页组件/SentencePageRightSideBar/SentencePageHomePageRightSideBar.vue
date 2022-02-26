@@ -8,18 +8,42 @@
       猜你喜欢
     </div>
     <div class="sentenceTypeContent">
-      <el-row :gutter="20">
-        <el-col :span="6"><div class="grid-content bg-purple">伤感</div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+      <el-row :gutter="20" v-for="(items , index) in tagList" :key="index">
+        <el-col :span="6" v-for="item in items" :key="item.id" ><div class="hiddenOverflow grid-content bg-purple" v-text="item.tagName"></div></el-col>
       </el-row>
     </div>
   </div>
 </template>
 <script>
+  import axios from "axios";
+
   export default {
-    name: 'SentencePageHomePageRightSideBar'
+    name: 'SentencePageHomePageRightSideBar',
+    data() {
+      return {
+        tagList: []
+      }
+    },
+    methods: {
+      getNineTags() {
+        axios.get("/getNineTags").then(response => {
+          const tags = [];
+          let sentenceTags = response.data
+          sentenceTags.forEach((item , index) => {
+            const tag = Math.floor(index / 4);
+            if (!tags[tag]) {
+              tags[tag] = []
+            }
+            tags[tag].push(item)
+          })
+          this.tagList = tags
+          // console.log(this.tagList)
+        })
+      }
+    },
+    mounted() {
+      this.getNineTags()
+    }
   }
 </script>
 <style scoped>
@@ -77,9 +101,22 @@
   padding: 10px 0;
   background-color: #f9fafc;
 }
+.el-row {
+  /*width: 100%;*/
+  padding: 0;
+}
+.el-col {
+  width: 100%;
+}
 .grid-content {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.hiddenOverflow {
+  width: 100%;
+  overflow: hidden;
+  /*text-overflow:ellipsis;*/
+  white-space: nowrap;
 }
 </style>

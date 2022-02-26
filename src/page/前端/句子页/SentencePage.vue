@@ -14,21 +14,21 @@
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'SentencePageEncounterLoversDisplay'}" active-class="active">
+            <router-link :to="{name:'SentencePageDetailDisplay' , query:{type: '偶遇佳句'}}" active-class="active">
               偶遇佳句
             </router-link>
           </div>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'SentencePageHomeDisplay' , params: {name: '名人名言'}}" active-class="active">
+            <router-link :to="{name:'SentencePageHomeDisplay' , query: {type: '名人名言'}}" active-class="active">
               名人名言
             </router-link>
           </div>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'SentencePageHomeDisplay' , params: {name: '精选句集'}}" active-class="active">
+            <router-link :to="{name:'SentencePageHomeDisplay' , query: {type: '精选句集'}}" active-class="active">
               精选句集
             </router-link>
           </div>
@@ -94,9 +94,7 @@ body > .el-container {
 .el-row {
   /*margin-bottom: 20px;*/
   padding-top: 20px;
-&:last-child {
-   margin-bottom: 0;
- }
+
 }
 
 .el-col {

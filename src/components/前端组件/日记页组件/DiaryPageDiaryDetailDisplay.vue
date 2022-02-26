@@ -37,7 +37,7 @@
 <!--      评论区-->
       <el-divider></el-divider>
       <div>
-        <ObserveComponent :obj_id="diary.id" v-if="diary.id != null"></ObserveComponent>
+        <ObserveComponent :obj_id="diary.id" objType="放空日记" v-if="diary.id != null"></ObserveComponent>
       </div>
     </el-main>
   </el-container>
@@ -154,7 +154,6 @@
           })
         }
       }
-
     },
     // 获取日记数据
     mounted() {

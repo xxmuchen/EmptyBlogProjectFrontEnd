@@ -2,42 +2,40 @@
   <!--  <el-container>-->
   <el-main>
     <div class="leftContent">
+      <el-breadcrumb separator="/" v-if="$route.query.type">
+        <el-breadcrumb-item :to="{ name: 'SentencePageHomeDisplay' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>{{ $route.query.type }}</el-breadcrumb-item>
+        <!--            <el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
+        <!--            <el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
+      </el-breadcrumb>
       <div class="sentenceContentSingle">
-<!--        <div class="sentenceTop">-->
-<!--          <div class="demo-basic&#45;&#45;circle">-->
-<!--            <div class="block"><el-avatar :size="large" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar></div>-->
-<!--            &lt;!&ndash;                  <div class="block" v-for="size in sizeList" :key="size">&ndash;&gt;-->
-<!--            &lt;!&ndash;                    <el-avatar :size="size" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>&ndash;&gt;-->
-<!--            &lt;!&ndash;                  </div>&ndash;&gt;-->
-<!--          </div>-->
-<!--          <div class="userName">wcx</div>-->
-<!--        </div>-->
+
         <div class="sentenceMain">
           <div class="sentenceContent">
-            <div class="sentenceContentBox">
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
+            <div class="sentenceContentBox" v-html="sentence.content"></div>
+          </div>
+          <div class="sentenceContentAuthor" v-text="sentence.originalAuthor"></div>
+          <div class="sentenceContentUserOperation">
+            <div class="operation">
+              <i class="iconfont icon-xihuan" v-show="!isLike" @click="saveDiaryStar"></i>
+              <i class="iconfont icon-xiai" v-show="isLike" @click="cancelDiaryStar"></i>
+            </div>
+            <div class="operation">
+              <i class="iconfont icon-shoucang2" v-show="!isCollect" @click="saveDiaryCollection"></i>
+              <i class="iconfont icon-shoucang1" v-show="isCollect" @click="cancelDiaryCollection"></i>
             </div>
           </div>
-          <div class="sentenceContentAuthor">dc</div>
-          <div class="sentenceContentUserOperation">
-            <div>喜欢</div>
-            <div>收藏</div>
-          </div>
         </div>
+
         <div class="sentenceFooter">
           <div class="commentSection">
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
+            <ObserveComponent :obj_id="sentence.id" objType='放空句子' v-if="sentence.id != null"></ObserveComponent>
           </div>
         </div>
       </div>
 <!--      评论区-->
     </div>
+
     <!--        这部分要拆分成一个新的组件-->
     <div class="rightContent">
       <SentencePageDetailDisplayPageRighSideBar></SentencePageDetailDisplayPageRighSideBar>
@@ -47,10 +45,123 @@
 </template>
 <script>
 import SentencePageDetailDisplayPageRighSideBar from '@/components/前端组件/RightSideBar/SentencePageDetailDisplayPageRighSideBar'
+import axios from "axios";
+import {ElMessage} from "element-plus";
+import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
 export default {
   name: 'SentencePageDetailDisplay',
   components: {
+    ObserveComponent,
       SentencePageDetailDisplayPageRighSideBar
+  },
+  data() {
+    return {
+      sentence: {},
+      isLike: false,
+      isCollect: false
+    }
+  },
+  methods: {
+    getencounterLoverSentence() {
+      if (this.$route.query.type === '偶遇佳句') {
+        axios.get('/encounterLoverSentence').then(response => {
+          this.sentence = response.data
+          this.hasAlreadLike()
+          this.hasAlreadCollect()
+        })
+      }else {
+        if (this.$route.query.sentenceId !== null) {
+          axios.get('/getOneSentenceById?sentenceId=' + this.$route.query.sentenceId).then(response => {
+            this.sentence = response.data
+            this.hasAlreadLike()
+            this.hasAlreadCollect()
+          })
+        }
+      }
+    },
+    saveDiaryStar() {
+      // console.log(this.diary.id)
+      axios.post('/saveObjStar' , {
+        objId: this.sentence.id,
+        objType: '放空句子'
+      }).then(response => {
+        this.isLike = true;
+        // console.log(response)
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+    },
+    cancelDiaryStar() {
+      axios.post('/cancelObjStar', {
+        objId: this.sentence.id,
+        objType: '放空句子'
+      }).then(response => {
+        this.isLike = false;
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+
+    },
+    saveDiaryCollection() {
+      // console.log(this.diary.id)
+      axios.post('/saveObjCollection' , {
+        objId: this.sentence.id,
+        objType: '放空句子'
+      }).then(response => {
+        this.isCollect = true;
+        // console.log(response)
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+    },
+    cancelDiaryCollection() {
+      axios.post('/cancelObjCollection', {
+        objId: this.sentence.id,
+        objType: '放空句子'
+      }).then(response => {
+        this.isCollect = false;
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+
+    },
+    hasAlreadLike(){
+      // console.log(this.diary.id)
+      let eleToken = localStorage.getItem('eleToken')
+      if (eleToken !== null) {
+        axios.get('/hasAlreadLike?objId=' + this.sentence.id + '&objType=放空句子').then(response => {
+          if (response.data === 'like') {
+            this.isLike = true;
+          }else {
+            this.isLike = false;
+          }
+        })
+      }
+    },
+    hasAlreadCollect(){
+      // console.log(this.diary.id)
+      let eleToken = localStorage.getItem('eleToken')
+      if (eleToken !== null) {
+        axios.get('/hasAlreadCollect?objId=' + this.sentence.id + '&objType=放空句子').then(response => {
+          if (response.data === 'collect') {
+            this.isCollect = true;
+          }else {
+            this.isCollect = false;
+          }
+        })
+      }
+    }
+  },
+  mounted() {
+    this.getencounterLoverSentence()
   }
 }
 </script>
@@ -59,9 +170,9 @@ export default {
 .el-container {
   margin: 0;
   padding: 0;
-  padding-left: 130px;
-  padding-right: 130px;
-  background: red;
+  /*padding-left: 130px;*/
+  /*padding-right: 130px;*/
+  /*background: red;*/
 }
 
 
@@ -71,7 +182,7 @@ export default {
   padding: 0;
   margin: 0;
   width: 100%;
-  /*height: 100%;*/
+  height: 100%;
   padding-left: 130px;
   padding-right: 130px;
   background: green;
@@ -131,14 +242,7 @@ body > .el-container {
   align-items: center;
   justify-content: center;
 }
-.userName {
-  width: auto;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-}
+
 .sentenceMain {
   width: 100%;
   min-height: 280px;
@@ -165,30 +269,54 @@ body > .el-container {
 
 }
 .sentenceContentUserOperation {
-  width: 100%;
-  min-height: 50px;
-  display: flex;
-  align-items: center;
+  width: 93%;
+  height: auto;
+  display:flex;
+  /*justify-content:center;*/
+  /*align-items:center;*/
+  margin-top: 30px;
+  margin-left: 2.5%;
   /*margin-left: 10px;*/
   /*padding-left: 10px;*/
   /*background: red;*/
   /*justify-content:center;*/
   border-bottom: 1px solid lightgray;
 }
-.sentenceContentUserOperation > div {
+.operation {
   width: 50px;
-  height: auto;
-  margin-left: 20px;
+  height: 50px;
+  /*background: red;*/
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 100px;
+  margin-right: 10px;
+  /*margin-left: ;*/
+  /*margin-right: -1.8;*/
+  /*margin-right: 10px;*/
+  /*margin-right: 100px;*/
 }
 .sentenceFooter {
   width: 100%;
-  height: 50px;
+  height: auto;
   background: aqua;
   display: flex;
   /*实现垂直居中*/
   align-items: center;
   /*实现水平居中*/
   justify-content: center;
+}
+::v-deep(.demo-basic) {
+  width: 8.5%;
+}
+::v-deep(.userName) {
+  width: 58%;
+}
+::v-deep(.observeTag) {
+  width: 14.5%;
+}
+::v-deep(.observeTime) {
+  width: 32%;
 }
 .commentSection {
   width: 98%;
@@ -203,19 +331,7 @@ body > .el-container {
   /*justify-content:right;*/
   /*text-align: center;*/
 }
-/*.el-input {*/
 
-/*    !*height: 300px;*!*/
-/*!*  height: 100%;*!*/
-/*!*  width: 100%;*!*/
-/*}*/
-
-/*.el-textarea .el-textarea__inner{ */
-/*resize: none;*/
-/*}*/
-
-/*  height: 100px;*/
-/*}*/
 .commentSection ::v-deep(.el-input__inner)  {
   height: 40px;
   background: none;
@@ -295,4 +411,9 @@ body > .el-container {
   align-items: center;
   justify-content: center;
 }
+.el-breadcrumb {
+  /*margin-top: 30px;*/
+  margin-left: 12px;
+}
+
 </style>

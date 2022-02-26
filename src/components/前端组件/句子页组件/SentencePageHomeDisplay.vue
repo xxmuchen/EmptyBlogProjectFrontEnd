@@ -4,7 +4,7 @@
     <div class="leftContent">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ name: 'SentencePageHomeDisplay' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item v-if="$route.params.name">{{ $route.params.name }}</el-breadcrumb-item>
+        <el-breadcrumb-item v-if="$route.query.type">{{ $route.query.type }}</el-breadcrumb-item>
         <!--            <el-breadcrumb-item>活动列表</el-breadcrumb-item>-->
         <!--            <el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
       </el-breadcrumb>
@@ -22,16 +22,18 @@
               </div>
               <div class="userName" v-text="item.authorName"></div>
             </div>
-            <div class="sentenceMain">
-              <div class="sentenceContent">
-                <div class="sentenceContentBox" v-html="item.content">
+            <router-link :to="{name: 'SentencePageDetailDisplay' , query: {sentenceId: item.id}}">
+              <div class="sentenceMain">
+                <div class="sentenceContent">
+                  <div class="sentenceContentBox" v-html="item.content">
+                  </div>
                 </div>
+                <div class="sentenceContentAuthor" v-text="item.originalAuthor"></div>
               </div>
-              <div class="sentenceContentAuthor" v-text="item.originalAuthor"></div>
-            </div>
+            </router-link>
             <div class="sentenceFooter">
               <div class="commentSection">
-                <el-input v-model="rootObserve" placeholder="请输入内容"></el-input>
+                <el-input v-model="rootObserveContent" :disabled="isDisable" placeholder="请输入内容" @keyup.enter="addRootObserve(item.id)"></el-input>
               </div>
             </div>
           </div>
@@ -46,6 +48,7 @@
 <script>
 import RightSideBar from '@/components/前端组件/句子页组件/SentencePageRightSideBar/SentencePageHomePageRightSideBar'
 import axios from "axios";
+import {ElMessage} from "element-plus";
 
 export default {
   name: 'SentencePageHomeDisplay',
@@ -56,23 +59,77 @@ export default {
     return {
       count: 0,
       sentenceData: {},
-      rootObserve: '',
+      rootObserveContent: '',
+      isDisable: false
     }
   },
   methods: {
     load() {
       this.count += 1;
     },
+    isDisabledObserve() {
+      let eleToken = localStorage.getItem('eleToken')
+      // eslint-disable-next-line no-debugger
+      // debugger
+      if (eleToken !== null) {
+        this.isDisable = false
+      }else {
+        this.isDisable = true
+      }
+    },
+    /*上传rootObserve*/
+    addRootObserve(obj_id) {
+      axios.post('/addObjObserve', {
+        type: '放空句子',
+        objId: obj_id,
+        observeContent: this.rootObserveContent
+      }).then(() => {
+        // console.log(response)
+        this.rootObserveContent = ''
+        // this.dataSource = response.data
+        ElMessage({
+          type: "success",
+          message: "评论成功"
+        })
+      })
+    },
     getAllSentence() {
       axios.get("/getAllSentence").then(response => {
         this.sentenceData = response.data
-        console.log(response.data)
+        // console.log(response.data)
       })
     },
+    getQuotesByFamousPeople() {
+      axios.get("/quotesByFamousPeople").then(response => {
+        this.sentenceData = response.data
+        console.log(this.sentenceData)
+        // console.log(response.data)
+      })
+    },
+    getRecommendSentenceList() {
+      axios.get("/recommendSentenceList").then(response => {
+        this.sentenceData = response.data
+        // console.log(response.data)
+      })
+    },
+    distinguishSentenceType(val) {
+      if (val === '名人名言') {
+        this.getQuotesByFamousPeople();
 
+      }else if (val === '精选句集') {
+        this.getRecommendSentenceList();
+      }else {
+        this.getAllSentence();
+      }
+    }
   },
   mounted() {
-    this.getAllSentence()
+    this.distinguishSentenceType(this.$route.query.type)
+  },
+  watch: {
+    '$route.query.type'(val) {
+      this.distinguishSentenceType(val)
+    }
   }
 }
 </script>

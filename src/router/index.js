@@ -20,7 +20,6 @@ import DiaryPageHomeDisplay from '@/components/前端组件/日记页组件/Diar
 import DiaryPageDiaryDetailDisplay from '@/components/前端组件/日记页组件/DiaryPageDiaryDetailDisplay';
 import SentencePage from '@/page/前端/句子页/SentencePage';
 import SentencePageHomeDisplay from '@/components/前端组件/句子页组件/SentencePageHomeDisplay'
-import SentencePageEncounterLoversDisplay from '@/components/前端组件/句子页组件/SentencePageDetailDisplay';
 import DiaryPageDiaryDisplay from '@/components/前端组件/日记页组件/DiaryPageDiaryDisplay';
 import VLogPage from '@/page/前端/Vlog页/VLogPage'
 import GriphicPage from '@/page/前端/图文页/GriphicPage'
@@ -32,6 +31,7 @@ import UserLoginPage from "@/page/前端/登录页/UserLoginPage";
 import WriteDiary from "@/page/前端/日记页/写日记/WriteDiary";
 import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
 import WriteSentence from "@/page/前端/句子页/写句子/WriteSentence";
+import SentencePageDetailDisplay from "@/components/前端组件/句子页组件/SentencePageDetailDisplay";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -93,7 +93,7 @@ const routes = [
         redirect: '/SentencePage/SentencePageHomeDisplay',
         children: [
             {name:'SentencePageHomeDisplay' , path: 'SentencePageHomeDisplay', component: SentencePageHomeDisplay},
-            {name:'SentencePageEncounterLoversDisplay' , path: 'SentencePageEncounterLoversDisplay', component: SentencePageEncounterLoversDisplay}
+            {name:'SentencePageDetailDisplay' , path: 'SentencePageDetailDisplay', component: SentencePageDetailDisplay}
 
         ]
     },

@@ -17,14 +17,14 @@
                 :rows="2"
                 type="textarea"
                 placeholder="Please input"
-                :disabled="isDisable"
+                :disabled="isDisabled"
             />
           </div>
 
         </div>
         <div class="rootObserveSubmit">
-          <el-button type="primary" @click="addRootObserve" :disabled="isDisable">Submit</el-button>
-          <el-button @click="removeRootObserveTextContent" :disabled="isDisable">Cancel</el-button>
+          <el-button type="primary" @click="addRootObserve" :disabled="isDisabled">Submit</el-button>
+          <el-button @click="removeRootObserveTextContent" :disabled="isDisabled">Cancel</el-button>
         </div>
 
       </div>
@@ -72,12 +72,12 @@
                       :rows="2"
                       type="replyObserveContent"
                       placeholder="Please input"
-                      :disabled="isDisable"
+                      :disabled="isDisabled"
                   />
                 </div>
                 <div class="ObserveContentReplySubmitButton">
-                  <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisable">Submit</el-button>
-                  <el-button @click="closeObserveContentReplySubmit" :disabled="isDisable">Cancel</el-button>
+                  <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisabled">Submit</el-button>
+                  <el-button @click="closeObserveContentReplySubmit" :disabled="isDisabled">Cancel</el-button>
                 </div>
               </div>
             </div>
@@ -98,14 +98,15 @@
 
   export default {
     name: 'ObserveComponent',
-    props: ['obj_id'],
+    props: ['obj_id' , 'objType'],
     data() {
       return {
         isShow: '',
+        isDisabled: false,
         rootObserveContent: '',
         replyObserveContent: '',
         circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-        dataSource: {},
+        dataSource: [],
         defaultProps: {
           children: 'nextNodes',
           label: 'observeContent'
@@ -118,7 +119,7 @@
         let eleToken = localStorage.getItem('eleToken')
         let flag =  eleToken === null
         if (flag) {
-          return true
+          this.isDisabled = true
         }else {
           ElMessageBox.confirm(
               '尊敬的用户，您需要登陆后才可以评论，请问您是否登陆?',
@@ -141,7 +142,7 @@
               message: '登陆取消'
             })
           })
-          return false;
+          this.isDisabled = false
         }
       },
       // 查看user是否已登录，并获取user头像信息
@@ -164,9 +165,9 @@
         }
       },
       /*查询所有评论*/
-      queryObserveByObjId(obj_id) {
+      queryObserveByObjId(objType , obj_id) {
 
-          axios.get('/queryObserveByObjId?objId='+ obj_id).then(response => {
+          axios.get('/queryObserveByObjId?objType=' + objType + '&objId='+ obj_id).then(response => {
             // console.log(response)
             this.dataSource = response.data
           })
@@ -174,8 +175,9 @@
 
       /*上传rootObserve*/
       addRootObserve() {
+        console.log(this.objType)
         axios.post('/addObjObserve', {
-          type: '放空日记',
+          type: this.objType,
           objId: this.obj_id,
           observeContent: this.rootObserveContent
         }).then(response => {
@@ -200,7 +202,7 @@
 
       addReplyObserve(last_id) {
         axios.post('/addObjObserve', {
-          type: '放空日记',
+          type: this.objType,
           objId: this.obj_id,
           lastId: last_id,
           observeContent: this.replyObserveContent
@@ -212,8 +214,9 @@
       }
     },
     mounted() {
+      // console.log(1234654)
       this.getAvatorAndUserName();
-      this.queryObserveByObjId(this.obj_id);
+      this.queryObserveByObjId(this.objType , this.obj_id);
       // console.log('obj_id' , this.obj_id)
     }
   }

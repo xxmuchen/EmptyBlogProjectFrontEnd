@@ -76,8 +76,9 @@
       },
       saveDiaryStar() {
         // console.log(this.diary.id)
-        axios.post('/saveDiaryStar' , {
-          diaryId: this.diary.id
+        axios.post('/saveObjStar' , {
+          objId: this.diary.id,
+          objType: '放空日记'
         }).then(response => {
           this.isLike = true;
           // console.log(response)
@@ -88,8 +89,9 @@
         })
       },
       cancelDiaryStar() {
-        axios.post('/cancelDiaryStar', {
-          diaryId: this.diary.id
+        axios.post('/cancelObjStar', {
+          objId: this.diary.id,
+          objType: '放空日记'
         }).then(response => {
           this.isLike = false;
           ElMessage({
@@ -101,8 +103,9 @@
       },
       saveDiaryCollection() {
         // console.log(this.diary.id)
-        axios.post('/saveDiaryCollection' , {
-          diaryId: this.diary.id
+        axios.post('/saveObjCollection' , {
+          objId: this.diary.id,
+          objType: '放空日记'
         }).then(response => {
           this.isCollect = true;
           // console.log(response)
@@ -113,8 +116,9 @@
         })
       },
       cancelDiaryCollection() {
-        axios.post('/cancelDiaryCollection', {
-          diaryId: this.diary.id
+        axios.post('/cancelObjCollection', {
+          objId: this.diary.id,
+          objType: '放空日记'
         }).then(response => {
           this.isCollect = false;
           ElMessage({
@@ -124,11 +128,11 @@
         })
 
       },
-      hasAlreadLike(diary_id){
+      hasAlreadLike(){
         // console.log(this.diary.id)
         let eleToken = localStorage.getItem('eleToken')
         if (eleToken !== null) {
-          axios.get('/hasAlreadLike?diaryId=' + diary_id).then(response => {
+          axios.get('/hasAlreadLike?objId=' + this.diary.id + '&objType=放空日记').then(response => {
             if (response.data === 'like') {
               this.isLike = true;
             }else {
@@ -137,11 +141,11 @@
           })
         }
       },
-      hasAlreadCollect(diary_id){
+      hasAlreadCollect(){
         // console.log(this.diary.id)
         let eleToken = localStorage.getItem('eleToken')
         if (eleToken !== null) {
-          axios.get('/hasAlreadCollect?diaryId=' + diary_id).then(response => {
+          axios.get('/hasAlreadCollect?objId=' + this.diary.id + '&objType=放空日记').then(response => {
             if (response.data === 'collect') {
               this.isCollect = true;
             }else {

@@ -164,9 +164,9 @@
         }
       },
       /*查询所有评论*/
-      queryObserveByBlogId(obj_id) {
+      queryObserveByObjId(obj_id) {
 
-          axios.get('/queryObserveByBlogId?objId='+ obj_id).then(response => {
+          axios.get('/queryObserveByObjId?objId='+ obj_id).then(response => {
             // console.log(response)
             this.dataSource = response.data
           })
@@ -174,7 +174,7 @@
 
       /*上传rootObserve*/
       addRootObserve() {
-        axios.post('/addDiaryObserve', {
+        axios.post('/addObjObserve', {
           type: '放空日记',
           objId: this.obj_id,
           observeContent: this.rootObserveContent
@@ -199,7 +199,7 @@
       },
 
       addReplyObserve(last_id) {
-        axios.post('/addDiaryObserve', {
+        axios.post('/addObjObserve', {
           type: '放空日记',
           objId: this.obj_id,
           lastId: last_id,
@@ -213,7 +213,7 @@
     },
     mounted() {
       this.getAvatorAndUserName();
-      this.queryObserveByBlogId(this.obj_id);
+      this.queryObserveByObjId(this.obj_id);
       // console.log('obj_id' , this.obj_id)
     }
   }

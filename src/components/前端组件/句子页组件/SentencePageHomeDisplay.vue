@@ -9,184 +9,70 @@
         <!--            <el-breadcrumb-item>活动详情</el-breadcrumb-item>-->
       </el-breadcrumb>
       <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-        <li  class="infinite-list-item">
+        <li  class="infinite-list-item" v-for="item in sentenceData" :key="item.id">
           <div class="sentenceContentSingle">
             <div class="sentenceTop">
               <div class="demo-basic--circle">
                 <div class="block">
-                  <el-avatar size="default" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>
+                  <el-avatar size="default" :src="item.authorAvatar"></el-avatar>
                 </div>
                 <!--                  <div class="block" v-for="size in sizeList" :key="size">-->
                 <!--                    <el-avatar :size="size" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>-->
                 <!--                  </div>-->
               </div>
-              <div class="userName">wcx</div>
+              <div class="userName" v-text="item.authorName"></div>
             </div>
             <div class="sentenceMain">
               <div class="sentenceContent">
-                <div class="sentenceContentBox">
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
+                <div class="sentenceContentBox" v-html="item.content">
                 </div>
               </div>
-              <div class="sentenceContentAuthor">dc</div>
-              <div class="sentenceContentUserOperation">
-                <div>喜欢</div>
-                <div>收藏</div>
-              </div>
+              <div class="sentenceContentAuthor" v-text="item.originalAuthor"></div>
             </div>
             <div class="sentenceFooter">
               <div class="commentSection">
-                <el-input v-model="input" placeholder="请输入内容"></el-input>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li  class="infinite-list-item">
-          <div class="sentenceContentSingle">
-            <div class="sentenceTop">
-              <div class="demo-basic--circle">
-                <div class="block">
-                  <el-avatar size="default" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>
-                </div>
-                <!--                  <div class="block" v-for="size in sizeList" :key="size">-->
-                <!--                    <el-avatar :size="size" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>-->
-                <!--                  </div>-->
-              </div>
-              <div class="userName">wcx</div>
-            </div>
-            <div class="sentenceMain">
-              <div class="sentenceContent">
-                <div class="sentenceContentBox">
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                </div>
-              </div>
-              <div class="sentenceContentAuthor">dc</div>
-              <div class="sentenceContentUserOperation">
-                <div>喜欢</div>
-                <div>收藏</div>
-              </div>
-            </div>
-            <div class="sentenceFooter">
-              <div class="commentSection">
-                <el-input v-model="input" placeholder="请输入内容"></el-input>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li  class="infinite-list-item">
-          <div class="sentenceContentSingle">
-            <div class="sentenceTop">
-              <div class="demo-basic--circle">
-                <div class="block">
-                  <el-avatar size="default" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>
-                </div>
-                <!--                  <div class="block" v-for="size in sizeList" :key="size">-->
-                <!--                    <el-avatar :size="size" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>-->
-                <!--                  </div>-->
-              </div>
-              <div class="userName">wcx</div>
-            </div>
-            <div class="sentenceMain">
-              <div class="sentenceContent">
-                <div class="sentenceContentBox">
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                  所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                </div>
-              </div>
-              <div class="sentenceContentAuthor">dc</div>
-              <div class="sentenceContentUserOperation">
-                <div>喜欢</div>
-                <div>收藏</div>
-              </div>
-            </div>
-            <div class="sentenceFooter">
-              <div class="commentSection">
-                <el-input v-model="input" placeholder="请输入内容"></el-input>
+                <el-input v-model="rootObserve" placeholder="请输入内容"></el-input>
               </div>
             </div>
           </div>
         </li>
       </ul>
-
-<!--      <div class="sentenceContentSingle">-->
-<!--        <div class="sentenceTop">-->
-<!--          <div class="demo-basic&#45;&#45;circle">-->
-<!--            <div class="block">-->
-<!--              <el-avatar :size="large" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>-->
-<!--            </div>-->
-<!--            &lt;!&ndash;                  <div class="block" v-for="size in sizeList" :key="size">&ndash;&gt;-->
-<!--            &lt;!&ndash;                    <el-avatar :size="size" src="https://file.mingyantong.com/weibopic/jxzlmu5.jpg"></el-avatar>&ndash;&gt;-->
-<!--            &lt;!&ndash;                  </div>&ndash;&gt;-->
-<!--          </div>-->
-<!--          <div class="userName">wcx</div>-->
-<!--        </div>-->
-<!--        <div class="sentenceMain">-->
-<!--          <div class="sentenceContent">-->
-<!--            <div class="sentenceContentBox">-->
-<!--              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。-->
-<!--              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。-->
-<!--              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。-->
-<!--              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。-->
-<!--              所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="sentenceContentAuthor">dc</div>-->
-<!--          <div class="sentenceContentUserOperation">-->
-<!--            <div>喜欢</div>-->
-<!--            <div>收藏</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="sentenceFooter">-->
-<!--          <div class="commentSection">-->
-<!--            <el-input v-model="input" placeholder="请输入内容"></el-input>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
     </div>
-
-
-    <!--        这部分要拆分成一个新的组件-->
     <div class="rightContent">
       <RightSideBar></RightSideBar>
-      <!--            <div class="sentenceType">-->
-      <!--                <div class="sentenceTypeHeader">-->
-      <!--                  <i class="iconfont icon-fuzhushuxian"></i>句子分类-->
-      <!--                  <el-tag>更多 >></el-tag>-->
-      <!--                </div>-->
-      <!--                <div class="guessLike">-->
-      <!--                  猜你喜欢-->
-      <!--                </div>-->
-      <!--                <div class="sentenceTypeContent">-->
-      <!--                  <el-row :gutter="20">-->
-      <!--                    <el-col :span="6"><div class="grid-content bg-purple">伤感</div></el-col>-->
-      <!--                    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
-      <!--                    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
-      <!--                    <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
-      <!--                  </el-row>-->
-      <!--                </div>-->
-      <!--            </div>-->
     </div>
   </el-main>
-  <!--  </el-container>-->
 </template>
 <script>
 import RightSideBar from '@/components/前端组件/句子页组件/SentencePageRightSideBar/SentencePageHomePageRightSideBar'
+import axios from "axios";
 
 export default {
   name: 'SentencePageHomeDisplay',
   components: {
     RightSideBar
+  },
+  data() {
+    return {
+      count: 0,
+      sentenceData: {},
+      rootObserve: '',
+    }
+  },
+  methods: {
+    load() {
+      this.count += 1;
+    },
+    getAllSentence() {
+      axios.get("/getAllSentence").then(response => {
+        this.sentenceData = response.data
+        console.log(response.data)
+      })
+    },
+
+  },
+  mounted() {
+    this.getAllSentence()
   }
 }
 </script>
@@ -246,7 +132,7 @@ body > .el-container {
 .infinite-list {
   /*height: 300px;*/
   /*height: 1000px;*/
-  height: 60%;
+  /*height: ;*/
   padding: 0;
   margin: 0;
   list-style: none;
@@ -401,19 +287,33 @@ body > .el-container {
   /*text-align: center;*/
 }
 
-/*.el-input {*/
 
-/*    !*height: 300px;*!*/
-/*!*  height: 100%;*!*/
-/*!*  width: 100%;*!*/
-/*}*/
+.sentenceContentUserOperation {
+  width: 93%;
+  height: auto;
+  display:flex;
+  /*justify-content:center;*/
+  /*align-items:center;*/
+  /*margin-top: 30px;*/
+  /*margin-left: 2.5%;*/
+  /*margin-bottom: 10px;*/
+  /*padding-left: 10px;*/
+}
+.operation {
+  width: 50px;
+  height: 50px;
+  /*background: red;*/
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 100px;
+  margin-right: 10px;
+  /*margin-left: ;*/
+  /*margin-right: -1.8;*/
+  /*margin-right: 10px;*/
+  /*margin-right: 100px;*/
+}
 
-/*.el-textarea .el-textarea__inner{ */
-/*resize: none;*/
-/*}*/
-
-/*  height: 100px;*/
-/*}*/
 .commentSection ::v-deep(.el-input__inner) {
   height: 40px;
   background: none;

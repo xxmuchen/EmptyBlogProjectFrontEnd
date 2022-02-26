@@ -42,7 +42,7 @@
                   multiple-limit="3"
               >
                 <el-option
-                    v-for="item in ruleForm.options"
+                    v-for="item in options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value"
@@ -51,7 +51,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="背景色">
-              <el-color-picker v-model="ruleForm.bgColor" show-alpha :active-change="colorChange()"/>
+              <el-color-picker v-model="ruleForm.bgColor" show-alpha />
             </el-form-item>
             <el-form-item label="公开">
               <el-switch
@@ -91,51 +91,51 @@ export default {
     return {
       url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
       ruleForm: {
-        public: true,
-        title: '',
         content: '',
+        public: true,
         original: true,
         originalAuthor: '',
         tag: '',
-        options: [
-          {
-            value: '哲理',
-            label: '哲理',
-          },
-          {
-            value: '感悟',
-            label: '感悟',
-          },
-          {
-            value: '爱情',
-            label: '爱情',
-          },
-          {
-            value: '伤感',
-            label: '伤感',
-          },
-          {
-            value: '励志',
-            label: '励志',
-          },
-          {
-            value: '唯美',
-            label: '唯美',
-          },
-          {
-            value: '生活',
-            label: '生活',
-          },
-          {
-            value: '动漫',
-            label: '动漫',
-          },
-          {
-            value: '朋友',
-            label: '朋友',
-          }
-        ]
+        bgColor: ''
       },
+      options: [
+        {
+          value: '哲理',
+          label: '哲理',
+        },
+        {
+          value: '感悟',
+          label: '感悟',
+        },
+        {
+          value: '爱情',
+          label: '爱情',
+        },
+        {
+          value: '伤感',
+          label: '伤感',
+        },
+        {
+          value: '励志',
+          label: '励志',
+        },
+        {
+          value: '唯美',
+          label: '唯美',
+        },
+        {
+          value: '生活',
+          label: '生活',
+        },
+        {
+          value: '动漫',
+          label: '动漫',
+        },
+        {
+          value: '朋友',
+          label: '朋友',
+        }
+      ],
       editor: {}
     }
   },
@@ -164,12 +164,6 @@ export default {
             break
         }
       }
-      this.editor.config.uploadImgShowBase64 = true
-      this.editor.config.uploadImgServer = 'http://localhost:8081/api/diaryImageFileUpLoadAndReturnUrl'
-      this.editor.config.uploadFileName = 'myImageFileName'
-      this.editor.config.uploadVideoServer = 'http://localhost:8081/api/diaryVideoFileUpLoadAndReturnUrl'
-      this.editor.config.uploadVideoName = 'myVideoFileName'
-      this.editor.config.uploadVideoMaxSize = 30 * 1024 * 1024
       this.editor.config.zIndex = 1
       this.editor.config.menus = [
         'head',
@@ -193,21 +187,16 @@ export default {
       this.editor.create()
       // this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
     },
-    colorChange() {
-
-    },
     onSubmit() {
       //
       this.ruleForm.content = this.editor.txt.html()
       console.log(this.ruleForm.bgColor)
-      axios.post('/diaryInfoUpload', {
-        title: this.ruleForm.title,
+      axios.post('/addSentence', {
         content: this.ruleForm.content,
-        mood: this.ruleForm.mood,
-        weather: this.ruleForm.weather,
-        bgColor: this.ruleForm.bgColor,
         see: this.ruleForm.public,
-        // author_id: this.$store.getters.user
+        originalAuthor: this.originalAuthor,
+        sentenceTagList: this.ruleForm.tag,
+        bgColor: this.ruleForm.bgColor
       }).then(response => {
         ElMessage({
           message: response.data,

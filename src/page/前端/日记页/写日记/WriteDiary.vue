@@ -126,12 +126,7 @@
               break
           }
         }
-        this.editor.config.uploadImgShowBase64 = true
-        this.editor.config.uploadImgServer = 'http://localhost:8081/api/diaryImageFileUpLoadAndReturnUrl'
-        this.editor.config.uploadFileName = 'myImageFileName'
-        this.editor.config.uploadVideoServer = 'http://localhost:8081/api/diaryVideoFileUpLoadAndReturnUrl'
-        this.editor.config.uploadVideoName = 'myVideoFileName'
-        this.editor.config.uploadVideoMaxSize = 30 * 1024 * 1024
+
         this.editor.config.zIndex = 1
 
         this.editor.create()
@@ -159,13 +154,7 @@
             message: response.data,
             type: 'success'
           })
-           // setTimeout(()=>{
-           //   // ElMessage.success(response);
-           //
-           // } , 3000)
         })
-        // console.log(this.ruleForm)
-        // console.log(this.editor.txt.html());
       }
     },
     mounted() {

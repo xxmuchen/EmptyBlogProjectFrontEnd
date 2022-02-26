@@ -10,7 +10,7 @@
     </el-aside>
 
     <el-main>
-      <el-carousel :interval="4000" type="card" height="400px">
+      <el-carousel :interval="4000" type="card" height="400px" initial-index="1">
         <el-carousel-item v-for="item in homePageInfoMedia" :key="item.id">
           <div class="demo-image">
             <div class="block">

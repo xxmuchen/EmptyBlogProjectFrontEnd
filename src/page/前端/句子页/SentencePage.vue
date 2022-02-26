@@ -3,15 +3,7 @@
     <el-header height="auto">
       <el-row :gutter="20">
         <el-col :span="3" :offset="1">
-          <router-link :to="{name:'HomePage'}"><div class="grid-content bg-purple">
-            <div class="demo-image">
-              <div class="block">
-                <el-image
-                    :src="url" fit="fill"></el-image>
-              </div>
-            </div>
-          </div>
-          </router-link>
+          <TopLogo></TopLogo>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
@@ -45,7 +37,7 @@
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
         <el-col :span="1"><div class="grid-content bg-purple"><i class="iconfont icon-Magnifier"></i></div></el-col>
-        <el-col :span="2"><div class="grid-content bg-purple">登录/注册</div></el-col>
+        <el-col :span="3"><div class="grid-content bg-purple"><UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay></div></el-col>
       </el-row>
 
 
@@ -57,8 +49,11 @@
   </el-container>
 </template>
 <script>
+import TopLogo from "@/components/前端组件/logo组件/TopLogo";
+import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
 export default {
   name: 'SentencePageHomeDisplay',
+  components: {UserLoginAvatarAndNameDisplay, TopLogo},
   data() {
     return {
       url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png'
@@ -97,7 +92,7 @@ body > .el-container {
   /*line-height: 320px;*/
 }
 .el-row {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   padding-top: 20px;
 &:last-child {
    margin-bottom: 0;

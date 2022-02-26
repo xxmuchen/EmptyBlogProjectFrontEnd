@@ -2,21 +2,16 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <div class="demo-image">
-          <div class="block">
-            <el-image
-                style="width: 100%; height: 80%"
-                :src="url"
-                fit="fill"
-            ></el-image>
+        <div class="topSection">
+          <TopLogo></TopLogo>
+          <div class="type">
+            <div>
+              放空句子
+            </div>
           </div>
+          <UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay>
         </div>
-        <div class="type">
-          <div>
-            放空句子
-          </div>
-        </div>
-        <UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay>
+
       </el-header>
       <el-main>
         <el-form label-position="left">
@@ -79,6 +74,7 @@ import E from 'wangeditor'
 import {ElMessage} from "element-plus";
 import axios from "axios";
 import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
+import TopLogo from "@/components/前端组件/logo组件/TopLogo";
 // import axios from "axios";
 // import { ElMessage } from "@element-plus/icons-vue";
 // import axios from "axios";
@@ -86,7 +82,7 @@ import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登�
 // editor.create()
 export default {
   name: 'WriteSentence',
-  components: {UserLoginAvatarAndNameDisplay},
+  components: {TopLogo, UserLoginAvatarAndNameDisplay},
   data() {
     return {
       url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
@@ -194,7 +190,7 @@ export default {
       axios.post('/addSentence', {
         content: this.ruleForm.content,
         see: this.ruleForm.public,
-        originalAuthor: this.originalAuthor,
+        originalAuthor: this.ruleForm.originalAuthor,
         sentenceTagList: this.ruleForm.tag,
         bgColor: this.ruleForm.bgColor
       }).then(response => {
@@ -264,22 +260,25 @@ export default {
 
 .el-header {
   /*height: 70px;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  /*height: 60px;*/
+  /*height: 100%;*/
+}
+.topSection {
+  height: 60px;
   display: flex;
   align-items: center;
+  /*height: 20%;*/
 }
-
 .el-footer {
   height: auto;
 }
 
-.demo-image {
-  width: 8%;
-  /*margin-top: 20px;*/
-  /*margin-left: 20px;*/
-}
+
 
 .type {
-  width: 84%;
+  width: 77%;
   display: flex;
   align-items: center;
   justify-content: center;

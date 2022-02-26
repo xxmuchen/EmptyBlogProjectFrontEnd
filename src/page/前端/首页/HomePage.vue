@@ -3,15 +3,7 @@
     <el-header height="auto">
       <el-row :gutter="20">
         <el-col :span="3">
-          <router-link :to="{name:'HomePage'}"><div class="grid-content bg-purple">
-            <div class="demo-image">
-              <div class="block">
-                <el-image
-                    :src="url" fit="fill"></el-image>
-              </div>
-            </div>
-          </div>
-          </router-link>
+         <TopLogo></TopLogo>
         </el-col>
         <el-col :span="3" v-for="item in homePageData" :key="item.id">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
@@ -39,14 +31,15 @@
 <script>
 import axios from 'axios'
 import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
+import TopLogo from "@/components/前端组件/logo组件/TopLogo"
 export default {
   name: 'HomePage',
   components: {
+    TopLogo,
     UserLoginAvatarAndNameDisplay
   },
   data() {
     return {
-      url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
       homePageData: {}
     }
   },
@@ -93,7 +86,7 @@ body > .el-container {
 .el-row {
   padding: 0;
   margin: 0;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   padding-top: 20px;
   /*margin-left: 0px;*/
 }

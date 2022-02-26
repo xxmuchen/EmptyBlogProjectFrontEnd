@@ -100,7 +100,7 @@ const routes = [
     {
         name: 'WriteSentence',
         path: '/WriteSentence',
-        component: WriteSentence
+        component: WriteSentence,
     },
     {
         name: 'VLogPage',

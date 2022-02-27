@@ -126,10 +126,7 @@
 
         // this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
       },
-      colorChange(){
-        // console.log(this.$store.state.user)
 
-      },
       onSubmit() {
         //
         this.ruleForm.content = this.editor.txt.html()

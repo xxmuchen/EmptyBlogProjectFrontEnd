@@ -67,10 +67,10 @@
           //   src:"https://www.runoob.com/try/demo_source/mov_bbb.mp4"
           // },
           {
-            src:"https://mvwebfs.ali.kugou.com/202202150544/c1e25c8affc83e84bf4581bbfd14b3b1/KGTX/CLTX002/2ef485d5ce1b774f6773483b193b7a73.mp4"
+            src:"https://v26-web.douyinvod.com/4214ed8c4359251260c5f2a266186951/621b23fb/video/tos/cn/tos-cn-ve-15-alinc2/c631f93f86a849aaaa98a0adfab45d92/?a=6383&br=2270&bt=2270&cd=0%7C0%7C0%7C0&ch=5&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=OyFYlOZZI02U17cz8Th9D8FxuhsdphxbtqY&l=202202271409260101400390420C858ED1&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=amV2NGc6Zm84OzMzNGkzM0ApZTk6PDZmODs4Nzg6NDlnOmdhYWtucjRvNGBgLS1kLWFzczUvMTYvXmMtMGFhLmA0MGM6Yw%3D%3D&vl=&vr="
           },
           {
-            src:"https://mvwebfs.tx.kugou.com/202202150544/bf7cd429df2ebc0725bcc5d836f1f93b/KGTX/CLTX002/7f4b65785921171338015f6b9896e79e.mp4"
+            src:"https://v26-web.douyinvod.com/4214ed8c4359251260c5f2a266186951/621b23fb/video/tos/cn/tos-cn-ve-15-alinc2/c631f93f86a849aaaa98a0adfab45d92/?a=6383&br=2270&bt=2270&cd=0%7C0%7C0%7C0&ch=5&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=OyFYlOZZI02U17cz8Th9D8FxuhsdphxbtqY&l=202202271409260101400390420C858ED1&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=amV2NGc6Zm84OzMzNGkzM0ApZTk6PDZmODs4Nzg6NDlnOmdhYWtucjRvNGBgLS1kLWFzczUvMTYvXmMtMGFhLmA0MGM6Yw%3D%3D&vl=&vr="
           },
         ],
         options: reactive({

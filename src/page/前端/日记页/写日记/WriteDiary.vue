@@ -2,14 +2,22 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <div class="topSection">
-          <TopLogo></TopLogo>
-          <div class="type">
-            <div>
-              放空日记
-            </div>
+        <div class="demo-image">
+          <div class="block">
+            <el-image
+                style="width: 100%; height: 80%"
+                :src="url"
+                fit="fill"
+            ></el-image>
           </div>
-          <UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay>
+        </div>
+        <div class="type">
+          <div>
+            放空日记
+          </div>
+        </div>
+        <div class="user">
+          名字和头像
         </div>
       </el-header>
       <el-main>
@@ -69,92 +77,105 @@
   </div>
 </template>
 <script>
-  import E from 'wangeditor'
-  import { ElMessage } from "element-plus";
-  import axios from "axios";
-  import TopLogo from "@/components/前端组件/logo组件/TopLogo";
-  import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
-  export default {
-    name: 'WriteDiary',
-    components: {
-      UserLoginAvatarAndNameDisplay,
-      TopLogo
-    },
-    data() {
-      return {
-        url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
-        ruleForm: {
-          mood: '',
-          weather: '',
-          bgColor: '',
-          public: true,
-          title: '',
-          content: ''
-        },
-        editor: {}
-      }
-    },
-    methods: {
-      setEditor() {
-        this.editor = new E(this.$refs.WangEditor)
-        this.editor.config.height = 400
-        this.editor.config.placeholder = ''
-        this.editor.config.focus = false
-        this.editor.config.customAlert = function (s, t) {
-          switch (t) {
-            case 'success':
-              ElMessage.success(s)
-              break
-            case 'info':
-              ElMessage.info(s)
-              break
-            case 'warning':
-              ElMessage.warning(s)
-              break
-            case 'error':
-              ElMessage.error(s)
-              break
-            default:
-              ElMessage.info(s)
-              break
-          }
-        }
-
-        this.editor.config.zIndex = 1
-
-        this.editor.create()
-
-        // this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
+import E from 'wangeditor'
+import { ElMessage } from "element-plus";
+import axios from "axios";
+// import axios from "axios";
+// import { ElMessage } from "@element-plus/icons-vue";
+// import axios from "axios";
+// 或者 const editor = new E( document.getElementById('div1') )
+// editor.create()
+export default {
+  name: 'WriteDiary',
+  data() {
+    return {
+      url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
+      ruleForm: {
+        mood: '',
+        weather: '',
+        bgColor: '',
+        public: true,
+        title: '',
+        content: ''
       },
-
-      onSubmit() {
-        //
-        this.ruleForm.content = this.editor.txt.html()
-        console.log(this.ruleForm.bgColor)
-        axios.post('/diaryInfoUpload' , {
-          title: this.ruleForm.title,
-          content: this.ruleForm.content,
-          mood: this.ruleForm.mood,
-          weather: this.ruleForm.weather,
-          bgColor: this.ruleForm.bgColor,
-          see: this.ruleForm.public,
-          // author_id: this.$store.getters.user
-        }).then(response => {
-          ElMessage({
-            message: response.data,
-            type: 'success'
-          })
-        })
-      }
-    },
-    mounted() {
-      this.setEditor();
-    },
-    beforeUnmount() {
-      this.editor.destroy();
-      this.editor = null
+      editor: {}
     }
+  },
+  methods: {
+    setEditor() {
+      this.editor = new E(this.$refs.WangEditor)
+      this.editor.config.height = 400
+      this.editor.config.placeholder = ''
+      this.editor.config.focus = false
+      this.editor.config.customAlert = function (s, t) {
+        switch (t) {
+          case 'success':
+            ElMessage.success(s)
+            break
+          case 'info':
+            ElMessage.info(s)
+            break
+          case 'warning':
+            ElMessage.warning(s)
+            break
+          case 'error':
+            ElMessage.error(s)
+            break
+          default:
+            ElMessage.info(s)
+            break
+        }
+      }
+      this.editor.config.uploadImgShowBase64 = true
+      this.editor.config.uploadImgServer = 'http://localhost:8081/api/diaryImageFileUpLoadAndReturnUrl'
+      this.editor.config.uploadFileName = 'myImageFileName'
+      this.editor.config.uploadVideoServer = 'http://localhost:8081/api/diaryVideoFileUpLoadAndReturnUrl'
+      this.editor.config.uploadVideoName = 'myVideoFileName'
+      this.editor.config.uploadVideoMaxSize = 30 * 1024 * 1024
+      this.editor.config.zIndex = 1
+
+      this.editor.create()
+
+      this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
+    },
+    colorChange(){
+      // console.log(this.$store.state.user)
+
+    },
+    onSubmit() {
+      //
+      this.ruleForm.content = this.editor.txt.html()
+      console.log(this.ruleForm.bgColor)
+      axios.post('/diaryInfoUpload' , {
+        title: this.ruleForm.title,
+        content: this.ruleForm.content,
+        mood: this.ruleForm.mood,
+        weather: this.ruleForm.weather,
+        bgColor: this.ruleForm.bgColor,
+        see: this.ruleForm.public,
+        // author_id: this.$store.getters.user
+      }).then(response => {
+        ElMessage({
+          message: response.data,
+          type: 'success'
+        })
+        // setTimeout(()=>{
+        //   // ElMessage.success(response);
+        //
+        // } , 3000)
+      })
+      // console.log(this.ruleForm)
+      // console.log(this.editor.txt.html());
+    }
+  },
+  mounted() {
+    this.setEditor();
+  },
+  beforeUnmount() {
+    this.editor.destroy();
+    this.editor = null
   }
+}
 
 
 </script>
@@ -163,7 +184,11 @@
 .common-layout .el-footer {
   background-color: #b3c0d1;
   color: var(--el-text-color-primary);
-
+  /*text-align: center;*/
+  /*line-height: 60px;*/
+  /*padding: 0;*/
+  /*margin: 0;*/
+  /*height: auto;*/
 }
 .common-layout .el-footer {
   /*line-height: 60px;*/
@@ -172,13 +197,16 @@
 .common-layout .el-aside {
   background-color: #d3dce6;
   color: var(--el-text-color-primary);
-
+  /*text-align: center;*/
+  /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
   background-color: #e9eef3;
   color: var(--el-text-color-primary);
-
+  /*text-align: center;*/
+  /*line-height: 160px;*/
+  /*padding: 0;*/
   padding-left: 240px;
   padding-right: 240px;
 }
@@ -195,33 +223,28 @@
 .common-layout .el-container:nth-child(7) .el-aside {
   /*line-height: 320px;*/
 }
-
 .el-header {
   /*height: 70px;*/
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*height: 60px;*/
-  /*height: 100%;*/
-}
-.topSection {
-  height: 60px;
   display: flex;
   align-items: center;
-  /*height: 20%;*/
 }
 .el-footer {
   height: auto;
 }
-
+.demo-image {
+  width: 8%;
+  /*margin-top: 20px;*/
+  /*margin-left: 20px;*/
+}
 .type {
-  width: 77%;
+  width: 84%;
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
 .user {
-  /*width: 8%;*/
+  width: 8%;
   display: flex;
   align-items: center;
   justify-content: center;

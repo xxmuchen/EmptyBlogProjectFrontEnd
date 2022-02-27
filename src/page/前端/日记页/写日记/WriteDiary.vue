@@ -2,22 +2,14 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-        <div class="demo-image">
-          <div class="block">
-            <el-image
-                style="width: 100%; height: 80%"
-                :src="url"
-                fit="fill"
-            ></el-image>
-          </div>
-        </div>
+       <TopLogo></TopLogo>
         <div class="type">
           <div>
             放空日记
           </div>
         </div>
         <div class="user">
-          名字和头像
+          <UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay>
         </div>
       </el-header>
       <el-main>
@@ -80,6 +72,8 @@
 import E from 'wangeditor'
 import { ElMessage } from "element-plus";
 import axios from "axios";
+import TopLogo from "@/components/前端组件/logo组件/TopLogo";
+import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
 // import axios from "axios";
 // import { ElMessage } from "@element-plus/icons-vue";
 // import axios from "axios";
@@ -87,6 +81,7 @@ import axios from "axios";
 // editor.create()
 export default {
   name: 'WriteDiary',
+  components: {UserLoginAvatarAndNameDisplay, TopLogo},
   data() {
     return {
       url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',

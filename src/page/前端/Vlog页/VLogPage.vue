@@ -7,31 +7,37 @@
                    indicator-position="none"
                    @change="getIndex"
                    ref="carousel">
-        <el-carousel-item v-for="(item,index) in videos" :key="index">
+        <el-carousel-item v-for="(item,index) in vlogs" :key="index" >
           <div class="player-container">
             <vue3VideoPlay
                 v-bind="options"
                 :ref="'vue3-video-player' + index"
                 :currentTime="0"
-                :src = "item.src"
+                :src = "item.videoUrl"
             >
             </vue3VideoPlay>
           </div>
+          <div class="rightSide">
+            <div class="controlVideo">
+              <div v-on:click="nextToNextVideo" class="nextToNextVideo">next</div>
+              <div v-on:click="prevToLastVideo" class="prevToLastVideo">prev</div>
+            </div>
+            <div class="avator">
+              <div class="block"><el-avatar :size="50" :src="item.authorAvatar"></el-avatar></div>
+            </div>
+            <div class="like">
+              <div class="block" v-show="!isLike" @click="saveDiaryStar(item.id)"><i class="iconfont icon-xihuan"></i></div>
+              <div class="block" v-show="isLike" @click="cancelDiaryStar(item.id)"><i class="iconfont icon-xiai"></i></div>
+            </div>
+            <div class="collect">
+              <div class="block" v-show="!isCollect" @click="saveDiaryCollection(item.id)"><i class="iconfont icon-shoucang2"></i></div>
+              <div class="block" v-show="isCollect" @click="cancelDiaryCollection(item.id)"><i class="iconfont icon-shoucang1"></i></div>
+            </div>
+          </div>
+
         </el-carousel-item>
       </el-carousel>
-      <div class="controlVideo">
-        <div v-on:click="nextToNextVideo" class="nextToNextVideo">next</div>
-        <div v-on:click="prevToLastVideo" class="prevToLastVideo">prev</div>
-      </div>
-      <div class="avator">
-        <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
-      </div>
-      <div class="like">
-        <div class="block"><i class="iconfont icon-lovetaoxin"></i></div>
-      </div>
-      <div class="collect">
-        <div class="block"><i class="iconfont icon-shoucang"></i></div>
-      </div>
+
       <div class="grid-content bg-purple logoControl">
         <router-link :to="{name:'HomePage'}"><div class="demo-image">
           <div class="block">
@@ -47,6 +53,8 @@
 </template>
 <script>
   import { reactive } from "vue";
+  import axios from "axios";
+  import {ElMessage} from "element-plus";
   // const onPlay = (ev) => {
   //   console.log(ev);
   // };
@@ -57,30 +65,21 @@
       return {
         url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
         screenHeight: document.body.clientHeight - 40 + 'px',
+        isLike: false,
+        isCollect: false,
         autoplay: false,//是否自动切换
         isPlay:false,//播放状态
         isIn:true,//鼠标是否位于播放器内
         cutTime:5000,//轮播时间，单位毫秒
         nowIndex: 0,
-        videos:[
-          // {
-          //   src:"https://www.runoob.com/try/demo_source/mov_bbb.mp4"
-          // },
-          {
-            src:"https://v26-web.douyinvod.com/4214ed8c4359251260c5f2a266186951/621b23fb/video/tos/cn/tos-cn-ve-15-alinc2/c631f93f86a849aaaa98a0adfab45d92/?a=6383&br=2270&bt=2270&cd=0%7C0%7C0%7C0&ch=5&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=OyFYlOZZI02U17cz8Th9D8FxuhsdphxbtqY&l=202202271409260101400390420C858ED1&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=amV2NGc6Zm84OzMzNGkzM0ApZTk6PDZmODs4Nzg6NDlnOmdhYWtucjRvNGBgLS1kLWFzczUvMTYvXmMtMGFhLmA0MGM6Yw%3D%3D&vl=&vr="
-          },
-          {
-            src:"https://v26-web.douyinvod.com/4214ed8c4359251260c5f2a266186951/621b23fb/video/tos/cn/tos-cn-ve-15-alinc2/c631f93f86a849aaaa98a0adfab45d92/?a=6383&br=2270&bt=2270&cd=0%7C0%7C0%7C0&ch=5&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=OyFYlOZZI02U17cz8Th9D8FxuhsdphxbtqY&l=202202271409260101400390420C858ED1&lr=all&mime_type=video_mp4&net=0&pl=0&qs=0&rc=amV2NGc6Zm84OzMzNGkzM0ApZTk6PDZmODs4Nzg6NDlnOmdhYWtucjRvNGBgLS1kLWFzczUvMTYvXmMtMGFhLmA0MGM6Yw%3D%3D&vl=&vr="
-          },
-        ],
+        vlogs:[{
+          // videoUrl: 'http://localhost:8080/images/vlog/vlogVideo/3430c3fe-067b-471e-ba14-8960bec00a61808280402.mp4'
+        }],
         options: reactive({
           width: "100%", //播放器高度
           height: "100%", //播放器高度
           color: "#409eff", //主题色
           title: "", //视频名称
-          // poster: "https://cdn.jsdelivr.net/gh/xdlumia/files/video-play/ironMan.jpg",
-          src: "https://mvwebfs.ali.kugou.com/202202150544/c1e25c8affc83e84bf4581bbfd14b3b1/KGTX/CLTX002/2ef485d5ce1b774f6773483b193b7a73.mp4", //视频源
-          // currentTime: 0,
           muted: false, //静音
           webFullScreen: false,
           speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
@@ -106,19 +105,17 @@
     methods: {
 
       getIndex(nowIndex, oldIndex){
+        console.log(nowIndex, oldIndex)
         //用户可能在上个视频未播放完毕就切换
         //此时需要暂停上个视频并把时间归零，否则影响对当前视频的监听逻辑
         let myOldVideo = this.$refs['vue3-video-player' + oldIndex];
         myOldVideo[0].pause();
-        // myOldVideo[0].currentTime = 1;
         myOldVideo[0].currentTime = 0
 
         let myNowVideo = this.$refs['vue3-video-player' + nowIndex];
 
         // myNowVideo[0].src = 'https://mvwebfs.ali.kugou.com/202202150544/c1e25c8affc83e84bf4581bbfd14b3b1/KGTX/CLTX002/2ef485d5ce1b774f6773483b193b7a73.mp4'
         myNowVideo[0].play();
-
-
       },
       nextToNextVideo() {
           // this.$refs.carousel.
@@ -126,27 +123,113 @@
       },
       prevToLastVideo() {
         this.$refs.carousel.prev();
+      },
+      getScreenHeightAndWidth() {
+        // 获取屏幕高度
+        let that = this;
+        // this.myEcharts();
+        window.onresize = () => {
+          return (() => {
+            window.fullHeight = document.documentElement.clientHeight;
+            window.fullWidth = document.documentElement.clientWidth;
+            that.screenHeight = window.fullHeight - 40 + 'px'; // 高
+            that.windowWidth = window.fullWidth; // 宽
+          })()
+        };
+      },
+      getAllVlog() {
+        axios.get('/getAllVlog').then(response => {
+            this.vlogs = response.data
+            this.$forceUpdate()
+          console.log(this.vlogs)
+        })
+      },
+
+      saveDiaryStar(vlogId) {
+        axios.post('/saveObjStar' , {
+          objId: vlogId,
+          objType: '放空Vlog'
+        }).then(response => {
+          this.isLike = true;
+          // console.log(response)
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+      },
+      cancelDiaryStar(vlogId) {
+        axios.post('/cancelObjStar', {
+          objId: vlogId,
+          objType: '放空Vlog'
+        }).then(response => {
+          this.isLike = false;
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+
+      },
+      saveDiaryCollection(vlogId) {
+        // console.log(this.diary.id)
+        axios.post('/saveObjCollection' , {
+          objId: vlogId,
+          objType: '放空Vlog'
+        }).then(response => {
+          this.isCollect = true;
+          // console.log(response)
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+      },
+      cancelDiaryCollection(vlogId) {
+        axios.post('/cancelObjCollection', {
+          objId: vlogId,
+          objType: '放空Vlog'
+        }).then(response => {
+          this.isCollect = false;
+          ElMessage({
+            type: "success",
+            message: response.data
+          })
+        })
+
+      },
+      hasAlreadLike(vlogId){
+        // console.log(this.diary.id)
+        let eleToken = localStorage.getItem('eleToken')
+        if (eleToken !== null) {
+          axios.get('/hasAlreadLike?objId=' + vlogId + '&objType=放空Vlog').then(response => {
+            if (response.data === 'like') {
+              this.isLike = true;
+            }else {
+              this.isLike = false;
+            }
+          })
+        }
+      },
+      hasAlreadCollect(vlogId){
+        // console.log(this.diary.id)
+        let eleToken = localStorage.getItem('eleToken')
+        if (eleToken !== null) {
+          axios.get('/hasAlreadCollect?objId=' + vlogId + '&objType=放空Vlog').then(response => {
+            if (response.data === 'collect') {
+              this.isCollect = true;
+            }else {
+              this.isCollect = false;
+            }
+          })
+        }
       }
     },
     mounted() {
-        // this.screenHeight = do
-      // 获取屏幕高度
-      let that = this;
-      // this.myEcharts();
-      window.onresize = () => {
-        return (() => {
-          window.fullHeight = document.documentElement.clientHeight;
-          window.fullWidth = document.documentElement.clientWidth;
-          that.screenHeight = window.fullHeight - 40 + 'px'; // 高
-          that.windowWidth = window.fullWidth; // 宽
-          // console.log("实时屏幕高度：", that.screenHeight);
+     this.getScreenHeightAndWidth()
+      this.getAllVlog()
+    },
 
-          // console.log("实时屏幕宽度：", that.windowWidth);
-          // myChart.resize();
-          // myChart2.resize();
-        })()
-      };
-    }
   }
 </script>
 <style scoped>
@@ -228,6 +311,8 @@ video-play {
   right: 30px;
   top: 80px;
 
+  z-index: 1000;
+
 }
 .nextToNextVideo , .prevToLastVideo {
   width: 50px;
@@ -244,12 +329,14 @@ video-play {
   justify-content:center;
   text-align: center;
 
+  z-index: 1000;
   /*position: absolute;*/
   /*top: 30px;*/
   /*right: 30px;*/
 }
 .nextToNextVideo {
   border-bottom: 1px solid gray;
+  z-index: 1000;
 }
 
 .avator {
@@ -257,12 +344,14 @@ video-play {
   /*top: 30px;*/
   right: 30px;
   top: 250px;
+  z-index: 1000;
 }
 .like {
   position: absolute;
   /*top: 30px;*/
   right: 30px;
   top: 340px;
+  z-index: 1000;
 }
 
 .collect {
@@ -270,5 +359,7 @@ video-play {
   /*top: 30px;*/
   right: 30px;
   top: 420px;
+  z-index: 100;
 }
+
 </style>

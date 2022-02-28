@@ -16,8 +16,8 @@
       </div>
     </el-aside>
     <el-main>
-      <el-carousel :interval="4000"  arrow="always" height="400px">
-        <el-carousel-item v-for="item in homePageInfoMedia" :key="item.id">
+      <el-carousel :interval="4000"  autoplay="autoplay"  arrow="always" height="500px">
+        <el-carousel-item v-for="(item , index) in homePageInfoMedia" :key="index">
           <div class="demo-image">
             <div class="block">
               <el-image
@@ -43,18 +43,14 @@
         homePageDisplay: {},
         homePageDisplayType:'',
         homePageInfoContent:{},
-        homePageInfoMedia: {},
-        homePageInfoExample: {},
+        homePageInfoMedia: [{}],
+        homePageInfoExample: {
+
+        },
       }
     },
     methods: {
       justToDiaryPage() {
-        // let routeUrl = this.$router.resolve({
-        //   path: "/DiaryPage",
-        //   query: {id:96}
-        // });
-        // window.open(routeUrl.href, '_blank');
-        // this.$router.push('/DiaryPage')
       }
     },
     mounted() {
@@ -64,8 +60,8 @@
         this.homePageInfoContent = this.homePageDisplay.homePageInfoContent;
         this.homePageInfoMedia = this.homePageDisplay.homePageInfoMedia;
         this.homePageInfoExample = this.homePageDisplay.homePageInfoExample;
-
-        // console.log(this.homePageInfoExample)
+        console.log(this.homePageInfoMedia)
+        this.$forceUpdate()
       })
     }
   }

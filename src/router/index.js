@@ -32,6 +32,7 @@ import WriteDiary from "@/page/前端/日记页/写日记/WriteDiary";
 import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
 import WriteSentence from "@/page/前端/句子页/写句子/WriteSentence";
 import SentencePageDetailDisplay from "@/components/前端组件/句子页组件/SentencePageDetailDisplay";
+import WriteVlog from "@/page/前端/Vlog页/上传视频/WriteVlog";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -55,7 +56,13 @@ const routes = [
             { name:'HomePageVlogDisplay' , path: 'HomePageVlogDisplay', component: HomePageVlogDisplay },
             { name:'HomePageGraphicDisplay' , path: 'HomePageGraphicDisplay', component: HomePageGraphicDisplay }
 
-        ]},
+        ]
+    },
+    {
+        name: 'WriteVlog',
+        path: '/WriteVlog',
+        component: WriteVlog
+    },
     {
         name:'DiaryPage' ,
         path: '/DiaryPage',

@@ -36,7 +36,7 @@
       return {
         homePageDisplay: {},
         homePageInfoContent:{},
-        homePageInfoMedia: {},
+        homePageInfoMedia: [{}],
         homePageInfoExample: {},
         url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
       }
@@ -48,7 +48,7 @@
         this.homePageInfoContent = this.homePageDisplay.homePageInfoContent;
         this.homePageInfoMedia = this.homePageDisplay.homePageInfoMedia;
         this.homePageInfoExample = this.homePageDisplay.homePageInfoExample;
-
+        this.$forceUpdate()
         // console.log(this.homePageInfoExample)
       })
       // let str = this.$route.params.homePageDisplayData;

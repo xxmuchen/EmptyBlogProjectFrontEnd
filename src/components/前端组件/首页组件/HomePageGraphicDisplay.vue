@@ -49,7 +49,7 @@ export default {
       homePageDisplay: {},
       homePageDisplayType:'',
       homePageInfoContent:{},
-      homePageInfoMedia: {},
+      homePageInfoMedia: [{}],
       homePageInfoExample: {},
     }
   },
@@ -63,7 +63,7 @@ export default {
       this.homePageInfoContent = this.homePageDisplay.homePageInfoContent;
       this.homePageInfoMedia = this.homePageDisplay.homePageInfoMedia;
       this.homePageInfoExample = this.homePageDisplay.homePageInfoExample;
-
+      this.$forceUpdate()
       // console.log(this.homePageInfoExample)
     })
   }

@@ -5,7 +5,7 @@
        <TopLogo></TopLogo>
         <div class="type">
           <div>
-            放空日记
+            放空Vlog
           </div>
         </div>
         <div class="user">
@@ -13,55 +13,49 @@
         </div>
       </el-header>
       <el-main>
-        <el-form label-position="left">
-          <div class="diaryConfiguration">
-            <el-form-item label="心情" label-po>
-              <div>
-                <el-radio-group v-model="ruleForm.mood">
-                  <el-radio-button label="开心"><i class="iconfont icon-a-weixiaokaixingaoxing-12"></i></el-radio-button>
-                  <el-radio-button label="愤怒"><i class="iconfont icon-a-shengqifennushangxindaku-15"></i></el-radio-button>
-                  <el-radio-button label="伤心"><i class="iconfont icon-shangxin"></i></el-radio-button>
-                  <el-radio-button label="害怕"><i class="iconfont icon-haipabiaoqing"></i></el-radio-button>
-                  <el-radio-button label="无奈"><i class="iconfont icon-wunai"></i></el-radio-button>
-                  <el-radio-button label="恋爱"><i class="iconfont icon-_lianaiqinggan"></i></el-radio-button>
-                </el-radio-group>
-              </div>
-            </el-form-item>
-            <el-form-item label="天气">
-              <div>
-                <el-radio-group v-model="ruleForm.weather">
-                  <el-radio-button label="晴朗"><i class="iconfont icon-qinglang"></i></el-radio-button>
-                  <el-radio-button label="多云"><i class="iconfont icon-duoyun"></i></el-radio-button>
-                  <el-radio-button label="打雷"><i class="iconfont icon-iconset0468"></i></el-radio-button>
-                  <el-radio-button label="下雨"><i class="iconfont icon-xiayu"></i></el-radio-button>
+        <div class="vlogUploadSection">
+          <div class="leftContent">
 
-                </el-radio-group>
+          </div>
+          <vue3VideoPlay v-show="options.src" v-bind="options"/>
+          <el-upload
+              ref="upload"
+              name="vlogVideoFile"
+              class="vlog-uploader"
+              action="http://localhost:8081/api/uploadVlogVideo"
+              :show-file-list="false"
+              :on-success="handleVlogSuccess"
+          >
+            <el-icon v-show="!options.src" class="vlog-uploader-icon"><plus /></el-icon>
+<!--            <template>-->
+
+<!--            </template>-->
+          </el-upload>
+          <div class="rightContent"  v-show="options.src">
+            <el-input
+
+                v-model="ruleForm.description"
+                :rows="8"
+                type="textarea"
+                placeholder="Please input"
+            />
+            <div class="buttons" >
+              <el-button type="primary" @click="toSelectFile">重新选择视频</el-button>
+              <div>
+                <span style="margin-right: 5px">公开</span>
+                <el-switch
+                    v-model="ruleForm.see"
+                    class="ml-2"
+                    inline-prompt
+                    active-color="#13ce66"
+                    inactive-color="#ff4949"
+                ></el-switch>
               </div>
-            </el-form-item>
-            <el-form-item label="背景色">
-              <el-color-picker v-model="ruleForm.bgColor"  show-alpha :active-change="colorChange()"/>
-            </el-form-item>
-            <el-form-item label="公开">
-              <el-switch
-                  v-model="ruleForm.public"
-                  size="small"
-              />
-            </el-form-item>
-          </div>
-          <div class="titleBox">
-            <el-form-item label="标题">
-              <el-input v-model="ruleForm.title" placeholder="请输入标题"  clearable />
-            </el-form-item>
-          </div>
-          <el-form-item>
-            <div class="editor">
-              <div ref="WangEditor" class="wangeditor"></div>
+              <el-button  type="success" @click="vlogSubmit">提交</el-button>
             </div>
-          </el-form-item>
-        </el-form>
+          </div>
 
-        <div class="submit">
-          <el-button type="primary" @click="onSubmit">写好了</el-button>
+
         </div>
       </el-main>
       <el-footer>Footer</el-footer>
@@ -69,106 +63,69 @@
   </div>
 </template>
 <script>
-import E from 'wangeditor'
-import { ElMessage } from "element-plus";
-import axios from "axios";
+
 import TopLogo from "@/components/前端组件/logo组件/TopLogo";
 import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
-// import axios from "axios";
-// import { ElMessage } from "@element-plus/icons-vue";
-// import axios from "axios";
-// 或者 const editor = new E( document.getElementById('div1') )
-// editor.create()
+import {reactive} from "vue";
+import axios from "axios";
+import {ElMessage} from "element-plus";
+// import {ElMessage} from "element-plus";
+
 export default {
   name: 'WriteVlog',
   components: {UserLoginAvatarAndNameDisplay, TopLogo},
+
   data() {
     return {
-      url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
+      options: reactive({
+        width: '60%', //播放器高度
+        height: '450px', //播放器高度
+        color: "#409eff", //主题色
+        title: '', //视频名称
+        src: "", //视频源
+        muted: false, //静音
+        webFullScreen: false,
+        speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
+        autoPlay: false, //自动播放
+        loop: false, //循环播放
+        mirror: false, //镜像画面
+        ligthOff: false,  //关灯模式
+        volume: 0.3, //默认音量大小
+        control: true, //是否显示控制
+        controlBtns:['audioTrack', 'quality', 'speedRate', 'volume', 'setting', 'pip', 'pageFullScreen', 'fullScreen'] //显示所有按钮,
+      }),
       ruleForm: {
-        mood: '',
-        weather: '',
-        bgColor: '',
-        public: true,
-        title: '',
-        content: ''
-      },
-      editor: {}
+        videoUrl: '',
+        description: '',
+        see: true
+      }
     }
   },
   methods: {
-    setEditor() {
-      this.editor = new E(this.$refs.WangEditor)
-      this.editor.config.height = 400
-      this.editor.config.placeholder = ''
-      this.editor.config.focus = false
-      this.editor.config.customAlert = function (s, t) {
-        switch (t) {
-          case 'success':
-            ElMessage.success(s)
-            break
-          case 'info':
-            ElMessage.info(s)
-            break
-          case 'warning':
-            ElMessage.warning(s)
-            break
-          case 'error':
-            ElMessage.error(s)
-            break
-          default:
-            ElMessage.info(s)
-            break
-        }
-      }
-      this.editor.config.uploadImgShowBase64 = true
-      this.editor.config.uploadImgServer = 'http://localhost:8081/api/diaryImageFileUpLoadAndReturnUrl'
-      this.editor.config.uploadFileName = 'myImageFileName'
-      this.editor.config.uploadVideoServer = 'http://localhost:8081/api/diaryVideoFileUpLoadAndReturnUrl'
-      this.editor.config.uploadVideoName = 'myVideoFileName'
-      this.editor.config.uploadVideoMaxSize = 30 * 1024 * 1024
-      this.editor.config.zIndex = 1
-
-      this.editor.create()
-
-      this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
+    handleVlogSuccess(res) {
+      console.log(123)
+      // this.options.src = ''
+      this.options.src = res
+      this.ruleForm.videoUrl = res
     },
-    colorChange(){
-      // console.log(this.$store.state.user)
-
+    toSelectFile() {
+      // this.$refs.upload.
+      // this.$refs['upload']
+      this.options.src = ''
     },
-    onSubmit() {
-      //
-      this.ruleForm.content = this.editor.txt.html()
-      console.log(this.ruleForm.bgColor)
-      axios.post('/diaryInfoUpload' , {
-        title: this.ruleForm.title,
-        content: this.ruleForm.content,
-        mood: this.ruleForm.mood,
-        weather: this.ruleForm.weather,
-        bgColor: this.ruleForm.bgColor,
-        see: this.ruleForm.public,
-        // author_id: this.$store.getters.user
+    // beforeAvatarUpload() {
+    //   console.log(456)
+    //   this.options.src = "https://cdn.jsdelivr.net/gh/xdlumia/files/video-play/IronMan.mp4"
+    // }
+    vlogSubmit() {
+      axios.post('/addVlog', {
+        videoUrl: this.ruleForm.videoUrl,
+        description: this.ruleForm.description,
+        see:this.ruleForm.see
       }).then(response => {
-        ElMessage({
-          message: response.data,
-          type: 'success'
-        })
-        // setTimeout(()=>{
-        //   // ElMessage.success(response);
-        //
-        // } , 3000)
+        ElMessage.success("上传成功", response)
       })
-      // console.log(this.ruleForm)
-      // console.log(this.editor.txt.html());
     }
-  },
-  mounted() {
-    this.setEditor();
-  },
-  beforeUnmount() {
-    this.editor.destroy();
-    this.editor = null
   }
 }
 
@@ -202,8 +159,8 @@ export default {
   /*text-align: center;*/
   /*line-height: 160px;*/
   /*padding: 0;*/
-  padding-left: 240px;
-  padding-right: 240px;
+  /*padding-left: 240px;*/
+  /*padding-right: 240px;*/
 }
 
 .common-layout > .el-container {
@@ -226,18 +183,20 @@ export default {
 .el-footer {
   height: auto;
 }
-.demo-image {
-  width: 8%;
-  /*margin-top: 20px;*/
-  /*margin-left: 20px;*/
+.topSection {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  /*height: 20%;*/
 }
 .type {
-  width: 84%;
+  width: 77%;
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
+
 .user {
   width: 8%;
   display: flex;
@@ -245,34 +204,63 @@ export default {
   justify-content: center;
   align-content: center;
 }
-.el-form {
-  /*width: 97%;*/
-  /*padding: 0;*/
-  /*padding-left: 240px;*/
-  /*padding-right: 240px;*/
+
+.vlog-uploader {
+  position: absolute;
+  left: 700px;
+  top: 240px;
 }
-.el-form-item {
-  /*padding: 0;*/
+.vlog-uploader ::v-deep(.el-upload) {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
-.diaryConfiguration {
+.vlog-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.el-icon.vlog-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  text-align: center;
+}
+.vlog {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+
+.vlogUploadSection {
+  width: 100%;
+  height: 100%;
   display: flex;
+  align-items: center;
+  /*justify-content: center;*/
+  /*align-content: center;*/
+  /*justify-items: center;*/
 }
-.editor {
+.rightContent {
+  width: 40%;
+  padding-left: 20px;
+}
+.el-button {
+  /*margin-left: 20px;*/
+}
+.buttons {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
-  /*margin-top: 30px;*/
-  /*padding: 0;*/
-  /*margin: 0;*/
+  justify-items: center;
+  /*padding: 30px;*/
+  margin-top: 20px;
 }
-.wangeditor {
-  width: 100%;
+.el-button {
+  margin-left: 20px;
+  margin-right: 20px;
 }
-.submit {
-  /*margin-left: 240px;*/
-  margin-top: 5px;
-}
-
 </style>

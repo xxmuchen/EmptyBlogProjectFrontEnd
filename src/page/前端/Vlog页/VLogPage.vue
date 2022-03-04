@@ -14,6 +14,7 @@
                 :ref="'vue3-video-player' + index"
                 :currentTime="0"
                 :src = "item.videoUrl"
+                @play="likeDisplay(item)"
             >
             </vue3VideoPlay>
           </div>
@@ -103,9 +104,13 @@
       }
     },
     methods: {
-
+      likeDisplay(e) {
+        console.log(e)
+        this.hasAlreadLike(e.id)
+        this.hasAlreadCollect(e.id)
+      },
       getIndex(nowIndex, oldIndex){
-        console.log(nowIndex, oldIndex)
+        // console.log(nowIndex, oldIndex)
         //用户可能在上个视频未播放完毕就切换
         //此时需要暂停上个视频并把时间归零，否则影响对当前视频的监听逻辑
         let myOldVideo = this.$refs['vue3-video-player' + oldIndex];
@@ -119,7 +124,7 @@
       },
       nextToNextVideo() {
           // this.$refs.carousel.
-          this.$refs.carousel.next();
+          this.$refs.carousel.next()
       },
       prevToLastVideo() {
         this.$refs.carousel.prev();
@@ -141,7 +146,7 @@
         axios.get('/getAllVlog').then(response => {
             this.vlogs = response.data
             this.$forceUpdate()
-          console.log(this.vlogs)
+          // console.log(this.vlogs)
         })
       },
 
@@ -199,7 +204,7 @@
 
       },
       hasAlreadLike(vlogId){
-        // console.log(this.diary.id)
+        console.log(vlogId)
         let eleToken = localStorage.getItem('eleToken')
         if (eleToken !== null) {
           axios.get('/hasAlreadLike?objId=' + vlogId + '&objType=放空Vlog').then(response => {
@@ -229,7 +234,15 @@
      this.getScreenHeightAndWidth()
       this.getAllVlog()
     },
-
+    watch: {
+      'item': {
+        deep: true,
+        immediate: true,
+        handler(newValue,oldValue) {
+          console.log('item被修改了',newValue,oldValue)
+        }
+      }
+    }
   }
 </script>
 <style scoped>

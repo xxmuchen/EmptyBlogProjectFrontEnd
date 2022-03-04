@@ -1,12 +1,12 @@
 <template>
   <el-breadcrumb separator="/">
     <el-breadcrumb-item :to="{ name: 'GriphicPage' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item v-if="$route.params.name">{{ $route.params.name }}</el-breadcrumb-item>
+    <el-breadcrumb-item v-if="$route.query.name">{{ $route.query.name }}</el-breadcrumb-item>
   </el-breadcrumb>
   <div v-if="imageData.length">
     <water-fall gap="10px" width="250px" class="container" :data="imageData" :delay="true">
       <template #default="item">
-        <router-link :to="{name:'GriphicPageDetailPageDisplay' , params:{'id': item.key}}">
+        <router-link :to="{name:'GriphicPageDetailPageDisplay' , query:{'id': item.key}}">
           <div class="card">
 <!--          <img class="img" :src="item.src" @click="preview(item.src, $event)" />-->
           <img class="img" :src="item.src" />
@@ -49,22 +49,22 @@ export default {
     preview(url, e) {
       const { width, height } = e.target;
       photoSwipe.preview(width ? [{ src: url, w: width, h: height }] : url);
-      console.log(url)
+      console.log('url' , url)
     },
     async fetchData() {
       const { page, size } = this.payload;
-      console.log(this.payload);
+      console.log('payload',this.payload);
       const prev = (page - 1) * size;
       const images = [...Array(this.payload.size).keys()].map((key) => ({
         key: key + 1 + prev,
         src: require(`@/assets/images/${key}.jpg`),
       }));
 
-      console.log(this.imageData);
-      console.log(images);
+      console.log('imageData' , this.imageData);
+      console.log('images',images);
       this.total = 500;
       this.imageData = [...this.imageData, ...images];
-      console.log(this.imageData);
+      console.log('imageData' , this.imageData);
     },
     loadMore() {
       if (this.hasMore) {
@@ -72,6 +72,9 @@ export default {
         this.fetchData();
       }
     },
+    getGriphicData() {
+
+    }
   },
 };
 </script>

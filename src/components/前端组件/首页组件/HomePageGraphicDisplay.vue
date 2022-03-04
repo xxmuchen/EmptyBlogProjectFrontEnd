@@ -31,9 +31,9 @@
       <div class="homePageInfoContent">
         <div style="font: 16px Medium" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
       </div>
-      <div class="homePageInfoType">
+      <router-link :to="{name: 'GriphicPage'}"><div class="homePageInfoType">
         <div style="font: 20px Extra large">{{ homePageDisplayType }}<br /></div>
-      </div>
+      </div></router-link>
 
       <!--      </div>-->
     </el-aside>

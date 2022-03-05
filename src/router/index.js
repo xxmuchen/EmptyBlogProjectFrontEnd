@@ -33,6 +33,7 @@ import ObserveComponent from "@/components/前端组件/评论组件/ObserveComp
 import WriteSentence from "@/page/前端/句子页/写句子/WriteSentence";
 import SentencePageDetailDisplay from "@/components/前端组件/句子页组件/SentencePageDetailDisplay";
 import WriteVlog from "@/page/前端/Vlog页/上传视频/WriteVlog";
+import WriteGriphic from "@/page/前端/图文页/上传图文/WriteGriphic";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -123,6 +124,11 @@ const routes = [
             {name:'GriphicPageHomePageDisplay' , path: 'GriphicPageHomePageDisplay', component: GriphicPageHomePageDisplay},
             {name:'GriphicPageDetailPageDisplay' , path: 'GriphicPageDetailPageDisplay', component: GriphicPageDetailPageDisplay}
         ]
+    },
+    {
+        name: 'WriteGriphic',
+        path: '/WriteGriphic',
+        component: WriteGriphic
     },
     {
         name: 'UserRegistPage',

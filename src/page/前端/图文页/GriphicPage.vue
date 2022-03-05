@@ -15,21 +15,21 @@
         <!-- 通过请求不同的后端网址和路径上的不同参数,返回相同的前端页面  -->
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'GriphicPageHomePageDisplay' , query:{name: '美图美句'}}" active-class="active">
+            <router-link :to="{name:'GriphicPageHomePageDisplay' , query:{type: '美图美句'}}" active-class="active">
               美图美句
             </router-link>
           </div>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'GriphicPageHomePageDisplay' , query:{name: '手写美句'}}" active-class="active">
+            <router-link :to="{name:'GriphicPageHomePageDisplay' , query:{type: '手写美句'}}" active-class="active">
               手写美句
             </router-link>
           </div>
         </el-col>
         <el-col :span="3">
           <div class="grid-content bg-purple"><!--{{ item.type }}-->
-            <router-link :to="{name:'GriphicPageHomePageDisplay' , query:{name: '经典对白'}}" active-class="active">
+            <router-link :to="{name:'GriphicPageHomePageDisplay' , query:{type: '经典对白'}}" active-class="active">
               经典对白
             </router-link>
           </div>

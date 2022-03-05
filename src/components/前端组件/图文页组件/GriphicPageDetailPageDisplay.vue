@@ -20,35 +20,35 @@
 <!--                  <span class="demonstration">{{ fit }}</span>-->
                   <el-image
                       style="width: 400px; height: auto"
-                      src="https://file.mingyantong.com/weibopic/jpzxma.jpg"
-                      :fit="fit"></el-image>
-
+                      :src="griphicData.imageUrl"
+                      fit="fill"></el-image>
                 </div>
               </div>
               <div>
-                所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
-                所谓的神秘，其实是无知的别名。 随着人增长学识，克服无知，培育文明积蓄力量。过去曾经被认为神秘存在的大多数，如今终被名为睿智的名刃斩杀、解体后制成样本封存于历史书之中。
+                <div class="fontSection">
+                  dsadfafsdfg
+                </div>
               </div>
             </div>
           </div>
-          <div class="sentenceContentAuthor">dc</div>
+<!--          <div class="sentenceContentAuthor">dc</div>-->
           <div class="sentenceContentUserOperation">
-            <div>喜欢</div>
-            <div>收藏</div>
+            <div class="operation">
+              <i class="iconfont icon-xihuan" v-show="!isLike" @click="saveDiaryStar"></i>
+              <i class="iconfont icon-xiai" v-show="isLike" @click="cancelDiaryStar"></i>
+            </div>
+            <div class="operation">
+              <i class="iconfont icon-shoucang2" v-show="!isCollect" @click="saveDiaryCollection"></i>
+              <i class="iconfont icon-shoucang1" v-show="isCollect" @click="cancelDiaryCollection"></i>
+            </div>
           </div>
         </div>
-        <div class="sentenceFooter">
-          <div class="commentSection">
-            <el-input v-model="input" placeholder="请输入内容"></el-input>
-          </div>
-        </div>
-        asdddddsssssssssssssssssss
       </div>
-      <!--      评论区-->
+      <div class="sentenceFooter">
+        <div class="commentSection">
+          <ObserveComponent :obj_id="griphicData.id" objType='放空图文' v-if="griphicData.id != null" ></ObserveComponent>
+        </div>
+      </div>
     </div>
     <!--        这部分要拆分成一个新的组件-->
     <div class="rightContent">
@@ -59,10 +59,114 @@
 </template>
 <script>
 import SentencePageDetailDisplayPageRighSideBar from '@/components/前端组件/RightSideBar/SentencePageDetailDisplayPageRighSideBar'
+import axios from "axios";
+import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
+import {ElMessage} from "element-plus";
 export default {
   name: 'GriphicPageDetailPageDisplay.vue',
   components: {
-    SentencePageDetailDisplayPageRighSideBar
+    SentencePageDetailDisplayPageRighSideBar,
+    ObserveComponent
+  },
+  data() {
+    return {
+      griphicData: {},
+      isLike: false,
+      isCollect: false
+    }
+  },
+  methods: {
+    getGriphicData() {
+      axios.get('getGriphicById?grophicId=' + this.$route.query.id).then(response => {
+        this.griphicData = response.data;
+        this.hasAlreadLike();
+        this.hasAlreadCollect();
+        // console.log(response.data);
+      })
+    },
+    saveDiaryStar() {
+      // console.log(this.diary.id)
+      axios.post('/saveObjStar' , {
+        objId: this.griphicData.id,
+        objType: '放空图文'
+      }).then(response => {
+        this.isLike = true;
+        // console.log(response)
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+    },
+    cancelDiaryStar() {
+      axios.post('/cancelObjStar', {
+        objId: this.griphicData.id,
+        objType: '放空图文'
+      }).then(response => {
+        this.isLike = false;
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+
+    },
+    saveDiaryCollection() {
+      // console.log(this.diary.id)
+      axios.post('/saveObjCollection' , {
+        objId: this.griphicData.id,
+        objType: '放空图文'
+      }).then(response => {
+        this.isCollect = true;
+        // console.log(response)
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+    },
+    cancelDiaryCollection() {
+      axios.post('/cancelObjCollection', {
+        objId: this.griphicData.id,
+        objType: '放空图文'
+      }).then(response => {
+        this.isCollect = false;
+        ElMessage({
+          type: "success",
+          message: response.data
+        })
+      })
+
+    },
+    hasAlreadLike(){
+      // console.log(this.diary.id)
+      let eleToken = localStorage.getItem('eleToken')
+      if (eleToken !== null) {
+        axios.get('/hasAlreadLike?objId=' + this.griphicData.id + '&objType=放空图文').then(response => {
+          if (response.data === 'like') {
+            this.isLike = true;
+          }else {
+            this.isLike = false;
+          }
+        })
+      }
+    },
+    hasAlreadCollect(){
+      // console.log(this.diary.id)
+      let eleToken = localStorage.getItem('eleToken')
+      if (eleToken !== null) {
+        axios.get('/hasAlreadCollect?objId=' + this.griphicData.id + '&objType=放空图文').then(response => {
+          if (response.data === 'collect') {
+            this.isCollect = true;
+          }else {
+            this.isCollect = false;
+          }
+        })
+      }
+    }
+  },
+  mounted() {
+    this.getGriphicData();
   }
 }
 </script>
@@ -181,10 +285,10 @@ body > .el-container {
   /*background: greenyellow;*/
 }
 .sentenceContentBox {
-  width: 500px;
+  width: 600px;
   height: auto;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 40px;
+  margin-bottom: 40px;
   margin-left: 100px;
   margin-right: 100px;
 }
@@ -219,48 +323,6 @@ body > .el-container {
   width: 50px;
   height: auto;
   margin-left: 20px;
-}
-.sentenceFooter {
-  width: 100%;
-  height: 50px;
-  background: aqua;
-  display: flex;
-  /*实现垂直居中*/
-  align-items: center;
-  /*实现水平居中*/
-  justify-content: center;
-
-}
-.commentSection {
-  width: 98%;
-  height: 100%;
-  display: flex;
-  /*实现垂直居中*/
-  align-items: center;
-  /*实现水平居中*/
-  justify-content: center;
-  /*display: flex;*/
-  /*align-items:center;!*实现水平居中*!*/
-  /*justify-content:right;*/
-  /*text-align: center;*/
-}
-/*.el-input {*/
-
-/*    !*height: 300px;*!*/
-/*!*  height: 100%;*!*/
-/*!*  width: 100%;*!*/
-/*}*/
-
-/*.el-textarea .el-textarea__inner{ */
-/*resize: none;*/
-/*}*/
-
-/*  height: 100px;*/
-/*}*/
-.commentSection ::v-deep(.el-input__inner)  {
-  height: 40px;
-  background: none;
-  border: none;
 }
 
 .rightContent {
@@ -336,4 +398,80 @@ body > .el-container {
   align-items: center;
   justify-content: center;
 }
+.sentenceContentUserOperation {
+  width: 93%;
+  height: auto;
+  display:flex;
+  /*justify-content:center;*/
+  /*align-items:center;*/
+  margin-top: 30px;
+  margin-left: 2.5%;
+  /*margin-left: 10px;*/
+  /*padding-left: 10px;*/
+  /*background: red;*/
+  /*justify-content:center;*/
+  border-bottom: 1px solid lightgray;
+}
+.operation {
+  width: 50px;
+  height: 50px;
+  /*background: red;*/
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 100px;
+  margin-right: 10px;
+  /*margin-left: ;*/
+  /*margin-right: -1.8;*/
+  /*margin-right: 10px;*/
+  /*margin-right: 100px;*/
+}
+.sentenceFooter {
+  width: 100%;
+  height: auto;
+  background: aqua;
+  display: flex;
+  /*实现垂直居中*/
+  align-items: center;
+  /*实现水平居中*/
+  justify-content: center;
+  padding: 0;
+}
+::v-deep(.demo-basic) {
+  width: 8.5%;
+}
+::v-deep(.userName) {
+  width: 58%;
+}
+::v-deep(.observeTag) {
+  width: 14.5%;
+}
+::v-deep(.observeTime) {
+  width: 32%;
+}
+.commentSection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /*实现垂直居中*/
+  align-items: center;
+  /*实现水平居中*/
+  justify-content: center;
+  /*display: flex;*/
+  /*align-items:center;!*实现水平居中*!*/
+  /*justify-content:right;*/
+  /*text-align: center;*/
+}
+.commentSection ::v-deep(.el-container) {
+  padding: 0;
+}
+.commentSection ::v-deep(.el-input__inner)  {
+  height: 40px;
+  background: none;
+  border: none;
+}
+.fontSection {
+  margin-top: 30px;
+}
+
 </style>

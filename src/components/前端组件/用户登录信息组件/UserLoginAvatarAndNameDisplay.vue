@@ -1,21 +1,38 @@
 <template>
-  <div>
-    <div v-show="!isShow">
-      <router-link :to="{name: 'UserLoginPage'}">登录/注册</router-link>
-    </div>
-    <div v-show="isShow" class="demo-basic">
-      <div class="demo-basic--circle">
-        <div class="block">
-          <el-avatar :size="50" :src="circleUrl"></el-avatar>
-        </div>
-      </div>
-      <div class="userName">{{ userName }}</div>
-    </div>
-  </div>
 
+    <div>
+      <div v-show="!isShow">
+        <router-link :to="{name: 'UserLoginPage'}">登录/注册</router-link>
+      </div>
+      <div v-show="isShow" class="userInfo">
+        <el-dropdown>
+          <div  class="demo-basic">
+            <div class="demo-basic--circle">
+              <div class="block">
+                <el-avatar :size="50" :src="circleUrl"></el-avatar>
+              </div>
+            </div>
+            <div class="userName">{{ userName }}</div><el-icon class="el-icon--right"><arrow-down /></el-icon>
+          </div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <router-link :to="{name: 'MySpace'}"><el-dropdown-item>我的空间</el-dropdown-item></router-link>
+              <router-link :to="{name: 'WriteDiary'}"><el-dropdown-item divided>写日记</el-dropdown-item></router-link>
+              <router-link :to="{name: 'WriteSentence'}"><el-dropdown-item divided>写句子</el-dropdown-item></router-link>
+              <router-link :to="{name: 'WriteVlog'}"><el-dropdown-item divided>上传Vlog</el-dropdown-item></router-link>
+              <router-link :to="{name: 'WriteGriphic'}"><el-dropdown-item divided>上传图文</el-dropdown-item></router-link>
+              <el-dropdown-item divided @click="logOut">退出登录</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+
+        </el-dropdown>
+      </div>
+
+    </div>
 </template>
 <script>
   import axios from "axios";
+  import {ElMessage, ElMessageBox} from "element-plus";
 
   export default {
     name: 'UserLoginAvatarAndNameDisplay',
@@ -27,6 +44,29 @@
       }
     },
     methods: {
+      logOut() {
+        ElMessageBox.confirm(
+            '请问您确定要退出登录吗？',
+            'Warning',
+            {
+              confirmButtonText: 'OK',
+              cancelButtonText: 'Cancel',
+              type: 'warning',
+            }
+        ).then(() => {
+              localStorage.removeItem('eleToken');
+              ElMessage({
+                type: 'success',
+                message: '退出登录成功',
+              })
+              this.$router.go(0)
+            }).catch(() => {
+              ElMessage({
+                type: 'info',
+                message: '退出登录取消',
+              })
+            })
+      },
       /*获取token，判断是否有 然后请求数据*/
       getAvatorAndUserName() {
        let eleToken = localStorage.getItem('eleToken')
@@ -54,6 +94,7 @@
 </script>
 <style scoped>
 .demo-basic {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -86,4 +127,15 @@
 .userName {
   margin-left: 10px;
 }
+
+.example-showcase .el-dropdown-link {
+  cursor: pointer;
+  color: var(--el-color-primary);
+  display: flex;
+  align-items: center;
+}
+/*.userInfo {*/
+/*  width: 100%;*/
+/*}*/
+
 </style>

@@ -29,11 +29,12 @@ import GriphicPageDetailPageDisplay from "@/components/前端组件/图文页组
 import UserRegistPage from '@/page/前端/注册页/UserRegistPage'
 import UserLoginPage from "@/page/前端/登录页/UserLoginPage";
 import WriteDiary from "@/page/前端/日记页/写日记/WriteDiary";
-import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
+// import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
 import WriteSentence from "@/page/前端/句子页/写句子/WriteSentence";
 import SentencePageDetailDisplay from "@/components/前端组件/句子页组件/SentencePageDetailDisplay";
 import WriteVlog from "@/page/前端/Vlog页/上传视频/WriteVlog";
 import WriteGriphic from "@/page/前端/图文页/上传图文/WriteGriphic";
+import MySpace from "@/page/前端/我的空间/MySpace";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -55,8 +56,8 @@ const routes = [
             { name:'HomePageDiaryDisplay' , path: 'HomePageDiaryDisplay', component: HomePageDiaryDisplay },
             { name:'HomePageSentenceDisplay' , path: 'HomePageSentenceDisplay', component: HomePageSentenceDisplay },
             { name:'HomePageVlogDisplay' , path: 'HomePageVlogDisplay', component: HomePageVlogDisplay },
-            { name:'HomePageGraphicDisplay' , path: 'HomePageGraphicDisplay', component: HomePageGraphicDisplay }
-
+            { name:'HomePageGraphicDisplay' , path: 'HomePageGraphicDisplay', component: HomePageGraphicDisplay },
+            { name: 'MySpace' , path: 'MySpace' , component: MySpace}
         ]
     },
     {
@@ -140,11 +141,12 @@ const routes = [
         path: '/UserLoginPage',
         component: UserLoginPage
     },
-    {
-        name: 'ObserveComponent',
-        path: '/ObserveComponent',
-        component: ObserveComponent
-    }
+    // {
+    //     name: 'ObserveComponent',
+    //     path: '/ObserveComponent',
+    //     component: ObserveComponent
+    // },
+
 ];
 
 // 3. 创建路由实例

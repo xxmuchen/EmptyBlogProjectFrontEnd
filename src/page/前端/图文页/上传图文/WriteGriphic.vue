@@ -213,7 +213,7 @@ export default {
   /*height: 20%;*/
 }
 .type {
-  width: 77%;
+  width: 75%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -221,7 +221,7 @@ export default {
 }
 
 .user {
-  width: 8%;
+  width: 10%;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -232,14 +232,14 @@ export default {
   /*margin-left: 20px;*/
 }
 .type {
-  width: 84%;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
 .user {
-  width: 8%;
+  width: 12%;
   display: flex;
   align-items: center;
   justify-content: center;

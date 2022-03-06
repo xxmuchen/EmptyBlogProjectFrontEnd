@@ -1,7 +1,6 @@
 <template>
   <el-container>
     <el-main>
-
       <div class="registBox">
         <div class="demo-image">
           <div class="block">
@@ -123,7 +122,7 @@ export default {
 
       }),
       // selectedOptions: [],
-      imageUrl: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png'
+      imageUrl: 'http://localhost:8080/images/logo/logo.png'
     }
   },
   methods: {

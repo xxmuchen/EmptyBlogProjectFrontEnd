@@ -64,7 +64,7 @@
     components: {},
     data() {
       return {
-        url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
+        url: 'http://localhost:8080/images/logo/logo.png',
         screenHeight: document.body.clientHeight - 40 + 'px',
         isLike: false,
         isCollect: false,

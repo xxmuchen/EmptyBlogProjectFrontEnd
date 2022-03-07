@@ -35,6 +35,11 @@ import SentencePageDetailDisplay from "@/components/前端组件/句子页组件
 import WriteVlog from "@/page/前端/Vlog页/上传视频/WriteVlog";
 import WriteGriphic from "@/page/前端/图文页/上传图文/WriteGriphic";
 import MySpace from "@/page/前端/我的空间/MySpace";
+import MySpaceOwnDiary from "@/components/前端组件/我的空间组件/放空日记/MySpaceOwnDiary";
+import MySpaceOwnStarDiary from "@/components/前端组件/我的空间组件/放空日记/MySpaceOwnStarDiary";
+import MySpaceOwnCollectDiary from "@/components/前端组件/我的空间组件/放空日记/MySpaceOwnCollectDiary";
+// import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
+// import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
 // 2. 定义路由配置
 const routes = [
     // {
@@ -57,7 +62,16 @@ const routes = [
             { name:'HomePageSentenceDisplay' , path: 'HomePageSentenceDisplay', component: HomePageSentenceDisplay },
             { name:'HomePageVlogDisplay' , path: 'HomePageVlogDisplay', component: HomePageVlogDisplay },
             { name:'HomePageGraphicDisplay' , path: 'HomePageGraphicDisplay', component: HomePageGraphicDisplay },
-            { name: 'MySpace' , path: 'MySpace' , component: MySpace}
+            {
+                name: 'MySpace' ,
+                path: 'MySpace' ,
+                component: MySpace ,
+                children: [
+                    { name:'MySpaceOwnDiary' , path: 'MySpaceOwnDiary', component: MySpaceOwnDiary },
+                    { name:'MySpaceOwnStarDiary' , path: 'MySpaceOwnStarDiary', component: MySpaceOwnStarDiary },
+                    { name:'MySpaceOwnCollectDiary' , path: 'MySpaceOwnCollectDiary', component: MySpaceOwnCollectDiary }
+                ]
+            }
         ]
     },
     {

@@ -42,6 +42,7 @@
           <el-pagination
               layout="prev, pager, next"
               :page-count="pageCount"
+              :current-page="currentPage"
               @current-change="currentChange"
           >
           </el-pagination>

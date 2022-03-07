@@ -38,6 +38,9 @@ import MySpace from "@/page/前端/我的空间/MySpace";
 import MySpaceOwnDiary from "@/components/前端组件/我的空间组件/放空日记/MySpaceOwnDiary";
 import MySpaceOwnStarDiary from "@/components/前端组件/我的空间组件/放空日记/MySpaceOwnStarDiary";
 import MySpaceOwnCollectDiary from "@/components/前端组件/我的空间组件/放空日记/MySpaceOwnCollectDiary";
+import MySpaceOwnSentence from "@/components/前端组件/我的空间组件/放空句子/MySpaceOwnSentence";
+import MySpaceOwnStarSentence from "@/components/前端组件/我的空间组件/放空句子/MySpaceOwnStarSentence";
+import MySpaceOwnCollectSentence from "@/components/前端组件/我的空间组件/放空句子/MySpaceOwnCollectSentence";
 // import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
 // import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
 // 2. 定义路由配置
@@ -69,7 +72,10 @@ const routes = [
                 children: [
                     { name:'MySpaceOwnDiary' , path: 'MySpaceOwnDiary', component: MySpaceOwnDiary },
                     { name:'MySpaceOwnStarDiary' , path: 'MySpaceOwnStarDiary', component: MySpaceOwnStarDiary },
-                    { name:'MySpaceOwnCollectDiary' , path: 'MySpaceOwnCollectDiary', component: MySpaceOwnCollectDiary }
+                    { name:'MySpaceOwnCollectDiary' , path: 'MySpaceOwnCollectDiary', component: MySpaceOwnCollectDiary },
+                    { name:'MySpaceOwnSentence' , path: 'MySpaceOwnSentence', component: MySpaceOwnSentence },
+                    { name:'MySpaceOwnStarSentence' , path: 'MySpaceOwnStarSentence', component: MySpaceOwnStarSentence },
+                    { name:'MySpaceOwnCollectSentence' , path: 'MySpaceOwnCollectSentence', component: MySpaceOwnCollectSentence },
                 ]
             }
         ]

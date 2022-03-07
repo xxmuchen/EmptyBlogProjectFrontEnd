@@ -9,9 +9,11 @@
             :lazy="true"
         >
           <el-table-column
-              prop="title"
-              label="日记名称"
+              label="句子内容"
               width="700">
+            <template #default="scope">
+              <div v-html="scope.row.content"></div>
+            </template>
           </el-table-column>
           <!--        <el-divider></el-divider>-->
           <el-table-column
@@ -66,18 +68,18 @@ export default {
   methods: {
     handleView(index , row) {
       // console.log(index , row)
-      this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
+      this.$router.push({name: 'SentencePageDetailDisplay' , query:{sentenceId: row.id}});
     },
     currentChange(currentIndex){
       // console.log(currentIndex)
-      this.getUserSpaceDiaryUserCollectionOrderByCreateTime(currentIndex)
+      this.getUserSpaceSentenceUserCollectionOrderByCreateTime(currentIndex)
     },
     // justToDiaryDetail(row) {
     //   // console.log(row.id);
     //   this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
     // },
-    getUserSpaceDiaryUserCollectionOrderByCreateTime(currentIndex) {
-      axios.get('/getUserSpaceDiaryUserCollectionOrderByCreateTime?currentIndex=' + currentIndex).then(response => {
+    getUserSpaceSentenceUserCollectionOrderByCreateTime(currentIndex) {
+      axios.get('/getUserSpaceSentenceUserCollectionOrderByCreateTime?currentIndex=' + currentIndex).then(response => {
         this.tableData = response.data.records
         this.pageCount = response.data.pages
         // console.log(this.tableData[0].authorId)
@@ -87,19 +89,19 @@ export default {
       console.log(index , row)
       axios.post('/cancelObjCollection' , {
         objId: row.id,
-        objType: '放空日记'
+        objType: '放空句子'
       }).then(response => {
         ElMessage({
           type: "success",
           message: response.data
         })
-        this.getUserSpaceDiaryUserCollectionOrderByCreateTime(1);
+        this.getUserSpaceSentenceUserCollectionOrderByCreateTime(1);
         this.currentPage = 1;
       })
     }
   },
   mounted() {
-    this.getUserSpaceDiaryUserCollectionOrderByCreateTime(this.currentPage);
+    this.getUserSpaceSentenceUserCollectionOrderByCreateTime(this.currentPage);
   }
 }
 </script>

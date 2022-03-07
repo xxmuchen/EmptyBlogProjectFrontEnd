@@ -63,6 +63,7 @@ export default {
   },
   methods: {
     getencounterLoverSentence() {
+
       if (this.$route.query.type === '偶遇佳句') {
         axios.get('/encounterLoverSentence').then(response => {
           this.sentence = response.data
@@ -71,6 +72,7 @@ export default {
         })
       }else {
         if (this.$route.query.sentenceId !== null) {
+          // console.log(this.$route.query.sentenceId)
           axios.get('/getOneSentenceById?sentenceId=' + this.$route.query.sentenceId).then(response => {
             this.sentence = response.data
             this.hasAlreadLike()

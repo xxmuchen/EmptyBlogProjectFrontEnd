@@ -6,8 +6,7 @@
         <el-menu
             default-active="2"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
+
         >
           <el-sub-menu index="1">
             <template #title>
@@ -30,9 +29,9 @@
               <span>放空句子</span>
             </template>
             <el-menu-item-group title="">
-              <el-menu-item index="2-1">我的句子</el-menu-item>
-              <el-menu-item index="2-2">点赞的句子</el-menu-item>
-              <el-menu-item index="2-3">收藏的句子</el-menu-item>
+              <router-link :to="{name: 'MySpaceOwnSentence'}"><el-menu-item index="2-1">我的句子</el-menu-item></router-link>
+              <router-link :to="{name: 'MySpaceOwnStarSentence'}"><el-menu-item index="2-2">点赞的句子</el-menu-item></router-link>
+              <router-link :to="{name: 'MySpaceOwnCollectSentence'}"><el-menu-item index="2-3">收藏的句子</el-menu-item></router-link>
             </el-menu-item-group>
           </el-sub-menu>
           <el-sub-menu index="3">

@@ -68,7 +68,7 @@ export default {
   methods: {
     handleView(index , row) {
       // console.log(index , row)
-      this.$router.push({name: 'SentencePageDetailDisplay' , query:{diaryId: row.id}});
+      this.$router.push({name: 'SentencePageDetailDisplay' , query:{sentenceId: row.id}});
     },
     currentChange(currentIndex){
       this.getUserSpaceSentenceOrderCreateTime(currentIndex)

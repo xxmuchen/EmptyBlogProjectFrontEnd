@@ -38,7 +38,7 @@
 
     <!--        这部分要拆分成一个新的组件-->
     <div class="rightContent">
-      <PageDetailDisplayPageRighSideBar></PageDetailDisplayPageRighSideBar>
+      <PageDetailDisplayPageRightSideBar></PageDetailDisplayPageRightSideBar>
     </div>
   </el-main>
   <!--  </el-container>-->
@@ -48,12 +48,12 @@
 import axios from "axios";
 import {ElMessage} from "element-plus";
 import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
-import PageDetailDisplayPageRighSideBar from "@/components/前端组件/RightSideBar/PageDetailDisplayPageRightSideBar";
+import PageDetailDisplayPageRightSideBar from "@/components/前端组件/RightSideBar/PageDetailDisplayPageRightSideBar";
 export default {
   name: 'SentencePageDetailDisplay',
   components: {
     ObserveComponent,
-    PageDetailDisplayPageRighSideBar
+    PageDetailDisplayPageRightSideBar
   },
   data() {
     return {

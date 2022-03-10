@@ -1,8 +1,6 @@
 <template>
   <el-container>
     <el-main>
-
-
       <el-carousel direction="vertical" :autoplay="false"  :height="screenHeight"
                    indicator-position="none"
                    @change="getIndex"
@@ -33,6 +31,9 @@
             <div class="collect">
               <div class="block" v-show="!isCollect" @click="saveDiaryCollection(item.id)"><i class="iconfont icon-shoucang2"></i></div>
               <div class="block" v-show="isCollect" @click="cancelDiaryCollection(item.id)"><i class="iconfont icon-shoucang1"></i></div>
+            </div>
+            <div class="details">
+              <div class="block" @click="justToVlogPageDetailDisplay(item.id)"><i class="iconfont icon-xiangqing"></i></div>
             </div>
           </div>
 
@@ -74,7 +75,7 @@
         cutTime:5000,//轮播时间，单位毫秒
         nowIndex: 0,
         vlogs:[{
-          // videoUrl: 'http://localhost:8080/images/vlog/vlogVideo/3430c3fe-067b-471e-ba14-8960bec00a61808280402.mp4'
+
         }],
         options: reactive({
           width: "100%", //播放器高度
@@ -104,6 +105,9 @@
       }
     },
     methods: {
+      justToVlogPageDetailDisplay(id) {
+        this.$router.push({name: 'VlogPageDetailDisplay' , query: {vlogId: id}})
+      },
       likeDisplay(e) {
         console.log(e)
         this.hasAlreadLike(e.id)
@@ -372,6 +376,13 @@ video-play {
   /*top: 30px;*/
   right: 30px;
   top: 420px;
+  z-index: 100;
+}
+.details {
+  position: absolute;
+  /*top: 30px;*/
+  right: 30px;
+  top: 500px;
   z-index: 100;
 }
 

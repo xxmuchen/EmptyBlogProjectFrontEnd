@@ -42,7 +42,7 @@
               <span>放空Vlog</span>
             </template>
             <el-menu-item-group title="">
-              <el-menu-item index="3-1">我的Vlog</el-menu-item>
+              <router-link :to="{name : 'MySpaceOwnVlog'}"><el-menu-item index="3-1">我的Vlog</el-menu-item></router-link>
               <el-menu-item index="3-2">点赞的Vlog</el-menu-item>
               <el-menu-item index="3-3">收藏的Vlog</el-menu-item>
             </el-menu-item-group>

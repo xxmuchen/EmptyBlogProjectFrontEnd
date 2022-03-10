@@ -32,13 +32,24 @@
 <!--            </template>-->
           </el-upload>
           <div class="rightContent"  v-show="options.src">
-            <el-input
+            <el-form-item label="标题">
+              <el-input
 
-                v-model="ruleForm.description"
-                :rows="8"
-                type="textarea"
-                placeholder="Please input"
-            />
+                  v-model="ruleForm.title"
+                  :rows="8"
+                  placeholder="Please input"
+              />
+            </el-form-item>
+            <el-form-item label="描述">
+              <el-input
+
+                  v-model="ruleForm.description"
+                  :rows="8"
+                  type="textarea"
+                  placeholder="Please input"
+              />
+            </el-form-item>
+
             <div class="buttons" >
               <el-button type="primary" @click="toSelectFile">重新选择视频</el-button>
               <div>
@@ -95,6 +106,7 @@ export default {
         controlBtns:['audioTrack', 'quality', 'speedRate', 'volume', 'setting', 'pip', 'pageFullScreen', 'fullScreen'] //显示所有按钮,
       }),
       ruleForm: {
+        title: '',
         videoUrl: '',
         description: '',
         see: true
@@ -119,6 +131,7 @@ export default {
     // }
     vlogSubmit() {
       axios.post('/addVlog', {
+        title: this.ruleForm.title,
         videoUrl: this.ruleForm.videoUrl,
         description: this.ruleForm.description,
         see:this.ruleForm.see

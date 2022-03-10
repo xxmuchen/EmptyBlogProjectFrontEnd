@@ -41,6 +41,8 @@ import MySpaceOwnCollectDiary from "@/components/前端组件/我的空间组件
 import MySpaceOwnSentence from "@/components/前端组件/我的空间组件/放空句子/MySpaceOwnSentence";
 import MySpaceOwnStarSentence from "@/components/前端组件/我的空间组件/放空句子/MySpaceOwnStarSentence";
 import MySpaceOwnCollectSentence from "@/components/前端组件/我的空间组件/放空句子/MySpaceOwnCollectSentence";
+import MySpaceOwnVlog from "@/components/前端组件/我的空间组件/放空Vlog/MySpaceOwnVlog";
+import VlogPageDetailDisplay from "@/components/前端组件/Vlog页组件/VlogPageDetailDisplay";
 // import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
 // import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
 // 2. 定义路由配置
@@ -76,6 +78,7 @@ const routes = [
                     { name:'MySpaceOwnSentence' , path: 'MySpaceOwnSentence', component: MySpaceOwnSentence },
                     { name:'MySpaceOwnStarSentence' , path: 'MySpaceOwnStarSentence', component: MySpaceOwnStarSentence },
                     { name:'MySpaceOwnCollectSentence' , path: 'MySpaceOwnCollectSentence', component: MySpaceOwnCollectSentence },
+                    { name:'MySpaceOwnVlog' , path: 'MySpaceOwnVlog', component: MySpaceOwnVlog },
                 ]
             }
         ]
@@ -134,7 +137,12 @@ const routes = [
     {
         name: 'VLogPage',
         path: '/VLogPage',
-        component: VLogPage,
+        component: VLogPage
+    },
+    {
+        name: 'VlogPageDetailDisplay' ,
+        path: '/VlogPageDetailDisplay' ,
+        component: VlogPageDetailDisplay
     },
     {
         name: 'GriphicPage',

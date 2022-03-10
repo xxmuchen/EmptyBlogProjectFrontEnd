@@ -58,7 +58,7 @@
   <!--  </el-container>-->
 </template>
 <script>
-import SentencePageDetailDisplayPageRighSideBar from '@/components/前端组件/RightSideBar/SentencePageDetailDisplayPageRighSideBar'
+import SentencePageDetailDisplayPageRighSideBar from '@/components/前端组件/RightSideBar/PageDetailDisplayPageRightSideBar'
 import axios from "axios";
 import ObserveComponent from "@/components/前端组件/评论组件/ObserveComponent";
 import {ElMessage} from "element-plus";

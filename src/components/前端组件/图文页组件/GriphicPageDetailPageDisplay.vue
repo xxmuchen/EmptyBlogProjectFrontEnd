@@ -38,8 +38,8 @@
               <i class="iconfont icon-xiai" v-show="isLike" @click="cancelDiaryStar"></i>
             </div>
             <div class="operation">
-              <i class="iconfont icon-shoucang2" v-show="!isCollect" @click="saveDiaryCollection"></i>
-              <i class="iconfont icon-shoucang1" v-show="isCollect" @click="cancelDiaryCollection"></i>
+              <i class="iconfont icon-shoucang2" v-show="!isCollect" @click="saveGriphicCollection"></i>
+              <i class="iconfont icon-shoucang1" v-show="isCollect" @click="cancelGriphicCollection"></i>
             </div>
           </div>
         </div>
@@ -109,9 +109,8 @@ export default {
           message: response.data
         })
       })
-
     },
-    saveDiaryCollection() {
+    saveGriphicCollection() {
       // console.log(this.diary.id)
       axios.post('/saveObjCollection' , {
         objId: this.griphicData.id,
@@ -125,7 +124,7 @@ export default {
         })
       })
     },
-    cancelDiaryCollection() {
+    cancelGriphicCollection() {
       axios.post('/cancelObjCollection', {
         objId: this.griphicData.id,
         objType: '放空图文'

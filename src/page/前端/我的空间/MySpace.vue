@@ -55,9 +55,9 @@
               <span>放空图文</span>
             </template>
             <el-menu-item-group title="">
-              <el-menu-item index="4-1">我的图文</el-menu-item>
-              <el-menu-item index="4-2">点赞的图文</el-menu-item>
-              <el-menu-item index="4-3">收藏的图文</el-menu-item>
+              <router-link :to="{name : 'MySpaceOwnGriphic'}"><el-menu-item index="4-1">我的图文</el-menu-item></router-link>
+              <router-link :to="{name : 'MySpaceOwnStarGriphic'}"><el-menu-item index="4-2">点赞的图文</el-menu-item></router-link>
+              <router-link :to="{name : 'MySpaceOwnCollectGriphic'}"><el-menu-item index="4-3">收藏的图文</el-menu-item></router-link>
             </el-menu-item-group>
           </el-sub-menu>
           <el-menu-item index="5">

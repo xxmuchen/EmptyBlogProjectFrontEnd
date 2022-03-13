@@ -49,14 +49,14 @@ import MySpaceOwnStarVlog from "@/components/前端组件/我的空间组件/放
 import MySpaceOwnGriphic from "@/components/前端组件/我的空间组件/放空图文/MySpaceOwnGriphic";
 import MySpaceOwnStarGriphic from "@/components/前端组件/我的空间组件/放空图文/MySpaceOwnStarGriphic";
 import MySpaceOwnCollectGriphic from "@/components/前端组件/我的空间组件/放空图文/MySpaceOwnCollectGriphic";
+import MySpaceOwnSetting from "@/components/前端组件/我的空间组件/设置/MySpaceOwnSetting";
+import AdminLogin from "@/page/后端/登录页/AdminLogin";
+import AdminPage from "@/page/后端/主页面/AdminPage";
 // import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
 // import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
 // 2. 定义路由配置
 const routes = [
-    // {
-    //     path: '/',
-    //     redirect: '/countIndex'
-    // },
+    // 前台部分
     {
         path: '/' ,
         redirect: '/HomePage'
@@ -90,6 +90,7 @@ const routes = [
                     { name:'MySpaceOwnGriphic' , path: 'MySpaceOwnGriphic', component: MySpaceOwnGriphic },
                     { name:'MySpaceOwnStarGriphic' , path: 'MySpaceOwnStarGriphic', component: MySpaceOwnStarGriphic },
                     { name:'MySpaceOwnCollectGriphic' , path: 'MySpaceOwnCollectGriphic', component: MySpaceOwnCollectGriphic },
+                    { name:'MySpaceOwnSetting' , path: 'MySpaceOwnSetting', component: MySpaceOwnSetting },
                 ]
             }
         ]
@@ -185,7 +186,17 @@ const routes = [
     //     path: '/ObserveComponent',
     //     component: ObserveComponent
     // },
-
+    // 后台部分
+    {
+        name: 'AdminLogin',
+        path: '/AdminLogin',
+        component: AdminLogin
+    },
+    {
+        name: 'AdminPage',
+        path: '/AdminPage',
+        component: AdminPage
+    }
 ];
 
 // 3. 创建路由实例

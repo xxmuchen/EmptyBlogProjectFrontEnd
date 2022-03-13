@@ -1,88 +1,141 @@
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-aside width="200px">
-        <h5 class="mb-2">我的空间</h5>
-        <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-
+  <div class="main">
+    <div class="userInfo">
+      <div class="userAvatar">
+        <el-upload
+            name="userAvatarFile"
+            class="avatar-uploader"
+            action="http://localhost:8081/api/avatarUpload"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
         >
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon>
-                <i class="iconfont icon-rijiben"></i>
-              </el-icon>
-              <span>放空日记</span>
-            </template>
-            <el-menu-item-group title="">
-              <router-link :to="{name: 'MySpaceOwnDiary'}"><el-menu-item index="1-1"> 我的日记</el-menu-item></router-link>
-              <router-link :to="{name: 'MySpaceOwnStarDiary'}"><el-menu-item index="1-2">点赞的日记</el-menu-item></router-link>
-              <router-link :to="{name: 'MySpaceOwnCollectDiary'}"><el-menu-item index="1-3">收藏的日记</el-menu-item></router-link>
-            </el-menu-item-group>
-          </el-sub-menu>
-          <el-sub-menu index="2">
-            <template #title>
-              <el-icon>
-                <i class="iconfont icon-juzi"></i>
-              </el-icon>
-              <span>放空句子</span>
-            </template>
-            <el-menu-item-group title="">
-              <router-link :to="{name: 'MySpaceOwnSentence'}"><el-menu-item index="2-1">我的句子</el-menu-item></router-link>
-              <router-link :to="{name: 'MySpaceOwnStarSentence'}"><el-menu-item index="2-2">点赞的句子</el-menu-item></router-link>
-              <router-link :to="{name: 'MySpaceOwnCollectSentence'}"><el-menu-item index="2-3">收藏的句子</el-menu-item></router-link>
-            </el-menu-item-group>
-          </el-sub-menu>
-          <el-sub-menu index="3">
-            <template #title>
-              <el-icon>
-                <i class="iconfont icon-video"></i>
-              </el-icon>
-              <span>放空Vlog</span>
-            </template>
-            <el-menu-item-group title="">
-              <router-link :to="{name : 'MySpaceOwnVlog'}"><el-menu-item index="3-1">我的Vlog</el-menu-item></router-link>
-              <router-link :to="{name : 'MySpaceOwnStarVlog'}"><el-menu-item index="3-2">点赞的Vlog</el-menu-item></router-link>
-                <router-link :to="{name : 'MySpaceOwnCollectVlog'}"><el-menu-item index="3-3">收藏的Vlog</el-menu-item></router-link>
-            </el-menu-item-group>
-          </el-sub-menu>
-          <el-sub-menu index="4">
-            <template #title>
-              <el-icon>
-                <i class="iconfont icon-31tuwenxiangqing"></i>
-              </el-icon>
-              <span>放空图文</span>
-            </template>
-            <el-menu-item-group title="">
-              <router-link :to="{name : 'MySpaceOwnGriphic'}"><el-menu-item index="4-1">我的图文</el-menu-item></router-link>
-              <router-link :to="{name : 'MySpaceOwnStarGriphic'}"><el-menu-item index="4-2">点赞的图文</el-menu-item></router-link>
-              <router-link :to="{name : 'MySpaceOwnCollectGriphic'}"><el-menu-item index="4-3">收藏的图文</el-menu-item></router-link>
-            </el-menu-item-group>
-          </el-sub-menu>
-          <router-link :to="{ name: 'MySpaceOwnSetting'}"><el-menu-item index="5">
-            <el-icon>
-              <setting/>
-            </el-icon>
-            <span>设置</span>
-          </el-menu-item></router-link>
-        </el-menu>
-      </el-aside>
-      <el-main>
-        <router-view></router-view>
-      </el-main>
-    </el-container>
+          <img v-if="userInfo.avatar" :src="userInfo.avatar" class="avatar" />
+          <el-icon v-else class="avatar-uploader-icon"><plus /></el-icon>
+        </el-upload>
+      </div>
+      <div class="userNameAndSynopsis" >
+        <div>
+          <span v-text="userInfo.userName"></span>
+          <el-tag @click="dialogTableSeeInfoVisible = true">查看</el-tag>
+          <el-tag @click="dialogFormModifyInfoVisible = true">修改</el-tag>
+        </div>
+        <div>
+          <span v-text="userInfo.synopsis"></span>
+        </div>
+      </div>
+      <el-dialog v-model="dialogTableSeeInfoVisible" title="Shipping address">
+        <el-descriptions title="User Info">
+          <el-descriptions-item label="姓名">{{ userInfo.userName }}</el-descriptions-item>
+          <el-descriptions-item label="性别">{{ userInfo.sex }}</el-descriptions-item>
+          <el-descriptions-item label="Email">{{ userInfo.email }}</el-descriptions-item>
+          <el-descriptions-item label="个性签名">{{ userInfo.synopsis }}</el-descriptions-item>
+          <el-descriptions-item label="生日">{{ userInfo.birthday }}</el-descriptions-item>
+          <el-descriptions-item label="位置">
+            <!--            <el-cascader-->
+            <!--              size="large"-->
+            <!--              :options="options"-->
+            <!--              v-model="userInfo.location"-->
+            <!--              @change="handleChange"-->
+            <!--              disabled-->
+            <!--              >-->
+            <!--          </el-cascader>-->
+            {{ userLocation }}
+
+          </el-descriptions-item>
+        </el-descriptions>
+      </el-dialog>
+
+      <el-dialog v-model="dialogFormModifyInfoVisible" title="Shipping address">
+        <el-form :rules="rules"   :model="userInfo" label-width="100px" class="demo-ruleForm">
+
+
+          <el-form-item label="用户昵称" prop="userName">
+            <el-input
+                placeholder="请输入昵称"
+                v-model.trim="userInfo.userName"
+                clearable>
+            </el-input>
+          </el-form-item>
+
+          <el-form-item label="用户密码" prop="password">
+            <el-input
+                type="password"
+                placeholder="请输入密码"
+                v-model.trim="userInfo.password"
+                show-password
+                clearable>
+            </el-input>
+          </el-form-item>
+
+          <el-form-item label="用户性别" prop="sex">
+            <el-radio v-model="userInfo.sex"  label="男">男</el-radio>
+            <el-radio v-model="userInfo.sex" label="女">女</el-radio>
+          </el-form-item>
+
+          <el-form-item label="用户Email" prop="email">
+            <el-input
+                type="email"
+                :rows="2"
+                placeholder="请输入您的Email"
+                autosize
+                v-model.trim="userInfo.email">
+            </el-input>
+          </el-form-item>
+
+          <el-form-item label="个性签名" prop="synopsis">
+            <el-input
+                type="textarea"
+                :rows="2"
+                placeholder="请输入个性签名"
+                autosize
+                v-model.trim="userInfo.synopsis">
+            </el-input>
+          </el-form-item>
+
+          <el-form-item label="用户生日" prop="birthday">
+            <div class="block">
+              <!--                <span class="demonstration">默认</span>-->
+              <el-date-picker
+                  v-model="userInfo.birthday"
+                  type="date"
+                  placeholder="选择日期">
+              </el-date-picker>
+            </div>
+          </el-form-item>
+          <el-form-item label="用户地址" prop="location">
+            <div class="address">
+              <el-cascader
+                  size="large"
+                  :options="options"
+                  v-model="userInfo.location"
+              >
+              </el-cascader>
+            </div>
+          </el-form-item>
+        </el-form>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogFormModifyInfoVisible = false">Cancel</el-button>
+            <el-button type="primary" @click="updateUserInfo"
+            >Confirm</el-button
+            >
+          </span>
+        </template>
+      </el-dialog>
+    </div>
+    <el-divider></el-divider>
+
   </div>
 </template>
+
 <script>
+import axios from "axios";
 import {regionData, CodeToText} from 'element-china-area-data'
 import {reactive} from "vue";
-import axios from "axios";
+// import axios from "axios";
 import {ElMessage} from "element-plus";
-
-
 export default {
-  name: 'MySpace',
+  name: "MySpaceOwnSetting",
   data() {
     // 密码验证
     var validatepassword = (rule, value, callback) => {

@@ -106,7 +106,6 @@ export default {
       }else {
          this.getAllGriphicBySee();
        }
-
     }
     // loadMore() {
     //   if (this.hasMore) {

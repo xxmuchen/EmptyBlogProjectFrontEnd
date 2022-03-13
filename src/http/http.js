@@ -100,6 +100,31 @@ axios.interceptors.response.use(Response => {
                     message: '登陆取消'
                 })
             })
+    }else if(status === '402') {
+        ElMessage.error("token失效，重新登录");
+        /*清楚token*/
+        localStorage.removeItem('eleToken');
+        ElMessageBox.confirm(
+            '尊敬的用户，您的登录信息已失效，请问是否重新登陆?',
+            'Warning',
+            {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning',
+            }
+        ).then(() => {
+            /*跳转登录*/
+            router.push({name: 'AdminLogin'})
+            ElMessage({
+                type: 'success',
+                message: '即将为您跳转到登陆页面'
+            })
+        }).catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '登陆取消'
+            })
+        })
     }
     return Promise.reject(error);
 })

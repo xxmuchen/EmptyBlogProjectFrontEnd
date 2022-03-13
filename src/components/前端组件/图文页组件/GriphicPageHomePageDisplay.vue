@@ -119,6 +119,7 @@ export default {
     '$route.query.type'(val){
         console.log(123)
         this.getDataBytype(val)
+        this.$router.go(0)
       }
     }
 }

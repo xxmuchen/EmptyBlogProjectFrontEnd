@@ -61,7 +61,7 @@
           }).then(response => {
             console.log(response.data);
             localStorage.setItem("eleToken" , response.data)
-            this.$router.push({name: ''})
+            this.$router.push({name: 'AdminPage'})
           })
         }
       }

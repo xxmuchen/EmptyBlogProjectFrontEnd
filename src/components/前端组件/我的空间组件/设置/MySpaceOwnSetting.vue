@@ -227,7 +227,7 @@ export default {
   computed: {
     userLocation() {
       console.log(this.userInfo.location)
-      if (this.userInfo.location !== null) {
+      if (this.userInfo.location.length === 3) {
         return CodeToText[this.userInfo.location[0]] + CodeToText[this.userInfo.location[1]] + CodeToText[this.userInfo.location[2]]
       } else {
         return ''

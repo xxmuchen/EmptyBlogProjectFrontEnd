@@ -93,6 +93,7 @@
   }
   .el-form-item {
     margin-top: 20px;
+    width: 100%;
   }
   .administratorLoginFont {
     width: 100%;

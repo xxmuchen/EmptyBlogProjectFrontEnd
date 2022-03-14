@@ -53,6 +53,7 @@ import MySpaceOwnSetting from "@/components/前端组件/我的空间组件/设�
 import AdminLogin from "@/page/后端/登录页/AdminLogin";
 import AdminPage from "@/page/后端/主页面/AdminPage";
 import UserInfoManage from "@/components/后端组件/用户管理/UserInfoManage";
+import DiaryInfoManange from "@/components/后端组件/日记管理/DiaryInfoManange";
 // import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
 // import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
 // 2. 定义路由配置
@@ -198,7 +199,8 @@ const routes = [
         path: '/AdminPage',
         component: AdminPage,
         children: [
-            { name: 'UserInfoManage' , path: 'UserInfoManage' , component: UserInfoManage }
+            { name: 'UserInfoManage' , path: 'UserInfoManage' , component: UserInfoManage },
+            { name: 'DiaryInfoManange' , path: 'DiaryInfoManange' , component: DiaryInfoManange }
         ]
     }
 ];

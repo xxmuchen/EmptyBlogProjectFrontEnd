@@ -17,7 +17,7 @@ export default {
   components: {AdminPageAsideDisplay, AdminPageHeadDisplay},
 }
 </script>
-<style>
+<style scoped>
   .el-header {
     background: red;
   }

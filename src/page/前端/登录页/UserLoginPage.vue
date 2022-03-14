@@ -15,10 +15,10 @@
         <el-form :rules="rules"  ref="ruleForm" :model="ruleForm" label-width="100px" class="demo-ruleForm">
 
 
-          <el-form-item label="用户昵称" prop="userName">
+          <el-form-item label="用户邮箱" prop="email">
             <el-input
-                placeholder="请输入昵称"
-                v-model.trim="ruleForm.userName"
+                placeholder="请输入邮箱"
+                v-model.trim="ruleForm.email"
                 clearable>
             </el-input>
           </el-form-item>
@@ -81,29 +81,12 @@ export default {
     return {
       isDisabled: false,
       ruleForm: {
-        userName: '',
+        email: '',
         password: '',
-        confirmPassword: '',
-        sex: '男',
-        birthday: '',
-        synopsis: '',
-        avatar: '',
-        location: [],
-        email: ''
+
       },
       rules: reactive({
-        userName: [
-          {
-            required: true,
-            message: '昵称不可为空',
-            trigger: 'blur'
-          },
-          {
-            min: 2,
-            max: 7,
-            message: '昵称长度应在2个字符到7个字符之间'
-          }
-        ],
+
         password: [
           {
             required: true,
@@ -135,7 +118,7 @@ export default {
       // console.log(this.ruleForm.avatar)
       axios
           .post('/userLogin',{
-            userName: this.ruleForm.userName,
+            email: this.ruleForm.email,
             password: this.ruleForm.password
       })
           .then(response => {

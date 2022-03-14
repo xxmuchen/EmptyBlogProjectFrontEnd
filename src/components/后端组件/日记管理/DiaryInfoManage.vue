@@ -69,7 +69,7 @@
           <el-table-column property="authorName" label="作者" width="180" />
           <el-table-column property="mood" label="心情" width="120" />
           <el-table-column property="weather" label="天气" width="120" />
-          <el-table-column property="see" label="是否私密" width="150" />
+          <el-table-column property="see" label="是否公开" width="150" />
           <el-table-column property="createTime" label="发布时间" width="200" />
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
@@ -125,7 +125,7 @@ import axios from "axios";
 import {ElMessage} from "element-plus";
 
 export default {
-  name: 'DiaryInfoManange',
+  name: 'DiaryInfoManage',
   components: {},
   data() {
     return {
@@ -148,12 +148,12 @@ export default {
           value: [new Date().getTime() - 3600 * 1000 * 24 * 90, new Date()]
         }
       ],
-      dialogAddUserVisible: false,
-      userAddForm: {
-        userName: '',
-        userEmail: '',
-        userPassword: ''
-      },
+      // dialogAddUserVisible: false,
+      // userAddForm: {
+      //   userName: '',
+      //   userEmail: '',
+      //   userPassword: ''
+      // },
       currentPage: 1,
       diaryDialogInfo: {}
     }

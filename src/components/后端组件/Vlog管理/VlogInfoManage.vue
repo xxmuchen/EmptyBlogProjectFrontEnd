@@ -2,7 +2,7 @@
   <div>
     <div class="mainTop">
       <div>
-        <div class="userInfoManageFont">句子管理</div>
+        <div class="userInfoManageFont">Vlog管理</div>
         <div class="userSearch">
           <div class="userInfoSearchTimeSelect">
             <el-date-picker
@@ -64,45 +64,45 @@
             highlight-current-row
             style="width: 100%"
         >
-          <el-table-column type="index" width="50" />
-          <el-table-column label="句子内容" width="420">
-            <template #default="scope">
-              <div v-html="scope.row.content"></div>
-            </template>
-          </el-table-column>
-          <el-table-column property="authorName" label="作者" width="120" />
-          <el-table-column property="originalAuthor" label="原作者" width="120" />
-          <el-table-column property="see" label="是否公开" width="120" />
-          <el-table-column property="createTime" label="发布时间" width="200" />
+          <el-table-column type="index" width="50"/>
+          <el-table-column property="title" label="Vlog标题" width="200"/>
+          <el-table-column property="description" label="描述" width="350"/>
+          <el-table-column property="authorName" label="作者" width="120"/>
+          <el-table-column property="see" label="是否公开" width="120"/>
+          <el-table-column property="createTime" label="发布时间" width="200"/>
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
               <el-button size="default" @click="handleWatch(scope.row)"
-              >查看</el-button
+              >查看
+              </el-button
               >
               <el-button
                   size="default"
                   type="danger"
                   @click="handleDelete(scope.row)"
-              >删除</el-button
+              >删除
+              </el-button
               >
             </template>
           </el-table-column>
         </el-table>
         <div>
           <el-dialog
-              v-model="sentenceDialogVisible"
-              title="句子内容"
-              :before-close="handleCloseDiaryDialog"
+              v-model="vlogDialogVisible"
+              :title="vlogDialogInfo.title"
+              :before-close="handleCloseVlogDialog"
           >
-            <div v-html="sentenceDialogInfo.content"></div>
-            <div class="originalAuthorBox" v-show="sentenceDialogInfo.originalAuthor !== ''">原作者: {{ sentenceDialogInfo.originalAuthor }}</div>
+            <vue3-video-play v-bind="options" :src="vlogDialogInfo.videoUrl"></vue3-video-play>
+            <div class="vlogDescription">{{ vlogDialogInfo.description }}</div>
+            <!--            <div v-html="vlogDialogInfo.content"></div>-->
+            <!--            <div class="originalAuthorBox">原作者: {{ vlogDialogInfo.originalAuthor }}</div>-->
             <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="diaryDialogClose">关闭</el-button>
-        <!--        <el-button type="primary" @click="sentenceDialogVisible = false"-->
-        <!--        >Confirm</el-button-->
-        <!--        >-->
-      </span>
+              <span class="dialog-footer">
+                <el-button @click="vlogDialogClose">关闭</el-button>
+                <!--        <el-button type="primary" @click="vlogDialogVisible = false"-->
+                <!--        >Confirm</el-button-->
+                <!--        >-->
+              </span>
             </template>
           </el-dialog>
         </div>
@@ -114,7 +114,7 @@
             :page-size="9"
             :page-count="pageCount"
             layout="prev, pager, next"
-            @current-change="adminGetAllSentenceByPageAndCreateTime"
+            @current-change="adminGetAllVlogByPageAndCreateTime"
         >
         </el-pagination>
       </div>
@@ -127,13 +127,14 @@
 // import AdminPageMainTopDisplay from "@/components/后端组件/主页面顶部/AdminPageMainTopDisplay";
 import axios from "axios";
 import {ElMessage} from "element-plus";
+import {reactive} from "vue";
 
 export default {
-  name: 'SentenceInfoManage',
+  name: 'VlogInfoManage',
   components: {},
   data() {
     return {
-      sentenceDialogVisible: false,
+      vlogDialogVisible: false,
       tableData: [],
       pageCount: 0,
       formLabelWidth: '80px',
@@ -159,35 +160,55 @@ export default {
       //   userPassword: ''
       // },
       currentPage: 1,
-      sentenceDialogInfo: {}
+      vlogDialogInfo: {
+        // video_url: 'http://localhost:8080/images/vlog/vlogVideo/a5d7d372-2581-40e9-bed4-897cba3e311e109670000.mp4'
+      },
+
+      options: reactive({
+        width: '700px', //播放器高度
+        height: '350px', //播放器高度
+        color: "#409eff", //主题色
+        title: '', //视频名称
+        // src: "", //视频源
+        muted: false, //静音
+        webFullScreen: false,
+        speedRate: ["0.75", "1.0", "1.25", "1.5", "2.0"], //播放倍速
+        autoPlay: false, //自动播放
+        loop: false, //循环播放
+        mirror: false, //镜像画面
+        ligthOff: false,  //关灯模式
+        volume: 0.3, //默认音量大小
+        control: true, //是否显示控制
+        controlBtns: ['audioTrack', 'quality', 'speedRate', 'volume', 'setting', 'pip', 'pageFullScreen', 'fullScreen'] //显示所有按钮,
+      })
     }
   },
   methods: {
     handleWatch(row) {
-      axios.get('/adminGetSentenceById?sentenceId=' + row.id).then( response=> {
-        this.sentenceDialogInfo = response.data
+      axios.get('/adminGetVlogById?vlogId=' + row.id).then(response => {
+        this.vlogDialogInfo = response.data
       })
-      this.sentenceDialogVisible = true
+      this.vlogDialogVisible = true
 
     },
-    diaryDialogClose() {
-      this.sentenceDialogInfo = {}
-      this.sentenceDialogVisible = false
+    vlogDialogClose() {
+      this.vlogDialogInfo = {}
+      this.vlogDialogVisible = false
     },
     handleDelete(row) {
       // console.log(row)
-      axios.delete('/adminDeleteSentenceById?sentenceId=' + row.id).then(response => {
+      axios.delete('/adminDeleteVlogById?vlogId=' + row.id).then(response => {
         this.tableData = response.data.records
         this.currentPage = 1
         ElMessage.success("删除成功");
       })
     },
-    handleCloseDiaryDialog() {
-      this.sentenceDialogInfo = {}
-      this.sentenceDialogVisible = false
+    handleCloseVlogDialog() {
+      this.vlogDialogInfo = {}
+      this.vlogDialogVisible = false
     },
-    adminGetAllSentenceByPageAndCreateTime(currentPage) {
-      axios.get('/adminGetAllSentenceByPageAndCreateTime?currentPage=' + currentPage).then(response => {
+    adminGetAllVlogByPageAndCreateTime(currentPage) {
+      axios.get('/adminGetAllVlogByPageAndCreateTime?currentPage=' + currentPage).then(response => {
         console.log(response.data)
         this.tableData = response.data.records;
         this.pageCount = response.data.pages
@@ -196,7 +217,7 @@ export default {
     }
   },
   mounted() {
-    this.adminGetAllSentenceByPageAndCreateTime(1)
+    this.adminGetAllVlogByPageAndCreateTime(1)
   }
 }
 </script>
@@ -206,6 +227,7 @@ export default {
   /*margin-top: 10px;*/
   /*margin-bottom: 10px;*/
 }
+
 .userInfoManageFont {
   /*margin-left: 30px;*/
 }
@@ -228,6 +250,7 @@ export default {
   display: flex;
   margin-left: 180px;
 }
+
 ::v-deep(.el-input__inner) {
   width: 270px;
 }
@@ -244,9 +267,11 @@ export default {
 .el-form {
   width: 500px;
 }
+
 .mainTable {
   margin-top: 20px;
 }
+
 .pagination {
   width: 100%;
   display: flex;
@@ -256,8 +281,14 @@ export default {
   justify-content: center;
   margin-top: 20px;
 }
+
 .originalAuthorBox {
   margin-top: 30px;
   margin-left: 500px;
+}
+
+.vlogDescription {
+  margin-top: 20px;
+  margin-left: 20px;
 }
 </style>

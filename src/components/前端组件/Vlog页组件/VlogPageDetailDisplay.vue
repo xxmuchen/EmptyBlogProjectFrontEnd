@@ -341,11 +341,15 @@ export default {
   /*justify-content:right;*/
   /*text-align: center;*/
 }
+.el-input {
+  width: 100%;
+  border: 1px red;
 
+}
 .commentSection ::v-deep(.el-input__inner)  {
   height: 40px;
-  background: none;
-  border: none;
+  width: 100%;
+
 }
 
 

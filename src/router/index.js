@@ -57,6 +57,15 @@ import DiaryInfoManage from "@/components/后端组件/日记管理/DiaryInfoMan
 import SentenceInfoManage from "@/components/后端组件/句子管理/SentenceInfoManage";
 import VlogInfoManage from "@/components/后端组件/Vlog管理/VlogInfoManage";
 import GriphicInfoManage from "@/components/后端组件/图文管理/GriphicInfoManage";
+import UserLoginAndRegistInfoVisualizationDisplay
+    from "@/components/后端组件/用户信息可视化展示/用户居住地址可视化/UserLoginAndRegistInfoVisualizationDisplay";
+import UserLocationInfoVisualizationDisplay
+    from "@/components/后端组件/用户信息可视化展示/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
+// import UserInfoVisualizationDisplay from "@/components/后端组件/用户信息可视化展示/UserLoginAndRegistInfoVisualizationDisplay";
+// import UserLoginAndRegistInfoVisualizationDisplay
+//     from "@/components/后端组件/用户信息可视化展示/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
+// import UserLocationInfoVisualizationDisplay
+//     from "@/components/后端组件/用户信息可视化展示/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
 // import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
 // import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
 // 2. 定义路由配置
@@ -206,7 +215,11 @@ const routes = [
             { name: 'DiaryInfoManage' , path: 'DiaryInfoManage' , component: DiaryInfoManage },
             { name: 'SentenceInfoManage' , path: 'SentenceInfoManage' , component: SentenceInfoManage },
             { name: 'VlogInfoManage' , path: 'VlogInfoManage' , component: VlogInfoManage },
-            { name: 'GriphicInfoManage' , path: 'GriphicInfoManage' , component: GriphicInfoManage }
+            { name: 'GriphicInfoManage' , path: 'GriphicInfoManage' , component: GriphicInfoManage },
+            { name: 'UserLoginAndRegistInfoVisualizationDisplay' , path: 'UserLoginAndRegistInfoVisualizationDisplay' , component: UserLoginAndRegistInfoVisualizationDisplay },
+            { name: 'UserLocationInfoVisualizationDisplay' , path: 'UserLocationInfoVisualizationDisplay' , component: UserLocationInfoVisualizationDisplay },
+            // { name: 'UserLocationInfoVisualizationDisplay' , path: 'UserLocationInfoVisualizationDisplay' , component: UserLocationInfoVisualizationDisplay },
+
         ]
     }
 ];

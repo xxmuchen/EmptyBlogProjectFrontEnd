@@ -50,7 +50,15 @@
         <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>
         <span>可视化管理</span>
       </template>
-      <router-link :to="{name: ''}"><el-menu-item index="6-1">用户登录可视化</el-menu-item></router-link>
+      <el-sub-menu index="6-1">
+        <template #title>
+<!--          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>-->
+          <span>用户信息</span>
+        </template>
+        <router-link :to="{name: 'UserLoginAndRegistInfoVisualizationDisplay'}"><el-menu-item index="6-1-1">注册登录可视化</el-menu-item></router-link>
+        <router-link :to="{name: 'UserLocationInfoVisualizationDisplay'}"><el-menu-item index="6-1-1">用户位置可视化</el-menu-item></router-link>
+      </el-sub-menu>
+
       <router-link :to="{name: ''}"><el-menu-item index="6-2">用户注册可视化</el-menu-item></router-link>
       <router-link :to="{name: ''}"><el-menu-item index="6-3">日记可视化</el-menu-item></router-link>
       <router-link :to="{name: ''}"><el-menu-item index="6-4">句子可视化</el-menu-item></router-link>

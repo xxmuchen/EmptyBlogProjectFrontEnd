@@ -166,7 +166,6 @@
       },
       /*查询所有评论*/
       queryObserveByObjId(objType , obj_id) {
-
           axios.get('/queryObserveByObjId?objType=' + objType + '&objId='+ obj_id).then(response => {
             // console.log(response)
             this.dataSource = response.data
@@ -186,20 +185,6 @@
           this.dataSource = response.data
         })
       },
-
-      removeRootObserveTextContent() {
-        this.rootObserveContent = '';
-      },
-      // 先通过评论tag获取该条评论的id，然后创建一个变量isShow来接收，最后根据该变量和所有评论的id进行比较，v-show为true时显示
-      expandTheReplyCommentTextarea(id) {
-        this.isShow = id;
-      },
-      // 将isShow清空，所有的比较就都是false了
-      closeObserveContentReplySubmit() {
-        this.isShow = '';
-        this.replyObserveContent = ''
-      },
-
       addReplyObserve(last_id) {
         axios.post('/addObjObserve', {
           type: this.objType,
@@ -213,6 +198,20 @@
         })
       }
     },
+      removeRootObserveTextContent() {
+        this.rootObserveContent = '';
+      },
+      // 先通过评论tag获取该条评论的id，然后创建一个变量isShow来接收，最后根据该变量和所有评论的id进行比较，v-show为true时显示
+      expandTheReplyCommentTextarea(id) {
+        this.isShow = id;
+      },
+      // 将isShow清空，所有的比较就都是false了
+      closeObserveContentReplySubmit() {
+        this.isShow = '';
+        this.replyObserveContent = ''
+      },
+
+
     mounted() {
       // console.log(1234654)
       this.getAvatorAndUserName();

@@ -58,16 +58,20 @@ import SentenceInfoManage from "@/components/后端组件/句子管理/SentenceI
 import VlogInfoManage from "@/components/后端组件/Vlog管理/VlogInfoManage";
 import GriphicInfoManage from "@/components/后端组件/图文管理/GriphicInfoManage";
 import UserLoginAndRegistInfoVisualizationDisplay
-    from "@/components/后端组件/用户信息可视化展示/用户居住地址可视化/UserLoginAndRegistInfoVisualizationDisplay";
+    from "@/components/后端组件/用户信息可视化展示/用户信息可视化/用户居住地址可视化/UserLoginAndRegistInfoVisualizationDisplay";
 import UserLocationInfoVisualizationDisplay
-    from "@/components/后端组件/用户信息可视化展示/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
-// import UserInfoVisualizationDisplay from "@/components/后端组件/用户信息可视化展示/UserLoginAndRegistInfoVisualizationDisplay";
-// import UserLoginAndRegistInfoVisualizationDisplay
-//     from "@/components/后端组件/用户信息可视化展示/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
-// import UserLocationInfoVisualizationDisplay
-//     from "@/components/后端组件/用户信息可视化展示/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
-// import MyDiary from "@/components/前端组件/我的空间组件/MySpaceDiary";
-// import MySpaceDiary from "@/components/前端组件/我的空间组件/MySpaceOwnDiary";
+    from "@/components/后端组件/用户信息可视化展示/用户信息可视化/用户注册登录可视化/UserLocationInfoVisualizationDisplay";
+import BlogWriteInfoVisualizationDisplay
+    from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记撰写可视化/BlogWriteInfoVisualizationDisplay";
+import BlogObserveInfoVisualizationDisplay
+    from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记评论可视化/BlogObserveInfoVisualizationDisplay";
+// import BlogStarAndCollectInfoVisualizationDisplay
+//     from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记点赞收藏可视化/BlogStarInfoVisualizationDisplay";
+import BlogStarInfoVisualizationDisplay
+    from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记点赞收藏可视化/BlogStarInfoVisualizationDisplay";
+import BlogCollectInfoVisualizationDisplay
+    from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记点赞收藏可视化/BlogCollectInfoVisualizationDisplay";
+
 // 2. 定义路由配置
 const routes = [
     // 前台部分
@@ -218,8 +222,10 @@ const routes = [
             { name: 'GriphicInfoManage' , path: 'GriphicInfoManage' , component: GriphicInfoManage },
             { name: 'UserLoginAndRegistInfoVisualizationDisplay' , path: 'UserLoginAndRegistInfoVisualizationDisplay' , component: UserLoginAndRegistInfoVisualizationDisplay },
             { name: 'UserLocationInfoVisualizationDisplay' , path: 'UserLocationInfoVisualizationDisplay' , component: UserLocationInfoVisualizationDisplay },
-            // { name: 'UserLocationInfoVisualizationDisplay' , path: 'UserLocationInfoVisualizationDisplay' , component: UserLocationInfoVisualizationDisplay },
-
+            { name: 'BlogWriteInfoVisualizationDisplay' , path: 'BlogWriteInfoVisualizationDisplay' , component: BlogWriteInfoVisualizationDisplay },
+            { name: 'BlogObserveInfoVisualizationDisplay' , path: 'BlogObserveInfoVisualizationDisplay' , component: BlogObserveInfoVisualizationDisplay },
+            { name: 'BlogStarInfoVisualizationDisplay' , path: 'BlogStarInfoVisualizationDisplay' , component: BlogStarInfoVisualizationDisplay },
+            { name: 'BlogCollectInfoVisualizationDisplay' , path: 'BlogCollectInfoVisualizationDisplay' , component: BlogCollectInfoVisualizationDisplay },
         ]
     }
 ];

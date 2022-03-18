@@ -53,17 +53,53 @@
       <el-sub-menu index="6-1">
         <template #title>
 <!--          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>-->
-          <span>用户信息</span>
+          <span>用户数据可视化</span>
         </template>
         <router-link :to="{name: 'UserLoginAndRegistInfoVisualizationDisplay'}"><el-menu-item index="6-1-1">注册登录可视化</el-menu-item></router-link>
         <router-link :to="{name: 'UserLocationInfoVisualizationDisplay'}"><el-menu-item index="6-1-1">用户位置可视化</el-menu-item></router-link>
       </el-sub-menu>
 
-      <router-link :to="{name: ''}"><el-menu-item index="6-2">用户注册可视化</el-menu-item></router-link>
-      <router-link :to="{name: ''}"><el-menu-item index="6-3">日记可视化</el-menu-item></router-link>
-      <router-link :to="{name: ''}"><el-menu-item index="6-4">句子可视化</el-menu-item></router-link>
-      <router-link :to="{name: ''}"><el-menu-item index="6-5">Vlog可视化</el-menu-item></router-link>
-      <router-link :to="{name: ''}"><el-menu-item index="6-6">图文可视化</el-menu-item></router-link>
+      <el-sub-menu index="6-2">
+        <template #title>
+          <!--          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>-->
+          <span>博客数据可视化</span>
+        </template>
+        <router-link :to="{name: 'BlogWriteInfoVisualizationDisplay'}"><el-menu-item index="6-2-1">博客撰写</el-menu-item></router-link>
+        <router-link :to="{name: 'BlogObserveInfoVisualizationDisplay'}"><el-menu-item index="6-2-2">博客评论</el-menu-item></router-link>
+        <router-link :to="{name: 'BlogStarInfoVisualizationDisplay'}"><el-menu-item index="6-2-3">博客点赞</el-menu-item></router-link>
+        <router-link :to="{name: 'BlogCollectInfoVisualizationDisplay'}"><el-menu-item index="6-2-4">博客收藏</el-menu-item></router-link>
+      </el-sub-menu>
+<!--      <el-sub-menu index="6-3">-->
+<!--        <template #title>-->
+<!--          &lt;!&ndash;          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>&ndash;&gt;-->
+<!--          <span>放空句子</span>-->
+<!--        </template>-->
+<!--        <router-link :to="{name: 'SentenceWriteInfoVisualizationDisplay'}"><el-menu-item index="6-3-1">句子撰写</el-menu-item></router-link>-->
+<!--        <router-link :to="{name: 'SentenceObserveInfoVisualizationDisplay'}"><el-menu-item index="6-3-1">用户评论</el-menu-item></router-link>-->
+<!--        <router-link :to="{name: 'SentenceStarAndCollectInfoVisualizationDisplay'}"><el-menu-item index="6-3-1">用户点赞、收藏</el-menu-item></router-link>-->
+<!--      </el-sub-menu>-->
+<!--      <el-sub-menu index="6-4">-->
+<!--        <template #title>-->
+<!--          &lt;!&ndash;          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>&ndash;&gt;-->
+<!--          <span>放空Vlog</span>-->
+<!--        </template>-->
+<!--        <router-link :to="{name: 'VlogWriteInfoVisualizationDisplay'}"><el-menu-item index="6-4-1">Vlog上传</el-menu-item></router-link>-->
+<!--        <router-link :to="{name: 'VlogObserveInfoVisualizationDisplay'}"><el-menu-item index="6-4-1">用户评论</el-menu-item></router-link>-->
+<!--        <router-link :to="{name: 'VlogStarAndCollectInfoVisualizationDisplay'}"><el-menu-item index="6-4-1">用户点赞、收藏</el-menu-item></router-link>-->
+<!--      </el-sub-menu>-->
+<!--      <el-sub-menu index="6-5">-->
+<!--        <template #title>-->
+<!--          <span>放空图文</span>-->
+<!--        </template>-->
+<!--        <router-link :to="{name: 'GriphicWriteInfoVisualizationDisplay'}"><el-menu-item index="6-5-1">图文撰写</el-menu-item></router-link>-->
+<!--        <router-link :to="{name: 'GriphicObserveInfoVisualizationDisplay'}"><el-menu-item index="6-5-1">用户评论</el-menu-item></router-link>-->
+<!--        <router-link :to="{name: 'GriphicStarAndCollectInfoVisualizationDisplay'}"><el-menu-item index="6-5-1">用户点赞、收藏</el-menu-item></router-link>-->
+<!--      </el-sub-menu>-->
+<!--      <router-link :to="{name: ''}"><el-menu-item index="6-2">用户注册可视化</el-menu-item></router-link>-->
+<!--      <router-link :to="{name: ''}"><el-menu-item index="6-2">日记可视化</el-menu-item></router-link>-->
+<!--      <router-link :to="{name: ''}"><el-menu-item index="6-3">句子可视化</el-menu-item></router-link>-->
+<!--      <router-link :to="{name: ''}"><el-menu-item index="6-4">Vlog可视化</el-menu-item></router-link>-->
+<!--      <router-link :to="{name: ''}"><el-menu-item index="6-5">图文可视化</el-menu-item></router-link>-->
       <!--      <el-menu-item index="5-2">图文信息可视化展示</el-menu-item>-->
     </el-sub-menu>
   </el-menu>

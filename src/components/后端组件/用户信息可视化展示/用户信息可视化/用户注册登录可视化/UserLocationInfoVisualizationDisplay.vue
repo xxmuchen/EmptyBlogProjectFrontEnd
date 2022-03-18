@@ -6,19 +6,19 @@
 </template>
 <script>
 import axios from "axios";
-
+import {  CodeToText } from 'element-china-area-data'
 export default {
-  name: 'UserLoginAndRegistInfoVisualizationDisplay',
+  name: 'UserLocationInfoVisualizationDisplay',
   data() {
     return {
       option: {
         title: {
-          text: "登录统计"
+          text: "用户位置统计"
         },
         legend: {
-          data: ['登录用户数量' , '注册用户数量'],
+          data: ['用户位置'],
           right: 100,
-          icon: 'rect'
+          icon: 'circle'
         },
         xAxis: {
           type: 'category',
@@ -29,38 +29,44 @@ export default {
         },
         series: [
           {
-            name: '登录用户数量',
+            name: '用户位置',
             data: [],
-            type: 'line',
             label: {
               show: true,
               position: 'top'
-            }
-          },
-          {
-            name: '注册用户数量',
-            data: [],
-            type: 'line',
-            label: {
-              show: true,
-              position: 'top'
+            },
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+              color: 'rgba(180, 180, 180, 0.2)'
             }
           }
         ]
       }
     }
   },
+  methods: {
+    getUserPlaceDataVisualization() {
+      axios.get("/getUserPlaceDataVisualization").then(response => {
+        // console.log(response.data)
+        this.option.xAxis.data = response.data.xaxis
+        for (let i = 0 ; i < this.option.xAxis.data.length ; i++) {
+          let code = this.option.xAxis.data[i].split(",")
+          this.option.xAxis.data[i] = CodeToText[code[0]] + CodeToText[code[1]]
+        }
+        // console.log(this.option.xAxis.data)
+        this.option.series[0].data = response.data.yaxis
+
+      })
+    }
+  },
   mounted() {
     // console.log(this.echarts)
     let myChart = this.$echarts.init(this.$refs.myChart);
-
-    axios.get("/getUserLoginAWeekDataVisualization").then(response => {
-      this.option.xAxis.data = response.data[0].xaxis
-      this.option.series[0].data = response.data[0].yaxis
-      this.option.series[1].data = response.data[1].yaxis
-      // console.log(this.option)
+    this.getUserPlaceDataVisualization()
+    setTimeout(() => {
       myChart.setOption(this.option)
-    })
+    } , 1000)
   }
 }
 </script>

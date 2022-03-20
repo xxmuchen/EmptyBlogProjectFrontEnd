@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <el-row :gutter="20">
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有句子')">所有句子</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的句子')">审批通过的句子</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的句子')">待审批的句子</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的句子')">审批不通过的句子</div></el-col>
+    <!--    <el-col :span="6"><div class="grid-content bg-purple" /></el-col>-->
+  </el-row>
+  <div class="tableContent">
     <el-table
         :data="tableData"
         :row-key="tableData.id"
@@ -10,10 +17,15 @@
     >
       <el-table-column
           label="句子内容"
-          width="700">
+          width="500">
         <template #default="scope">
           <div v-html="scope.row.content"></div>
         </template>
+      </el-table-column>
+      <el-table-column
+          prop="state"
+          label="状态"
+          width="200">
       </el-table-column>
       <!--        <el-divider></el-divider>-->
       <el-table-column
@@ -66,12 +78,33 @@ export default {
     }
   },
   methods: {
+    switchingAuditStatus(state){
+      console.log(state)
+      this.state = state;
+      this.justToStatusByState(1)
+    },
+    /*通过选择的状态跳转*/
+    justToStatusByState(currentIndex) {
+
+      if (this.state === '所有句子') {
+        this.getUserSpaceSentenceOrderCreateTime(currentIndex)
+      }else if (this.state === '审批通过的句子') {
+        this.getUserSpaceSentenceStateSuccessOrderCreateTime(currentIndex)
+      }else if (this.state === '待审批的句子') {
+        this.getUserSpaceSentenceStateWaitOrderCreateTime(currentIndex)
+      }else if (this.state === '审批不通过的句子') {
+        this.getUserSpaceSentenceStateFailOrderCreateTime(currentIndex)
+      }else {
+        this.getUserSpaceSentenceOrderCreateTime(currentIndex)
+      }
+    },
     handleView(index , row) {
       // console.log(index , row)
       this.$router.push({name: 'SentencePageDetailDisplay' , query:{sentenceId: row.id}});
     },
     currentChange(currentIndex){
-      this.getUserSpaceSentenceOrderCreateTime(currentIndex)
+      this.justToStatusByState(currentIndex)
+      // this.getUserSpaceSentenceOrderCreateTime(currentIndex)
     },
     // justToDiaryDetail(row) {
     //   // console.log(row.id);
@@ -84,6 +117,27 @@ export default {
         // console.log(this.tableData[0].authorId)
       })
     },
+    getUserSpaceSentenceStateSuccessOrderCreateTime(currentIndex) {
+      axios.get('/getUserSpaceSentenceStateSuccessOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        // console.log(this.tableData[0].authorId)
+      })
+    },
+    getUserSpaceSentenceStateWaitOrderCreateTime(currentIndex) {
+      axios.get('/getUserSpaceSentenceStateWaitOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        // console.log(this.tableData[0].authorId)
+      })
+    },
+    getUserSpaceSentenceStateFailOrderCreateTime(currentIndex) {
+      axios.get('/getUserSpaceSentenceStateFailOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        // console.log(this.tableData[0].authorId)
+      })
+    },
     handleDelete(index , row) {
       console.log(index , row)
       axios.delete('delUserSpaceSentenceBySentenceId?sentenceId=' + row.id).then(response => {
@@ -91,6 +145,7 @@ export default {
         this.pageCount = response.data.pages
         this.currentPage = 1
         ElMessage.success('删除成功')
+        this.justToStatusByState(1)
       })
       // axios.put()
     }
@@ -103,6 +158,42 @@ export default {
 <style scoped>
 .el-scrollbar{
   height: 500px;
+}
+.el-row {
+  margin-bottom: 20px;
+
+  /*display: flex;*/
+
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.grid-content {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.tableContent {
+  margin-top: 10px;
 }
 .paging {
   margin-top: 10px;

@@ -238,6 +238,11 @@ export default {
 
     handleAvatarSuccess(res) {
       this.userInfo.avatar = res;
+      axios.post('/updateUserAvatar', {
+        avatar: res
+      }).then(response => {
+        ElMessage.success(response.data)
+      })
       // this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {

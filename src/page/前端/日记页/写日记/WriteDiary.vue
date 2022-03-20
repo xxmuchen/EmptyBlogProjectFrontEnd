@@ -138,7 +138,6 @@ export default {
 
     },
     onSubmit() {
-      //
       this.ruleForm.content = this.editor.txt.html()
       console.log(this.ruleForm.bgColor)
       axios.post('/diaryInfoUpload' , {
@@ -154,10 +153,6 @@ export default {
           message: response.data,
           type: 'success'
         })
-        // setTimeout(()=>{
-        //   // ElMessage.success(response);
-        //
-        // } , 3000)
       })
       // console.log(this.ruleForm)
       // console.log(this.editor.txt.html());

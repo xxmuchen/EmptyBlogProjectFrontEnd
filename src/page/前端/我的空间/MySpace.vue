@@ -16,7 +16,7 @@
               <span>放空日记</span>
             </template>
             <el-menu-item-group title="">
-              <router-link :to="{name: 'MySpaceOwnDiary'}"><el-menu-item index="1-1"> 我的日记</el-menu-item></router-link>
+              <router-link :to="{name: 'MySpaceOwnDiary'}"><el-menu-item index="1-1"> 我的所有日记</el-menu-item></router-link>
               <router-link :to="{name: 'MySpaceOwnStarDiary'}"><el-menu-item index="1-2">点赞的日记</el-menu-item></router-link>
               <router-link :to="{name: 'MySpaceOwnCollectDiary'}"><el-menu-item index="1-3">收藏的日记</el-menu-item></router-link>
             </el-menu-item-group>

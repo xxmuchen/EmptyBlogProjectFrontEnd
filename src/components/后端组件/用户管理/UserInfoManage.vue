@@ -345,7 +345,9 @@ export default {
       axios.get('/adminGetUserById?userId=' + row.id).then(response => {
         this.userInfo = response.data
         this.dialogFormModifyInfoVisible = true
-        this.userInfo.location = this.userInfo.location.split(',')
+        if (this.userInfo.location !== null) {
+          this.userInfo.location = this.userInfo.location.split(',')
+        }
       })
     },
     updateUserInfo() {
@@ -358,7 +360,7 @@ export default {
         email: this.userInfo.email,
         birthday: this.userInfo.birthday,
         avatar: this.userInfo.avatar,
-        location: this.userInfo.location.toString()
+        location: this.userInfo.location === null? null: this.userInfo.location.toString()
       }).then(response => {
         // console.log(response)
         this.tableData = response.data.records

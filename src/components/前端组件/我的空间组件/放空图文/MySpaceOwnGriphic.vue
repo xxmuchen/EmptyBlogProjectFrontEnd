@@ -1,5 +1,12 @@
 <template>
-  <div v-if="imageData.length">
+  <el-row :gutter="20">
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有图文')">所有图文</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的图文')">审批通过的图文</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的图文')">待审批的图文</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的图文')">审批不通过的图文</div></el-col>
+    <!--    <el-col :span="6"><div class="grid-content bg-purple" /></el-col>-->
+  </el-row>
+  <div v-if="imageData.length" class="tableContent">
     <water-fall gap="10px" width="250px" class="container" :data="imageData" :delay="true">
       <template #default="item">
 
@@ -54,8 +61,41 @@ export default {
     this.getUserSpaceGriphicOrderCreateTime()
   },
   methods: {
+    switchingAuditStatus(state){
+      console.log(state)
+      this.state = state;
+      this.justToStatusByState()
+    },
+    justToStatusByState() {
+      if (this.state === '所有图文') {
+        this.getUserSpaceGriphicOrderCreateTime()
+      }else if (this.state === '审批通过的图文') {
+        this.getUserSpaceGriphicStateSuccessOrderCreateTime()
+      }else if (this.state === '待审批的图文') {
+        this.getUserSpaceGriphicStateWaitOrderCreateTime()
+      }else if (this.state === '审批不通过的图文') {
+        this.getUserSpaceGriphicStateFailOrderCreateTime()
+      }else {
+        this.getUserSpaceGriphicOrderCreateTime()
+      }
+    },
     getUserSpaceGriphicOrderCreateTime() {
       axios.get('/getUserSpaceGriphicOrderCreateTime').then(response => {
+        this.imageData = response.data;
+      })
+    },
+    getUserSpaceGriphicStateSuccessOrderCreateTime() {
+      axios.get('/getUserSpaceGriphicStateSuccessOrderCreateTime').then(response => {
+        this.imageData = response.data;
+      })
+    },
+    getUserSpaceGriphicStateWaitOrderCreateTime() {
+      axios.get('/getUserSpaceGriphicStateWaitOrderCreateTime').then(response => {
+        this.imageData = response.data;
+      })
+    },
+    getUserSpaceGriphicStateFailOrderCreateTime() {
+      axios.get('/getUserSpaceGriphicStateFailOrderCreateTime').then(response => {
         this.imageData = response.data;
       })
     },
@@ -74,6 +114,42 @@ export default {
 <style scoped>
 .container {
   min-height: 90vh;
+}
+.el-row {
+  margin-bottom: 20px;
+
+  /*display: flex;*/
+
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.grid-content {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.tableContent {
+  margin-top: 10px;
 }
 .card {
   padding: 10px;

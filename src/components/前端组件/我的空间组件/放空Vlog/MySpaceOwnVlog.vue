@@ -1,5 +1,12 @@
 <template>
-  <div>
+  <el-row :gutter="20">
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有Vlog')">所有Vlog</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的Vlog')">审批通过的Vlog</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的Vlog')">待审批的Vlog</div></el-col>
+    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的Vlog')">审批不通过的Vlog</div></el-col>
+    <!--    <el-col :span="6"><div class="grid-content bg-purple" /></el-col>-->
+  </el-row>
+  <div class="tableContent">
     <el-table
         :data="tableData"
         :row-key="tableData.id"
@@ -10,12 +17,17 @@
     >
       <el-table-column
           label="Vlog标题"
-          width="700">
+          width="500">
         <template #default="scope">
           <div v-html="scope.row.title"></div>
         </template>
       </el-table-column>
       <!--        <el-divider></el-divider>-->
+      <el-table-column
+          prop="state"
+          label="状态"
+          width="200">
+      </el-table-column>
       <el-table-column
           prop="authorName"
           label="作者"
@@ -66,21 +78,70 @@ export default {
     }
   },
   methods: {
+    switchingAuditStatus(state){
+      console.log(state)
+      this.state = state;
+      this.justToStatusByState(1)
+    },
+    /*通过选择的状态跳转*/
+    justToStatusByState(currentIndex) {
+      // console.log("debugger")
+      if (this.state === '所有Vlog') {
+        this.getUserSpaceVlogOrderCreateTime(currentIndex)
+      }else if (this.state === '审批通过的Vlog') {
+        this.getUserSpaceVlogStateSuccessOrderCreateTime(currentIndex)
+      }else if (this.state === '待审批的Vlog') {
+        this.getUserSpaceVlogStateWaitOrderCreateTime(currentIndex)
+      }else if (this.state === '审批不通过的Vlog') {
+        this.getUserSpaceVlogStateFailOrderCreateTime(currentIndex)
+      }else {
+        // console.log("debugger")
+        this.getUserSpaceVlogOrderCreateTime(currentIndex)
+      }
+    },
     handleView(index , row) {
       // console.log(index , row)
       this.$router.push({name: 'VlogPageDetailDisplay' , query:{vlogId: row.id}});
     },
     currentChange(currentIndex){
-      this.getUserSpaceVlogOrderCreateTime(currentIndex)
+      this.justToStatusByState(currentIndex)
+      // this.getUserSpaceVlogOrderCreateTime(currentIndex)
     },
     // justToDiaryDetail(row) {
     //   // console.log(row.id);
     //   this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
     // },
     getUserSpaceVlogOrderCreateTime(currentIndex) {
+
       axios.get('/getUserSpaceVlogOrderCreateTime?currentIndex=' + currentIndex).then(response => {
         this.tableData = response.data.records
         this.pageCount = response.data.pages
+        // console.log(this.tableData[0].authorId)
+      })
+    },
+    getUserSpaceVlogStateSuccessOrderCreateTime(currentIndex) {
+      axios.get('/getUserSpaceVlogStateSuccessOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+        this.tableData = []
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        // console.log(response.data.records)
+      })
+      // this.tableData = []
+    },
+    getUserSpaceVlogStateWaitOrderCreateTime(currentIndex) {
+      axios.get('/getUserSpaceVlogStateWaitOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+
+        // console.log(this.tableData[0].authorId)
+      })
+    },
+    getUserSpaceVlogStateFailOrderCreateTime(currentIndex) {
+      axios.get('/getUserSpaceVlogStateFailOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        // eslint-disable-next-line no-debugger
+        // debugger
         // console.log(this.tableData[0].authorId)
       })
     },
@@ -91,11 +152,13 @@ export default {
         this.pageCount = response.data.pages
         this.currentPage = 1
         ElMessage.success('删除成功')
+        this.justToStatusByState(1)
       })
       // axios.put()
     }
   },
   mounted() {
+    // console.log("debugger")
     this.getUserSpaceVlogOrderCreateTime(this.currentPage);
   }
 }
@@ -103,6 +166,42 @@ export default {
 <style scoped>
 .el-scrollbar{
   height: 500px;
+}
+.el-row {
+  margin-bottom: 20px;
+
+  /*display: flex;*/
+
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.grid-content {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.tableContent {
+  margin-top: 10px;
 }
 .paging {
   margin-top: 10px;

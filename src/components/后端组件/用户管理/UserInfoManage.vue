@@ -31,7 +31,7 @@
             <div class="userInfoSearchInputButton">
               <el-button type="primary" @click="dialogAddUserVisible = true">添加用户</el-button>
             </div>
-            <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="30%">
+            <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="40%">
               <el-form :model="userAddForm">
                 <el-form-item label="昵称" :label-width="formLabelWidth">
                   <el-input v-model="userAddForm.userName" autocomplete="off"></el-input>
@@ -76,22 +76,13 @@
           <el-table-column property="updateTime" label="修改时间" width="200"/>
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
-              <el-button size="default" @click="handleUpdate(scope.row)"
-              >修改
-              </el-button
-              >
-              <el-button
-                  size="default"
-                  type="danger"
-                  @click="handleDelete(scope.row)"
-              >删除
-              </el-button
-              >
+              <el-button size="default" @click="handleUpdate(scope.row)">修改</el-button>
+              <el-button size="default" type="danger" @click="handleDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
         <div>
-          <el-dialog v-model="dialogTableSeeInfoVisible" title="Shipping address">
+          <el-dialog v-model="dialogTableSeeInfoVisible" title="用户信息">
             <el-descriptions title="User Info">
               <el-descriptions-item label="姓名">{{ userInfo.userName }}</el-descriptions-item>
               <el-descriptions-item label="性别">{{ userInfo.sex }}</el-descriptions-item>
@@ -104,7 +95,7 @@
             </el-descriptions>
           </el-dialog>
 
-          <el-dialog v-model="dialogFormModifyInfoVisible" title="Shipping address">
+          <el-dialog v-model="dialogFormModifyInfoVisible" title="修改用户信息">
             <el-form :rules="rules" :model="userInfo" label-width="100px" class="demo-ruleForm">
 
 
@@ -174,6 +165,8 @@
             </el-form>
             <template #footer>
           <span class="dialog-footer">
+            <el-button size="default" @click="setManagerByUserId" v-if="adminPermission > 1">设为管理员</el-button>
+            <el-button size="default" @click="setSuperManagerByUserId" v-if="adminPermission > 1">设为超级管理员</el-button>
             <el-button @click="dialogFormModifyInfoVisible = false">Cancel</el-button>
             <el-button type="primary" @click="updateUserInfo"
             >Confirm</el-button
@@ -198,9 +191,7 @@
   </div>
 </template>
 <script>
-// import {reactive} from "vue";
 
-// import AdminPageMainTopDisplay from "@/components/后端组件/主页面顶部/AdminPageMainTopDisplay";
 import axios from "axios";
 import {ElMessage} from "element-plus";
 import {CodeToText, regionData} from "element-china-area-data";
@@ -244,6 +235,7 @@ export default {
       }, 100)
     };
     return {
+      adminPermission: 0,
       diaryDialogVisible: false,
       tableData: [],
       pageCount: 0,
@@ -333,6 +325,35 @@ export default {
     }
   },
   methods: {
+    setManagerByUserId() {
+      axios.post('/setManagerByUserId', {
+        userId: this.userInfo.id
+      }).then(response => {
+        this.dialogFormModifyInfoVisible = false;
+        this.tableData = response.data.records;
+        this.pageCount = response.data.pages
+        // this.getUserPermissionByUserId()
+        this.$router.go(0)
+      })
+    },
+    setSuperManagerByUserId() {
+      axios.post('/setSuperManagerByUserId', {
+        userId: this.userInfo.id
+      }).then(response => {
+        this.dialogFormModifyInfoVisible = false;
+        this.tableData = response.data.records;
+        this.pageCount = response.data.pages
+        // this.getUserPermissionByUserId()
+        this.$router.go(0)
+      })
+    },
+    getUserPermissionByUserId() {
+      // let token = localStorage.getItem("eleToken");
+      axios.post("/getUserPermissionByUserId").then(response => {
+        this.adminPermission = response.data.userPermission;
+        console.log(this.adminPermission)
+      })
+    },
     // 获取用户信息
     adminGetUserById(row) {
       axios.get('/adminGetUserById?userId=' + row.id).then(response => {
@@ -391,6 +412,7 @@ export default {
 
   mounted() {
     this.adminGetAllUserByPageAndCreateTime(1)
+    this.getUserPermissionByUserId();
   }
 }
 </script>

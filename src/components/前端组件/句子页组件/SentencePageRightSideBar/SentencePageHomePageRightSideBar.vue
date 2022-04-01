@@ -2,7 +2,7 @@
   <div class="sentenceType">
     <div class="sentenceTypeHeader">
       <i class="iconfont icon-fuzhushuxian"></i>句子分类
-      <el-tag>更多 >></el-tag>
+      <router-link :to="{name: 'SentencePageTagDisplay'}"><el-tag>更多 >></el-tag></router-link>
     </div>
     <div class="guessLike">
       猜你喜欢

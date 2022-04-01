@@ -20,39 +20,17 @@
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-
+          <div class="diaryState">
+            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '待审批'}}"><el-button>待审批</el-button></router-link>
+            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批通过'}}"><el-button>审批通过</el-button></router-link>
+              <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批不通过'}}"><el-button>审批不通过</el-button></router-link>
+          </div>
           <div class="userInfoSearchInput">
             <el-input></el-input>
             <div class="userInfoSearchInputButton">
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-<!--          <div class="addUser">-->
-<!--            <div class="userInfoSearchInputButton">-->
-<!--              <el-button type="primary" @click="dialogAddUserVisible = true">添加用户</el-button>-->
-<!--            </div>-->
-<!--            <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="30%">-->
-<!--              <el-form :model="userAddForm">-->
-<!--                <el-form-item label="昵称" :label-width="formLabelWidth">-->
-<!--                  <el-input v-model="userAddForm.userName" autocomplete="off"></el-input>-->
-<!--                </el-form-item>-->
-<!--                <el-form-item label="邮箱" :label-width="formLabelWidth">-->
-<!--                  <el-input v-model="userAddForm.userEmail" autocomplete="off"></el-input>-->
-<!--                </el-form-item>-->
-<!--                <el-form-item label="密码" :label-width="formLabelWidth">-->
-<!--                  <el-input v-model="userAddForm.userPassword" show-password type="password" autocomplete="off"></el-input>-->
-<!--                </el-form-item>-->
-<!--              </el-form>-->
-<!--              <template #footer>-->
-<!--      <span class="dialog-footer">-->
-<!--        <el-button @click="dialogAddUserVisible = false">Cancel</el-button>-->
-<!--        <el-button type="primary" @click="dialogAddUserVisible = false"-->
-<!--        >Confirm</el-button-->
-<!--        >-->
-<!--      </span>-->
-<!--              </template>-->
-<!--            </el-dialog>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -63,6 +41,7 @@
             :data="tableData"
             highlight-current-row
             style="width: 100%"
+            @row-dblclick="handleWatch"
         >
           <el-table-column type="index" width="50" />
           <el-table-column property="title" label="日记名称" width="180" />
@@ -70,12 +49,11 @@
           <el-table-column property="mood" label="心情" width="120" />
           <el-table-column property="weather" label="天气" width="120" />
           <el-table-column property="see" label="是否公开" width="150" />
+          <el-table-column property="state" label="审批状态" width="120" />
           <el-table-column property="createTime" label="发布时间" width="200" />
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
-              <el-button size="default" @click="handleWatch(scope.row)"
-              >查看</el-button
-              >
+              <el-button size="default" @click="handleWatch(scope.row)">查看</el-button>
               <el-button
                   size="default"
                   type="danger"
@@ -92,13 +70,30 @@
               :before-close="handleCloseDiaryDialog"
           >
             <div v-html="diaryDialogInfo.content"></div>
+
             <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="diaryDialogClose">关闭</el-button>
-        <!--        <el-button type="primary" @click="diaryDialogVisible = false"-->
-        <!--        >Confirm</el-button-->
-        <!--        >-->
-      </span>
+              <span class="dialog-footer">
+                <el-button @click="adminDiaryApproveSuccess">审批通过</el-button>
+                <el-button @click="adminDiaryApproveFail">审批不通过</el-button>
+                <el-button @click="diaryDialogClose">关闭</el-button>
+              </span>
+            </template>
+          </el-dialog>
+        </div>
+        <div>
+          <el-dialog
+              v-model="diaryDialogApproveFailReason"
+              title="审批失败原因"
+              :before-close="handleCloseDiaryDialog"
+          >
+            <el-input v-model="diaryApproveFailReason" placeholder="请输入审批失败原因"></el-input>
+
+            <template #footer>
+              <span class="dialog-footer">
+                <el-button @click="adminDiaryApproveFailReasonSubmit">提交</el-button>
+<!--                <el-button @click="adminDiaryApproveFail">滚</el-button>-->
+                <el-button @click="adminDiaryApproveFailReasonClose">关闭</el-button>
+              </span>
             </template>
           </el-dialog>
         </div>
@@ -129,6 +124,8 @@ export default {
   components: {},
   data() {
     return {
+      diaryApproveFailReason: '',
+      diaryDialogApproveFailReason: false,
       diaryDialogVisible: false,
       tableData: [],
       pageCount: 0,
@@ -159,12 +156,40 @@ export default {
     }
   },
   methods: {
+    adminDiaryApproveFailReasonClose() {
+      this.diaryDialogApproveFailReason = false
+    },
+    adminDiaryApproveFailReasonSubmit() {
+      axios.put('/adminDiaryApproveFail', {
+        diaryId: this.diaryDialogInfo.id,
+        errorReason: this.diaryApproveFailReason
+      }).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        this.diaryDialogVisible = false
+        this.diaryDialogApproveFailReason = false
+      })
+      this.diaryDialogApproveFailReason = ""
+    },
+    adminDiaryApproveSuccess() {
+      axios.put('/adminDiaryApproveSuccess', {
+        diaryId: this.diaryDialogInfo.id
+      }).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        this.diaryDialogVisible = false
+      })
+      this.diaryDialogInfo = {}
+    },
+    adminDiaryApproveFail() {
+      this.diaryDialogApproveFailReason = true
+    },
     handleWatch(row) {
+      // console.log(row)
       axios.get('/adminGetDiaryById?diaryId=' + row.id).then( response=> {
         this.diaryDialogInfo = response.data
       })
       this.diaryDialogVisible = true
-
     },
     diaryDialogClose() {
       this.diaryDialogInfo = {}
@@ -210,7 +235,9 @@ export default {
   display: flex;
   margin-top: 20px;
 }
-
+.diaryState .el-button {
+  margin-left: 30px;
+}
 .userInfoSearchTimeSelect {
   display: flex;
   /*margin-left: 100px;*/
@@ -222,7 +249,7 @@ export default {
 
 .userInfoSearchInput {
   display: flex;
-  margin-left: 180px;
+  margin-left: 80px;
 }
 ::v-deep(.el-input__inner) {
   width: 270px;

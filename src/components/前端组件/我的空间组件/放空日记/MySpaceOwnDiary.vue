@@ -85,7 +85,6 @@ export default {
     },
     /*通过选择的状态跳转*/
     justToStatusByState(currentIndex) {
-
       if (this.state === '所有日记') {
         this.getUserSpaceDiaryOrderCreateTime(currentIndex)
       }else if (this.state === '审批通过的日记') {
@@ -100,12 +99,9 @@ export default {
     },
 
     handleView(index , row) {
-      // console.log(index , row)
       this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
     },
     currentChange(currentIndex){
-      // console.log(currentIndex)
-      // this.getUserSpaceDiaryOrderCreateTime(currentIndex)
       this.justToStatusByState(currentIndex)
     },
     // justToDiaryDetail(row) {
@@ -113,10 +109,10 @@ export default {
     //   this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
     // },
     getUserSpaceDiaryOrderCreateTime(currentIndex) {
-      axios.get('/getUserSpaceDiaryOrderCreateTime?currentIndex=' + currentIndex).then(response => {
+      axios.get('/getUserSpaceDiaryOrderCreateTime?currentIndex=' + currentIndex)
+          .then(response => {
         this.tableData = response.data.records
         this.pageCount = response.data.pages
-        // console.log(this.tableData[0].authorId)
       })
     },
     getUserSpaceDiaryStateSuccessOrderCreateTime(currentIndex) {

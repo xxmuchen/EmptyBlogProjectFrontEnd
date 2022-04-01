@@ -36,6 +36,7 @@
             default-expand-all
             :expand-on-click-node="false"
             :props="defaultProps"
+
         >
           <template class="custom-tree-node" #default="{ node , data }">
             <div class="observeDisplayWhole">
@@ -170,6 +171,7 @@ export default {
       axios.get('/queryObserveByObjId?objType=' + objType + '&objId=' + obj_id).then(response => {
         // console.log(response)
         this.dataSource = response.data
+        console.log(this.dataSource)
       })
     },
 

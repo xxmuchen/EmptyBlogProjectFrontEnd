@@ -71,6 +71,7 @@ import BlogStarInfoVisualizationDisplay
     from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记点赞收藏可视化/BlogStarInfoVisualizationDisplay";
 import BlogCollectInfoVisualizationDisplay
     from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记点赞收藏可视化/BlogCollectInfoVisualizationDisplay";
+import SentencePageTagDisplay from "@/components/前端组件/句子页组件/SentencePageRightSideBar/SentencePageTagDisplay";
 
 // 2. 定义路由配置
 const routes = [
@@ -154,9 +155,9 @@ const routes = [
         component: SentencePage,
         redirect: '/SentencePage/SentencePageHomeDisplay',
         children: [
-            {name:'SentencePageHomeDisplay' , path: 'SentencePageHomeDisplay', component: SentencePageHomeDisplay},
-            {name:'SentencePageDetailDisplay' , path: 'SentencePageDetailDisplay', component: SentencePageDetailDisplay}
-
+            { name:'SentencePageHomeDisplay' , path: 'SentencePageHomeDisplay', component: SentencePageHomeDisplay },
+            { name:'SentencePageDetailDisplay' , path: 'SentencePageDetailDisplay', component: SentencePageDetailDisplay },
+            { name:'SentencePageTagDisplay' , path: 'SentencePageTagDisplay', component: SentencePageTagDisplay }
         ]
     },
     {

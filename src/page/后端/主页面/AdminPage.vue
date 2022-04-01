@@ -12,9 +12,10 @@
 <script>
 import AdminPageHeadDisplay from "@/components/后端组件/后端头部/AdminPageHeadDisplay";
 import AdminPageAsideDisplay from "@/components/后端组件/后端侧边栏/AdminPageAsideDisplay";
+
 export default {
   name: 'AdminPage',
-  components: {AdminPageAsideDisplay, AdminPageHeadDisplay},
+  components: {AdminPageAsideDisplay, AdminPageHeadDisplay}
 }
 </script>
 <style scoped>

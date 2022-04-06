@@ -63,16 +63,18 @@
             :data="tableData"
             highlight-current-row
             style="width: 100%"
+            @row-dblclick="handleWatch"
         >
           <el-table-column type="index" width="50" />
-          <el-table-column label="句子内容" width="420">
+          <el-table-column label="句子内容" width="300">
             <template #default="scope">
-              <div v-html="scope.row.content"></div>
+              <div v-html="scope.row.content" style="width: 270px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;"></div>
             </template>
           </el-table-column>
           <el-table-column property="authorName" label="作者" width="120" />
           <el-table-column property="originalAuthor" label="原作者" width="120" />
           <el-table-column property="see" label="是否公开" width="120" />
+          <el-table-column property="state" label="审批状态" width="120" />
           <el-table-column property="createTime" label="发布时间" width="200" />
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
@@ -97,12 +99,28 @@
             <div v-html="sentenceDialogInfo.content"></div>
             <div class="originalAuthorBox" v-show="sentenceDialogInfo.originalAuthor !== ''">原作者: {{ sentenceDialogInfo.originalAuthor }}</div>
             <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="diaryDialogClose">关闭</el-button>
-        <!--        <el-button type="primary" @click="sentenceDialogVisible = false"-->
-        <!--        >Confirm</el-button-->
-        <!--        >-->
-      </span>
+               <span class="dialog-footer">
+                 <el-button @click="adminSentenceApproveWait">待审批</el-button>
+                <el-button @click="adminSentenceApproveSuccess">审批通过</el-button>
+                <el-button @click="adminSentenceApproveFail">审批不通过</el-button>
+                 <el-button @click="diaryDialogClose">关闭</el-button>
+              </span>
+            </template>
+          </el-dialog>
+        </div>
+        <div>
+          <el-dialog
+              v-model="sentenceStateFailReasonDialogVisible"
+              title="审批不通过"
+              :before-close="function () { sentenceStateFailReasonDialogVisible = false }"
+          >
+            <el-input v-model="sentenceApproveFailReason" placeholder="请输入审批失败原因"></el-input>
+
+            <template #footer>
+               <span class="dialog-footer">
+                <el-button @click="adminSentenceApproveFailReasonSubmit">提交</el-button>
+                 <el-button @click="function(){ sentenceStateFailReasonDialogVisible = false }">关闭</el-button>
+              </span>
             </template>
           </el-dialog>
         </div>
@@ -133,6 +151,8 @@ export default {
   components: {},
   data() {
     return {
+      sentenceApproveFailReason: '',
+      sentenceStateFailReasonDialogVisible: false,
       sentenceDialogVisible: false,
       tableData: [],
       pageCount: 0,
@@ -163,12 +183,46 @@ export default {
     }
   },
   methods: {
+    adminSentenceApproveWait() {
+        axios.put('/adminSentenceApproveWait' , {
+          sentenceId: this.sentenceDialogInfo.id
+        }).then(response => {
+          this.sentenceDialogVisible = false;
+          this.tableData = response.data.records;
+          this.pageCount = response.data.pages
+          this.sentenceDialogInfo = {}
+        })
+    },
+    adminSentenceApproveSuccess() {
+      axios.put('/adminSentenceApproveSuccess' , {
+        sentenceId: this.sentenceDialogInfo.id
+      }).then(response => {
+        this.sentenceDialogVisible = false;
+        this.tableData = response.data.records;
+        this.pageCount = response.data.pages
+        this.sentenceDialogInfo = {}
+      })
+    },
+    adminSentenceApproveFail() {
+        this.sentenceStateFailReasonDialogVisible = true;
+    },
+    adminSentenceApproveFailReasonSubmit() {
+      axios.put('/adminSentenceApproveFail', {
+        sentenceId: this.sentenceDialogInfo.id,
+        errorReason: this.sentenceApproveFailReason
+      }).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        this.sentenceStateFailReasonDialogVisible = false
+        this.sentenceDialogVisible = false
+      })
+      this.sentenceApproveFailReason = ""
+    },
     handleWatch(row) {
       axios.get('/adminGetSentenceById?sentenceId=' + row.id).then( response=> {
         this.sentenceDialogInfo = response.data
       })
       this.sentenceDialogVisible = true
-
     },
     diaryDialogClose() {
       this.sentenceDialogInfo = {}
@@ -185,10 +239,11 @@ export default {
     handleCloseDiaryDialog() {
       this.sentenceDialogInfo = {}
       this.sentenceDialogVisible = false
+      this.sentenceStateFailReasonDialogVisible = false
     },
     adminGetAllSentenceByPageAndCreateTime(currentPage) {
       axios.get('/adminGetAllSentenceByPageAndCreateTime?currentPage=' + currentPage).then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.tableData = response.data.records;
         this.pageCount = response.data.pages
 

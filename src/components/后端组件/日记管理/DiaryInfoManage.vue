@@ -20,11 +20,11 @@
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-          <div class="diaryState">
-            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '待审批'}}"><el-button>待审批</el-button></router-link>
-            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批通过'}}"><el-button>审批通过</el-button></router-link>
-              <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批不通过'}}"><el-button>审批不通过</el-button></router-link>
-          </div>
+          <!--          <div class="diaryState">-->
+          <!--            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '待审批'}}"><el-button>待审批</el-button></router-link>-->
+          <!--            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批通过'}}"><el-button>审批通过</el-button></router-link>-->
+          <!--              <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批不通过'}}"><el-button>审批不通过</el-button></router-link>-->
+          <!--          </div>-->
           <div class="userInfoSearchInput">
             <el-input></el-input>
             <div class="userInfoSearchInputButton">
@@ -43,14 +43,14 @@
             style="width: 100%"
             @row-dblclick="handleWatch"
         >
-          <el-table-column type="index" width="50" />
-          <el-table-column property="title" label="日记名称" width="180" />
-          <el-table-column property="authorName" label="作者" width="180" />
-          <el-table-column property="mood" label="心情" width="120" />
-          <el-table-column property="weather" label="天气" width="120" />
-          <el-table-column property="see" label="是否公开" width="150" />
-          <el-table-column property="state" label="审批状态" width="120" />
-          <el-table-column property="createTime" label="发布时间" width="200" />
+          <el-table-column type="index" width="50"/>
+          <el-table-column property="title" label="日记名称" width="180"/>
+          <el-table-column property="authorName" label="作者" width="180"/>
+          <el-table-column property="mood" label="心情" width="120"/>
+          <el-table-column property="weather" label="天气" width="120"/>
+          <el-table-column property="see" label="是否公开" width="150"/>
+          <el-table-column property="state" label="审批状态" width="120"/>
+          <el-table-column property="createTime" label="发布时间" width="200"/>
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
               <el-button size="default" @click="handleWatch(scope.row)">查看</el-button>
@@ -58,7 +58,8 @@
                   size="default"
                   type="danger"
                   @click="handleDelete(scope.row)"
-              >删除</el-button
+              >删除
+              </el-button
               >
             </template>
           </el-table-column>
@@ -73,6 +74,7 @@
 
             <template #footer>
               <span class="dialog-footer">
+                <el-button @click="adminDiaryApproveWait">待审批</el-button>
                 <el-button @click="adminDiaryApproveSuccess">审批通过</el-button>
                 <el-button @click="adminDiaryApproveFail">审批不通过</el-button>
                 <el-button @click="diaryDialogClose">关闭</el-button>
@@ -84,15 +86,15 @@
           <el-dialog
               v-model="diaryDialogApproveFailReason"
               title="审批失败原因"
-              :before-close="handleCloseDiaryDialog"
+              :before-close="function (){ diaryDialogApproveFailReason = false }"
           >
             <el-input v-model="diaryApproveFailReason" placeholder="请输入审批失败原因"></el-input>
 
             <template #footer>
               <span class="dialog-footer">
                 <el-button @click="adminDiaryApproveFailReasonSubmit">提交</el-button>
-<!--                <el-button @click="adminDiaryApproveFail">滚</el-button>-->
-                <el-button @click="adminDiaryApproveFailReasonClose">关闭</el-button>
+                <!--                <el-button @click="adminDiaryApproveFail">滚</el-button>-->
+                <el-button @click="function(){ diaryDialogApproveFailReason = false }">关闭</el-button>
               </span>
             </template>
           </el-dialog>
@@ -145,20 +147,25 @@ export default {
           value: [new Date().getTime() - 3600 * 1000 * 24 * 90, new Date()]
         }
       ],
-      // dialogAddUserVisible: false,
-      // userAddForm: {
-      //   userName: '',
-      //   userEmail: '',
-      //   userPassword: ''
-      // },
       currentPage: 1,
       diaryDialogInfo: {}
     }
   },
   methods: {
-    adminDiaryApproveFailReasonClose() {
-      this.diaryDialogApproveFailReason = false
+    adminDiaryApproveWait() {
+      axios.put('/adminDiaryApproveWait', {
+        diaryId: this.diaryDialogInfo.id
+      }).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+        this.diaryDialogVisible = false
+      })
     },
+    /*打开日记审批失败弹出框*/
+    // adminDiaryApproveFailReasonClose() {
+    //
+    // },
+    /*提交日记审批失败原因*/
     adminDiaryApproveFailReasonSubmit() {
       axios.put('/adminDiaryApproveFail', {
         diaryId: this.diaryDialogInfo.id,
@@ -171,6 +178,7 @@ export default {
       })
       this.diaryDialogApproveFailReason = ""
     },
+    /*提交日记审批成功*/
     adminDiaryApproveSuccess() {
       axios.put('/adminDiaryApproveSuccess', {
         diaryId: this.diaryDialogInfo.id
@@ -186,7 +194,7 @@ export default {
     },
     handleWatch(row) {
       // console.log(row)
-      axios.get('/adminGetDiaryById?diaryId=' + row.id).then( response=> {
+      axios.get('/adminGetDiaryById?diaryId=' + row.id).then(response => {
         this.diaryDialogInfo = response.data
       })
       this.diaryDialogVisible = true
@@ -206,13 +214,13 @@ export default {
     handleCloseDiaryDialog() {
       this.diaryDialogInfo = {}
       this.diaryDialogVisible = false
+      // this.diaryDialogApproveFailReason = false
     },
     adminGetAllDiaryByPageAndCreateTime(currentPage) {
       axios.get('/adminGetAllDiaryByPageAndCreateTime?currentPage=' + currentPage).then(response => {
         console.log(response.data)
-        this.tableData = response.data.records;
+        this.tableData = response.data.records
         this.pageCount = response.data.pages
-
       })
     }
   },
@@ -227,6 +235,7 @@ export default {
   /*margin-top: 10px;*/
   /*margin-bottom: 10px;*/
 }
+
 .userInfoManageFont {
   /*margin-left: 30px;*/
 }
@@ -235,9 +244,11 @@ export default {
   display: flex;
   margin-top: 20px;
 }
+
 .diaryState .el-button {
   margin-left: 30px;
 }
+
 .userInfoSearchTimeSelect {
   display: flex;
   /*margin-left: 100px;*/
@@ -249,8 +260,9 @@ export default {
 
 .userInfoSearchInput {
   display: flex;
-  margin-left: 80px;
+  margin-left: 560px;
 }
+
 ::v-deep(.el-input__inner) {
   width: 270px;
 }
@@ -267,9 +279,11 @@ export default {
 .el-form {
   width: 500px;
 }
+
 .mainTable {
   margin-top: 20px;
 }
+
 .pagination {
   width: 100%;
   display: flex;

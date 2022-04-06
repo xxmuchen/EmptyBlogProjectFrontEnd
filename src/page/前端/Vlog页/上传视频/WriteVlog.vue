@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-header>
-       <TopLogo></TopLogo>
+        <TopLogo></TopLogo>
         <div class="type">
           <div>
             放空Vlog
@@ -26,44 +26,48 @@
               :show-file-list="false"
               :on-success="handleVlogSuccess"
           >
-            <el-icon v-show="!options.src" class="vlog-uploader-icon"><plus /></el-icon>
-<!--            <template>-->
+            <el-icon v-show="!options.src" class="vlog-uploader-icon">
+              <plus/>
+            </el-icon>
+            <!--            <template>-->
 
-<!--            </template>-->
+            <!--            </template>-->
           </el-upload>
-          <div class="rightContent"  v-show="options.src">
-            <el-form-item label="标题">
-              <el-input
+          <div class="rightContent" v-show="options.src">
+            <el-form>
+              <el-form-item label="标题">
+                <el-input
 
-                  v-model="ruleForm.title"
-                  :rows="8"
-                  placeholder="Please input"
-              />
-            </el-form-item>
-            <el-form-item label="描述">
-              <el-input
+                    v-model="ruleForm.title"
+                    :rows="8"
+                    placeholder="Please input"
+                />
+              </el-form-item>
+              <el-form-item label="描述">
+                <el-input
 
-                  v-model="ruleForm.description"
-                  :rows="8"
-                  type="textarea"
-                  placeholder="Please input"
-              />
-            </el-form-item>
+                    v-model="ruleForm.description"
+                    :rows="8"
+                    type="textarea"
+                    placeholder="Please input"
+                />
+              </el-form-item>
 
-            <div class="buttons" >
-              <el-button type="primary" @click="toSelectFile">重新选择视频</el-button>
-              <div>
-                <span style="margin-right: 5px">公开</span>
-                <el-switch
-                    v-model="ruleForm.see"
-                    class="ml-2"
-                    inline-prompt
-                    active-color="#13ce66"
-                    inactive-color="#ff4949"
-                ></el-switch>
+              <div class="buttons">
+                <el-button type="primary" @click="toSelectFile">重新选择视频</el-button>
+                <div>
+                  <span style="margin-right: 5px">公开</span>
+                  <el-switch
+                      v-model="ruleForm.see"
+                      class="ml-2"
+                      inline-prompt
+                      active-color="#13ce66"
+                      inactive-color="#ff4949"
+                  ></el-switch>
+                </div>
+                <el-button type="success" @click="vlogSubmit">提交</el-button>
               </div>
-              <el-button  type="success" @click="vlogSubmit">提交</el-button>
-            </div>
+            </el-form>
           </div>
 
 
@@ -103,7 +107,7 @@ export default {
         ligthOff: false,  //关灯模式
         volume: 0.3, //默认音量大小
         control: true, //是否显示控制
-        controlBtns:['audioTrack', 'quality', 'speedRate', 'volume', 'setting', 'pip', 'pageFullScreen', 'fullScreen'] //显示所有按钮,
+        controlBtns: ['audioTrack', 'quality', 'speedRate', 'volume', 'setting', 'pip', 'pageFullScreen', 'fullScreen'] //显示所有按钮,
       }),
       ruleForm: {
         title: '',
@@ -134,7 +138,7 @@ export default {
         title: this.ruleForm.title,
         videoUrl: this.ruleForm.videoUrl,
         description: this.ruleForm.description,
-        see:this.ruleForm.see
+        see: this.ruleForm.see
       }).then(response => {
         ElMessage.success("上传成功", response)
       })
@@ -155,6 +159,7 @@ export default {
   /*margin: 0;*/
   /*height: auto;*/
 }
+
 .common-layout .el-footer {
   /*line-height: 60px;*/
 }
@@ -188,20 +193,24 @@ export default {
 .common-layout .el-container:nth-child(7) .el-aside {
   /*line-height: 320px;*/
 }
+
 .el-header {
   /*height: 70px;*/
   display: flex;
   align-items: center;
 }
+
 .el-footer {
   height: auto;
 }
+
 .topSection {
   height: 60px;
   display: flex;
   align-items: center;
   /*height: 20%;*/
 }
+
 .type {
   width: 75%;
   display: flex;
@@ -223,6 +232,7 @@ export default {
   left: 700px;
   top: 240px;
 }
+
 .vlog-uploader ::v-deep(.el-upload) {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -230,9 +240,11 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .vlog-uploader .el-upload:hover {
   border-color: #409eff;
 }
+
 .el-icon.vlog-uploader-icon {
   font-size: 28px;
   color: #8c939d;
@@ -240,6 +252,7 @@ export default {
   height: 178px;
   text-align: center;
 }
+
 .vlog {
   width: 178px;
   height: 178px;
@@ -255,13 +268,16 @@ export default {
   /*align-content: center;*/
   /*justify-items: center;*/
 }
+
 .rightContent {
   width: 40%;
   padding-left: 20px;
 }
+
 .el-button {
   /*margin-left: 20px;*/
 }
+
 .buttons {
   width: 100%;
   display: flex;
@@ -272,6 +288,7 @@ export default {
   /*padding: 30px;*/
   margin-top: 20px;
 }
+
 .el-button {
   margin-left: 20px;
   margin-right: 20px;

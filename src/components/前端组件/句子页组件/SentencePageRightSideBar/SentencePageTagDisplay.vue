@@ -2,7 +2,14 @@
   <div class="sentencePageTagContain">
     <div class="sentencePageTag">
       <el-row :gutter="20" v-for="(items , index) in sentenceTagList" :key="index">
-        <el-col :span="6" v-for="item in items" :key="item.id" ><div class="grid-content bg-purple" v-text="item.tagName"></div></el-col>
+
+          <el-col :span="6" v-for="item in items" :key="item.id" >
+            <router-link :to="{name: 'SentencePageHomeDisplay' , query: {tag: item.tagName}}">
+              <div class="grid-content bg-purple" v-text="item.tagName">
+              </div>
+            </router-link>
+          </el-col>
+
       </el-row>
     </div>
   </div>

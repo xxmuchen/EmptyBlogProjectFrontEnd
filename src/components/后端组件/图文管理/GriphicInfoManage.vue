@@ -7,6 +7,8 @@
           <!--          <img class="img" :src="item.src" @click="preview(item.src, $event)" />-->
           <img class="img" :src="item.imageUrl"/>
           <p>{{ item.description }}</p>
+          <p>审批状态：{{ item.state }}</p>
+          <p v-if="item.errorReason !== null">审批不通过原因：{{ item.errorReason }}</p>
           <div class="userOperation">
             <el-button size="default" @click="handleView(item.id)"
             >查看</el-button>
@@ -25,15 +27,33 @@
           v-model="griphicDialogVisible"
           :title="griphicDialogInfo.title"
           :before-close="handleCloseGriphicDialog"
+          width="500px"
       >
-        <el-image :src="griphicDialogInfo.imageUrl"></el-image>
-        <div class="descriptionBox">{{ griphicDialogInfo.description }}</div>
+        <center><el-image :src="griphicDialogInfo.imageUrl"></el-image>
+        <div class="descriptionBox">{{ griphicDialogInfo.description }}</div></center>
         <template #footer>
               <span class="dialog-footer">
+                <el-button @click="adminGriphicApproveWait">待审批</el-button>
+                <el-button @click="adminGriphicApproveSuccess">审批通过</el-button>
+                <el-button @click="adminGriphicApproveFail">审批不通过</el-button>
                 <el-button @click="griphicDialogClose">关闭</el-button>
-                <!--        <el-button type="primary" @click="griphicDialogVisible = false"-->
-                <!--        >Confirm</el-button-->
-                <!--        >-->
+              </span>
+        </template>
+      </el-dialog>
+    </div>
+    <div>
+      <el-dialog
+          v-model="griphicDialogApproveFailReason"
+          title="审批失败原因"
+          :before-close="function (){ griphicDialogApproveFailReason = false }"
+      >
+        <el-input v-model="griphicApproveFailReason" placeholder="请输入审批失败原因"></el-input>
+
+        <template #footer>
+              <span class="dialog-footer">
+                <el-button @click="adminDiaryApproveFailReasonSubmit">提交</el-button>
+                <!--                <el-button @click="adminDiaryApproveFail">滚</el-button>-->
+                <el-button @click="function(){ griphicDialogApproveFailReason = false }">关闭</el-button>
               </span>
         </template>
       </el-dialog>
@@ -52,6 +72,8 @@ export default{
   },
   data() {
     return {
+      griphicApproveFailReason: '',
+      griphicDialogApproveFailReason: false,
       griphicDialogVisible: false,
       griphicDialogInfo: {},
       payload: {
@@ -69,6 +91,44 @@ export default{
     },
   },
   methods: {
+    adminGriphicApproveWait() {
+      axios.put('/adminGriphicApproveWait', {
+        griphicId: this.griphicDialogInfo.id
+      }).then(response => {
+
+        this.imageData = response.data;
+        this.griphicDialogVisible = false
+      })
+      this.$router.go(0)
+    },
+    adminGriphicApproveSuccess() {
+      axios.put('/adminGriphicApproveSuccess', {
+        griphicId: this.griphicDialogInfo.id
+      }).then(response => {
+        this.imageData = response.data;
+        this.griphicDialogVisible = false
+      })
+      this.$router.go(0)
+    },
+    adminGriphicApproveFail() {
+      this.griphicDialogApproveFailReason = true
+    },
+    adminDiaryApproveFailReasonSubmit() {
+      axios.put('/adminGriphicApproveFail', {
+        griphicId: this.griphicDialogInfo.id,
+        errorReason: this.griphicApproveFailReason
+      }).then(response => {
+        this.imageData = response.data;
+        // this.tableData = response.data.records
+        // this.pageCount = response.data.pages
+
+        this.griphicDialogApproveFailReason = false
+        this.griphicDialogVisible = false
+      })
+      this.griphicApproveFailReason = ""
+      this.$router.go(0)
+    },
+
     adminGetAllGriphicByPageAndCreateTime() {
       axios.get('/adminGetAllGriphicByPageAndCreateTime').then(response => {
         this.imageData = response.data;

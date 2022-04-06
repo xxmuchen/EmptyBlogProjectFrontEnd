@@ -121,6 +121,12 @@ export default {
       }else {
         this.getAllSentence();
       }
+    },
+    /*通过标签获取句子*/
+    getSentenceByTag(sentenceTag) {
+      axios.get('/getSentenceByTag?sentenceTag=' + sentenceTag).then(response => {
+        this.sentenceData = response.data
+      })
     }
   },
   mounted() {
@@ -129,6 +135,9 @@ export default {
   watch: {
     '$route.query.type'(val) {
       this.distinguishSentenceType(val)
+    },
+    '$route.query.tag'(val) {
+      this.getSentenceByTag(val)
     }
   }
 }

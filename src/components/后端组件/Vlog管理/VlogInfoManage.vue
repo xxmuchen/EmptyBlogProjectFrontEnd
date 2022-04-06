@@ -13,7 +13,6 @@
                 start-placeholder="Start date"
                 end-placeholder="End date"
                 :shortcuts="shortcuts"
-                placeholder="请输入用户信息"
             >
             </el-date-picker>
             <div class="userInfoSearchTimeSelectButton">
@@ -27,32 +26,6 @@
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-          <!--          <div class="addUser">-->
-          <!--            <div class="userInfoSearchInputButton">-->
-          <!--              <el-button type="primary" @click="dialogAddUserVisible = true">添加用户</el-button>-->
-          <!--            </div>-->
-          <!--            <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="30%">-->
-          <!--              <el-form :model="userAddForm">-->
-          <!--                <el-form-item label="昵称" :label-width="formLabelWidth">-->
-          <!--                  <el-input v-model="userAddForm.userName" autocomplete="off"></el-input>-->
-          <!--                </el-form-item>-->
-          <!--                <el-form-item label="邮箱" :label-width="formLabelWidth">-->
-          <!--                  <el-input v-model="userAddForm.userEmail" autocomplete="off"></el-input>-->
-          <!--                </el-form-item>-->
-          <!--                <el-form-item label="密码" :label-width="formLabelWidth">-->
-          <!--                  <el-input v-model="userAddForm.userPassword" show-password type="password" autocomplete="off"></el-input>-->
-          <!--                </el-form-item>-->
-          <!--              </el-form>-->
-          <!--              <template #footer>-->
-          <!--      <span class="dialog-footer">-->
-          <!--        <el-button @click="dialogAddUserVisible = false">Cancel</el-button>-->
-          <!--        <el-button type="primary" @click="dialogAddUserVisible = false"-->
-          <!--        >Confirm</el-button-->
-          <!--        >-->
-          <!--      </span>-->
-          <!--              </template>-->
-          <!--            </el-dialog>-->
-          <!--          </div>-->
         </div>
       </div>
     </div>
@@ -63,12 +36,14 @@
             :data="tableData"
             highlight-current-row
             style="width: 100%"
+            @row-dblclick="handleWatch"
         >
           <el-table-column type="index" width="50"/>
           <el-table-column property="title" label="Vlog标题" width="200"/>
-          <el-table-column property="description" label="描述" width="350"/>
+          <el-table-column property="description" label="描述" width="200"/>
           <el-table-column property="authorName" label="作者" width="120"/>
           <el-table-column property="see" label="是否公开" width="120"/>
+          <el-table-column property="state" label="审批状态" width="120"/>
           <el-table-column property="createTime" label="发布时间" width="200"/>
           <el-table-column fixed="right" label="Operations">
             <template #default="scope">
@@ -98,10 +73,28 @@
             <!--            <div class="originalAuthorBox">原作者: {{ vlogDialogInfo.originalAuthor }}</div>-->
             <template #footer>
               <span class="dialog-footer">
+                <el-button @click="adminVlogApproveWait">待审批</el-button>
+                <el-button @click="adminVlogApproveSuccess">审批通过</el-button>
+                <el-button @click="adminVlogApproveFail">审批不通过</el-button>
                 <el-button @click="vlogDialogClose">关闭</el-button>
-                <!--        <el-button type="primary" @click="vlogDialogVisible = false"-->
-                <!--        >Confirm</el-button-->
-                <!--        >-->
+              </span>
+            </template>
+          </el-dialog>
+        </div>
+        <div>
+          <el-dialog
+              v-model="vlogDialogApproveFailReason"
+              title="审批失败原因"
+              :before-close="function (){ vlogDialogApproveFailReason = false }"
+          >
+            <el-form>
+              <el-input v-model="vlogApproveFailReason" placeholder="请输入审批失败原因"></el-input>
+            </el-form>
+            <template #footer>
+              <span class="dialog-footer">
+                <el-button @click="adminVlogApproveFailReasonSubmit">提交</el-button>
+                <!--                <el-button @click="adminDiaryApproveFail">滚</el-button>-->
+                <el-button @click="function(){ vlogDialogApproveFailReason = false }">关闭</el-button>
               </span>
             </template>
           </el-dialog>
@@ -134,6 +127,8 @@ export default {
   components: {},
   data() {
     return {
+      vlogDialogApproveFailReason:false,
+      vlogApproveFailReason:'',
       vlogDialogVisible: false,
       tableData: [],
       pageCount: 0,
@@ -184,6 +179,44 @@ export default {
     }
   },
   methods: {
+    adminVlogApproveWait() {
+      axios.put('/adminVlogApproveWait', {
+        vlogId: this.vlogDialogInfo.id
+      }).then(response => {
+        this.tableData = response.data.records;
+        this.pageCount = response.data.pages
+
+      })
+      this.vlogDialogVisible = false
+      this.vlogDialogInfo = {}
+    },
+    adminVlogApproveSuccess() {
+      axios.put('/adminVlogApproveSuccess', {
+        vlogId: this.vlogDialogInfo.id
+      }).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+
+      })
+      this.vlogDialogVisible = false
+      this.vlogDialogInfo = {}
+    },
+    adminVlogApproveFail() {
+      this.vlogDialogApproveFailReason = true
+    },
+    adminVlogApproveFailReasonSubmit() {
+      axios.put('/adminVlogApproveFail', {
+        vlogId: this.vlogDialogInfo.id,
+        errorReason: this.vlogApproveFailReason
+      }).then(response => {
+        this.tableData = response.data.records
+        this.pageCount = response.data.pages
+      })
+      this.vlogDialogVisible = false
+      this.vlogDialogApproveFailReason = false
+      this.vlogApproveFailReason = ""
+      this.vlogDialogInfo = {}
+    },
     handleWatch(row) {
       axios.get('/adminGetVlogById?vlogId=' + row.id).then(response => {
         this.vlogDialogInfo = response.data

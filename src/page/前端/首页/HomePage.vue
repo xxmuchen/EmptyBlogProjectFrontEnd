@@ -13,7 +13,7 @@
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <el-col :span="2"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="1"><div class="grid-content bg-purple"><i class="el-icon-edit"></i></div></el-col>
+        <el-col :span="1"><div class="grid-content bg-purple"><SearchBlogComponemt></SearchBlogComponemt></div></el-col>
         <el-col :span="3"><div class="grid-content bg-purple"><UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay></div></el-col>
       </el-row>
 
@@ -32,11 +32,13 @@
 import axios from 'axios'
 import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
 import TopLogo from "@/components/前端组件/logo组件/TopLogo"
+import SearchBlogComponemt from "@/components/前端组件/搜索组件/SearchBlogComponemt";
 export default {
   name: 'HomePage',
   components: {
     TopLogo,
-    UserLoginAvatarAndNameDisplay
+    UserLoginAvatarAndNameDisplay,
+    SearchBlogComponemt
   },
   data() {
     return {

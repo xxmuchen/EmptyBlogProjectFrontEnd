@@ -37,7 +37,7 @@
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <!--        <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>-->
         <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
-        <el-col :span="1"><div class="grid-content bg-purple"><i class="el-icon-edit"></i></div></el-col>
+        <el-col :span="1"><div class="grid-content bg-purple"><SearchBlogComponemt></SearchBlogComponemt></div></el-col>
         <el-col :span="3"><div class="grid-content bg-purple"><UserLoginAvatarAndNameDisplay></UserLoginAvatarAndNameDisplay></div></el-col>
       </el-row>
 
@@ -50,17 +50,18 @@
 </template>
 <script>
   import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
+  import SearchBlogComponemt from "@/components/前端组件/搜索组件/SearchBlogComponemt";
   import TopLogo from "@/components/前端组件/logo组件/TopLogo";
 
   export default {
     name: 'DiaryPage',
     components: {
       TopLogo,
-      UserLoginAvatarAndNameDisplay
+      UserLoginAvatarAndNameDisplay,
+      SearchBlogComponemt
     },
     data() {
       return {
-
         url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png'
       }
     },

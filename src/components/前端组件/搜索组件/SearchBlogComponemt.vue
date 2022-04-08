@@ -57,16 +57,44 @@
           <el-menu-item index="放空图文">放空图文</el-menu-item>
         </el-menu>
         <div v-show="userSelectType === '放空日记'">
-
+          <el-table :data="tableData" stripe style="width: 100%"  @row-dblclick="diaryDialogClickJustToDiaryDetail">
+            <el-table-column prop="title" label="标题" width="270" />
+            <el-table-column prop="authorName" label="作者" width="180" />
+            <el-table-column prop="createTime" label="创建时间" />
+          </el-table>
         </div>
         <div v-show="userSelectType === '放空句子'">
-
+          <el-table :data="tableData" stripe style="width: 100%" @row-dblclick="sentenceDialogClickJustToSentenceyDetail">
+            <el-table-column label="内容" width="270" >
+              <template #default="scope">
+                  <span style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap" v-html="scope.row.content"></span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="authorName" label="作者" width="180" />
+            <el-table-column prop="createTime" label="创建时间" />
+          </el-table>
         </div>
-        <div v-show="userSelectType === '放空Vlog'">
-
+        <div v-show="userSelectType === '放空Vlog'" >
+          <el-table :data="tableData" stripe style="width: 100%" @row-dblclick="vlogDialogClickJustToVlogDetail">
+            <el-table-column prop="title" label="标题" width="270" />
+            <el-table-column prop="authorName" label="作者" width="180" />
+            <el-table-column prop="createTime" label="创建时间" />
+          </el-table>
         </div>
         <div v-show="userSelectType === '放空图文'">
-
+          <div v-if="imageData.length">
+            <water-fall gap="10px" width="100px" class="container" :data="imageData">
+              <template #default="item">
+                <router-link :to="{name:'GriphicPageDetailPageDisplay' , query:{'id': item.id}}">
+                  <div class="card">
+                    <!--          <img class="img" :src="item.src" @click="preview(item.src, $event)" />-->
+                    <img class="img" :src="item.imageUrl" />
+                    <p>{{ item.description }}</p>
+                  </div></router-link>
+              </template>
+            </water-fall>
+            <!--    <button class="halo-btn halo-btn-primary" @click.stop.prevent="loadMore">加载更多</button>-->
+          </div>
         </div>
       </el-dialog>
     </div>
@@ -75,60 +103,68 @@
 
 </template>
 <script>
+  import axios from "axios";
+  import WaterFall from 'kuan-vue-waterfall';
   export default {
     name: 'SearchBlogComponemt',
+    components: {
+      WaterFall
+    },
     data() {
       return {
-        userSelectType: '',
+        imageData: [],
+        tableData: [],
+        userSelectType: '放空日记',
         searchBlogDialogResultVisiable: false,
         searchKeyValue: '' ,
         searchBlogDialogVisiable: false,
-        blogType: '放空日记',
-        options: [
-          {
-            value: '放空日记',
-            label: '放空日记',
-          },
-          {
-            value: '放空句子',
-            label: '放空句子',
-          },
-          {
-            value: '放空Vlog',
-            label: '放空Vlog',
-          },
-          {
-            value: '放空图文',
-            label: '放空图文',
-          }
-        ]
       }
     },
     methods: {
+      diaryDialogClickJustToDiaryDetail(row) {
+        this.$router.push({name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: row.id}});
+      },
+
+      sentenceDialogClickJustToSentenceyDetail(row) {
+        this.$router.push({name: 'SentencePageDetailDisplay' , query: {sentenceId: row.id}});
+      },
+
+      vlogDialogClickJustToVlogDetail(row) {
+        this.$router.push({name: 'VlogPageDetailDisplay' , query: {vlogId: row.id}})
+      },
       searchBlogByBlogType() {
         this.searchBlogDialogResultVisiable = true
-        // if (this.blogType === '放空日记') {
-        //
-        // } else if (this.blogType === '放空句子') {
-        //
-        // } else if (this.blogType === '放空Vlog') {
-        //
-        // } else if (this.blogType === '放空图文') {
-        //
-        // }
+        this.getSearchResult(this.userSelectType)
       },
       handleSelect (index) {
         this.userSelectType = index
+        this.searchBlogByBlogType()
         // console.log(this)
-        // if (index === '放空日记') {
-        //
-        // } else if (index === '放空句子') {
-        //
-        // } else if (index === '放空Vlog') {
-        //
-        // } else if (index === '放空图文') {
-        //
-        // }
+        this.getSearchResult(index)
+      },
+      getSearchResult(index) {
+        if (index === '放空日记') {
+          axios.get('/getDiaryByKeyValue?diaryKeyValue=' + this.searchKeyValue).then(response => {
+            console.log(123)
+            console.log(response)
+            this.tableData = response.data
+          })
+        } else if (index === '放空句子') {
+          axios.get('/getSentenceByKeyValue?sentenceKeyValue=' + this.searchKeyValue).then(response => {
+            console.log(response.data)
+            this.tableData = response.data
+          })
+        } else if (index === '放空Vlog') {
+          axios.get('/getVlogByKeyValue?vlogKeyValue=' + this.searchKeyValue).then(response => {
+            console.log(response.data)
+            this.tableData = response.data
+          })
+        } else if (index === '放空图文') {
+          axios.get('/getGriphicByKeyValue?griphicKeyValue=' + this.searchKeyValue).then(response => {
+            this.imageData = response.data
+            // console.log(this.imageData)
+          })
+        }
       }
     }
   }

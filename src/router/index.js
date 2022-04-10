@@ -72,6 +72,9 @@ import BlogStarInfoVisualizationDisplay
 import BlogCollectInfoVisualizationDisplay
     from "@/components/后端组件/用户信息可视化展示/日记信息可视化/日记点赞收藏可视化/BlogCollectInfoVisualizationDisplay";
 import SentencePageTagDisplay from "@/components/前端组件/句子页组件/SentencePageRightSideBar/SentencePageTagDisplay";
+import ManagerInfoManage from "@/components/后端组件/管理员管理/一级管理员管理/ManagerInfoManage";
+import SuperManagerInfoManage from "@/components/后端组件/管理员管理/二级管理员管理/SuperManagerInfoManage";
+import AdminNoticeManage from "@/components/后端组件/公告管理/公告管理/AdminNoticeManage";
 
 // 2. 定义路由配置
 const routes = [
@@ -227,6 +230,9 @@ const routes = [
             { name: 'BlogObserveInfoVisualizationDisplay' , path: 'BlogObserveInfoVisualizationDisplay' , component: BlogObserveInfoVisualizationDisplay },
             { name: 'BlogStarInfoVisualizationDisplay' , path: 'BlogStarInfoVisualizationDisplay' , component: BlogStarInfoVisualizationDisplay },
             { name: 'BlogCollectInfoVisualizationDisplay' , path: 'BlogCollectInfoVisualizationDisplay' , component: BlogCollectInfoVisualizationDisplay },
+            { name: 'ManagerInfoManage' , path: 'ManagerInfoManage' , component: ManagerInfoManage },
+            { name: 'SuperManagerInfoManage' , path: 'SuperManagerInfoManage' , component: SuperManagerInfoManage },
+            { name: 'AdminNoticeManage' , path: 'AdminNoticeManage' , component: AdminNoticeManage },
         ]
     }
 ];

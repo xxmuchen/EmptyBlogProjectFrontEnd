@@ -26,19 +26,11 @@ export default {
     }
   },
   methods: {
-    // getAdminOwnInfo() {
-    //   axios.post('/getAdminOwnInfo').then(response => {
-    //     this.adminData = response.data
-    //   })
-    // },
-
     getAvatorAndUserName() {
       let eleToken = localStorage.getItem('eleToken')
       if (eleToken !== null) {
         axios.post('/getAdminOwnInfo').then(response => {
           this.adminData = response.data
-        }).catch(() => {
-
         })
       }
     },

@@ -102,36 +102,46 @@
 <!--      <router-link :to="{name: ''}"><el-menu-item index="6-5">图文可视化</el-menu-item></router-link>-->
       <!--      <el-menu-item index="5-2">图文信息可视化展示</el-menu-item>-->
     </el-sub-menu>
-    <el-sub-menu index="7">
+    <el-sub-menu index="7" v-if="adminPermission > 0">
       <template #title>
         <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>
         <span>管理员管理</span>
       </template>
-      <el-sub-menu index="7-1">
-        <template #title>
-          <!--          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>-->
-          <span>用户数据可视化</span>
-        </template>
-        <router-link :to="{name: 'UserLoginAndRegistInfoVisualizationDisplay'}"><el-menu-item index="6-1-1">注册登录可视化</el-menu-item></router-link>
-        <router-link :to="{name: 'UserLocationInfoVisualizationDisplay'}"><el-menu-item index="6-1-1">用户位置可视化</el-menu-item></router-link>
-      </el-sub-menu>
-      <el-sub-menu index="7-2">
-        <template #title>
-          <!--          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>-->
-          <span>博客数据可视化</span>
-        </template>
-        <router-link :to="{name: 'BlogWriteInfoVisualizationDisplay'}"><el-menu-item index="6-2-1">博客撰写</el-menu-item></router-link>
-        <router-link :to="{name: 'BlogObserveInfoVisualizationDisplay'}"><el-menu-item index="6-2-2">博客评论</el-menu-item></router-link>
-        <router-link :to="{name: 'BlogStarInfoVisualizationDisplay'}"><el-menu-item index="6-2-3">博客点赞</el-menu-item></router-link>
-        <router-link :to="{name: 'BlogCollectInfoVisualizationDisplay'}"><el-menu-item index="6-2-4">博客收藏</el-menu-item></router-link>
-      </el-sub-menu>
+        <router-link :to="{name: 'ManagerInfoManage'}"><el-menu-item index="7-1-1">管理员信息</el-menu-item></router-link>
+        <router-link :to="{name: 'SuperManagerInfoManage'}" v-if="adminPermission > 1"><el-menu-item index="7-1-2">超级管理员信息</el-menu-item></router-link>
+    </el-sub-menu>
+    <el-sub-menu index="8" v-if="adminPermission > 0">
+      <template #title>
+        <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>
+        <span>公告管理</span>
+      </template>
+      <router-link :to="{name: 'AdminNoticeManage'}"><el-menu-item index="8-1-1">公告管理</el-menu-item></router-link>
     </el-sub-menu>
   </el-menu>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   name: 'AdminPageAsideDisplay',
-  components: {}
+  components: {},
+  data() {
+    return {
+      adminPermission: ''
+    }
+  },
+  methods: {
+    getUserPermissionByUserId() {
+      // let token = localStorage.getItem("eleToken");
+      axios.post("/getUserPermissionByUserId").then(response => {
+        this.adminPermission = response.data.userPermission;
+        console.log(this.adminPermission)
+      })
+    }
+  },
+  mounted() {
+    this.getUserPermissionByUserId()
+  }
 }
 </script>
 <style scoped>

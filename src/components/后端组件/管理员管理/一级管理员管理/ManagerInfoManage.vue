@@ -2,60 +2,8 @@
   <div>
     <div class="mainTop">
       <div class="topInfo">
-        <div class="userInfoManageFont">用户管理</div>
-<!--        <div class="userSearch">-->
-<!--          <div class="userInfoSearchTimeSelect">-->
-<!--            <el-date-picker-->
-<!--                v-model="searchDate"-->
-<!--                type="daterange"-->
-<!--                unlink-panels-->
-<!--                range-separator="To"-->
-<!--                start-placeholder="Start date"-->
-<!--                end-placeholder="End date"-->
-<!--                :shortcuts="shortcuts"-->
-<!--                placeholder="请输入用户信息"-->
-<!--            >-->
-<!--            </el-date-picker>-->
-<!--            <div class="userInfoSearchTimeSelectButton">-->
-<!--              <el-button type="primary">搜索</el-button>-->
-<!--            </div>-->
-<!--          </div>-->
+        <div class="userInfoManageFont">管理员管理</div>
 
-<!--          <div class="userInfoSearchInput">-->
-<!--            <el-input></el-input>-->
-<!--            <div class="userInfoSearchInputButton">-->
-<!--              <el-button type="primary">搜索</el-button>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </div>-->
-        <div class="addUser">
-          <div class="userInfoSearchInputButton">
-            <el-button type="primary" @click="dialogAddUserVisible = true">添加用户</el-button>
-          </div>
-          <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="40%">
-            <el-form :model="userAddForm">
-              <el-form-item label="昵称" :label-width="formLabelWidth">
-                <el-input v-model="userAddForm.userName" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="邮箱" :label-width="formLabelWidth">
-                <el-input v-model="userAddForm.userEmail" autocomplete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="密码" :label-width="formLabelWidth">
-                <el-input v-model="userAddForm.userPassword" show-password type="password"
-                          autocomplete="off"></el-input>
-              </el-form-item>
-            </el-form>
-            <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogAddUserVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="adminAddUser"
-        >Confirm</el-button
-        >
-      </span>
-            </template>
-          </el-dialog>
-        </div>
       </div>
     </div>
     <div class="mainTable">
@@ -185,7 +133,7 @@
             :page-size="9"
             :page-count="pageCount"
             layout="prev, pager, next"
-            @current-change="adminGetAllUserByPageAndCreateTime"
+            @current-change="adminGetAllManagerByPageAndCreateTime"
         >
         </el-pagination>
       </div>
@@ -319,7 +267,7 @@ export default {
   computed: {
     userLocation() {
       console.log(this.userInfo.location)
-      if (this.userInfo.location !== null) {
+      if (this.userInfo.location.length === 3) {
         return CodeToText[this.userInfo.location[0]] + CodeToText[this.userInfo.location[1]] + CodeToText[this.userInfo.location[2]]
       } else {
         return ''
@@ -327,18 +275,6 @@ export default {
     }
   },
   methods: {
-    adminAddUser() {
-        axios.post("/adminAddUser" , {
-          userName: this.userAddForm.userName,
-          email: this.userAddForm.userEmail,
-          password: this.userAddForm.userPassword
-        }).then(response => {
-          ElMessage.success(response.data)
-          this.adminGetAllUserByPageAndCreateTime(1)
-          this.currentPage = 1
-          this.dialogAddUserVisible = false
-        })
-    },
     setSimpleUserByUserId () {
       axios.post('/setUserPermissionByUserId', {
         userId: this.userInfo.id,
@@ -348,7 +284,7 @@ export default {
         this.dialogFormModifyInfoVisible = false;
         // this.tableData = response.data.records;
         // this.pageCount = response.data.pages
-        this.adminGetAllUserByPageAndCreateTime(1)
+        this.adminGetAllManagerByPageAndCreateTime(1)
         this.currentPage = 1
         // this.getUserPermissionByUserId()
         // this.$router.go(0)
@@ -363,7 +299,7 @@ export default {
         this.dialogFormModifyInfoVisible = false;
         // this.tableData = response.data.records;
         // this.pageCount = response.data.pages
-        this.adminGetAllUserByPageAndCreateTime(1)
+        this.adminGetAllManagerByPageAndCreateTime(1)
         this.currentPage = 1
         // this.getUserPermissionByUserId()
         // this.$router.go(0)
@@ -378,7 +314,7 @@ export default {
         this.dialogFormModifyInfoVisible = false;
         // this.tableData = response.data.records;
         // this.pageCount = response.data.pages
-        this.adminGetAllUserByPageAndCreateTime(1)
+        this.adminGetAllManagerByPageAndCreateTime(1)
         this.currentPage = 1
         // this.getUserPermissionByUserId()
         // this.$router.go(0)
@@ -397,9 +333,7 @@ export default {
       axios.get('/adminGetUserById?userId=' + row.id).then(response => {
         this.userInfo = response.data
         this.dialogTableSeeInfoVisible = true
-        if (this.userInfo.location !== null) {
-          this.userInfo.location = this.userInfo.location.split(',')
-        }
+        this.userInfo.location = this.userInfo.location.split(',')
       })
     },
     handleUpdate(row) {
@@ -424,7 +358,7 @@ export default {
         location: this.userInfo.location === null? null: this.userInfo.location.toString(),
       }).then((response) => {
         // console.log(response)
-        this.adminGetAllUserByPageAndCreateTime(1)
+        this.adminGetAllManagerByPageAndCreateTime(1)
         this.currentPage = 1
         // this.currentPage = 1
         ElMessage.success(response.data)
@@ -437,13 +371,13 @@ export default {
         // this.tableData = response.data.records
         // this.currentPage = 1
         // this.pageCount = response.data.pages
-        this.adminGetAllUserByPageAndCreateTime(1)
+        this.adminGetAllManagerByPageAndCreateTime(1)
         this.currentPage = 1
         ElMessage.success(response.data);
       })
     },
-    adminGetAllUserByPageAndCreateTime(currentPage) {
-      axios.get('/adminGetAllUserByPageAndCreateTime?currentPage=' + currentPage).then(response => {
+    adminGetAllManagerByPageAndCreateTime(currentPage) {
+      axios.get('/adminGetAllManagerByPageAndCreateTime?currentPage=' + currentPage).then(response => {
         // console.log(response.data)
         this.tableData = response.data.records;
         this.pageCount = response.data.pages
@@ -453,7 +387,7 @@ export default {
   },
 
   mounted() {
-    this.adminGetAllUserByPageAndCreateTime(1)
+    this.adminGetAllManagerByPageAndCreateTime(1)
     this.getUserPermissionByUserId();
   }
 }

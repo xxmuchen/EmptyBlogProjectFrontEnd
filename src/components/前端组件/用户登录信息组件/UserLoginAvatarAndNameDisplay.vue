@@ -85,6 +85,37 @@
               this.isShow = false;
           })
         }
+        this.getLatestNoticeInfo()
+      },
+      getLatestNoticeInfo() {
+        axios.get("/getLatestNoticeInfo").then(response => {
+          if (response.data !== "") {
+            // console.log(response)
+            ElMessageBox.confirm(
+                response.data.content,
+                '公告',
+                {
+                  confirmButtonText: '确认',
+                  cancelButtonText: '取消',
+                  // type: 'warning',
+                }
+            )
+                .then(() => {
+                  axios.post("/confirmNotice" , {
+                    noticeId: response.data.id
+                  })
+                  ElMessage({
+                    type: 'success',
+                    message: '公告确认成功',
+                  })
+                }).catch(() => {
+              ElMessage({
+                type: 'error',
+                message: '公告确认失败',
+              })
+            })
+          }
+        })
       }
     },
     mounted() {

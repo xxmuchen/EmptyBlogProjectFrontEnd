@@ -65,19 +65,21 @@ export default {
 </script>
 <style scoped>
 .el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
+  /*background-color: #B3C0D1;*/
+  /*color: #333;*/
   text-align: center;
   line-height: 40px;
   height: auto;
+  background-color: #f4f0e6;
 }
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  /*background-color: #E9EEF3;*/
+  /*color: #333;*/
   /*text-align: center;*/
   /*line-height: 160px;*/
   padding: 0;
   margin: 0;
+  background-color: #f4f0e6;
   /*height: 100%;*/
 }
 
@@ -124,6 +126,6 @@ body > .el-container {
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 </style>

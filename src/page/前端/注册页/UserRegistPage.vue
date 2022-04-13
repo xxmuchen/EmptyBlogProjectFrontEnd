@@ -288,8 +288,8 @@
   height: 100%;
 }
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  background-color: #f4f0e6;
+  /*color: #333;*/
   margin: 0;
   padding: 0;
   /*height: 100%;*/
@@ -334,7 +334,7 @@ body > .el-container {
   overflow: hidden;
 }
 .avatar-uploader .el-upload:hover {
-  border-color: #409eff;
+  /*border-color: #409eff;*/
 }
 .el-icon.avatar-uploader-icon {
   font-size: 28px;

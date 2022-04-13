@@ -28,12 +28,14 @@
 <!--          </el-form-item>-->
         </el-form>
         <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="searchBlogDialogVisiable = false">Cancel</el-button>
-        <el-button type="primary" @click="searchBlogByBlogType"
-        >Confirm</el-button
-        >
-      </span>
+          <el-form-item>
+            <span class="dialog-footer">
+              <el-button @click="searchBlogDialogVisiable = false">Cancel</el-button>
+              <el-button type="primary" @click="searchBlogByBlogType"
+              >Confirm</el-button
+              >
+            </span>
+          </el-form-item>
         </template>
       </el-dialog>
     </div>

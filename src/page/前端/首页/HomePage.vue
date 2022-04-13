@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header height="auto">
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="font-size: 21px;font-family: 华文行楷">
         <el-col :span="3">
          <TopLogo></TopLogo>
         </el-col>
@@ -59,20 +59,18 @@ export default {
 
 <style scoped>
 .el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  text-align: center;
-  line-height: 40px;
+
   height: auto;
-  /*margin: 0;*/
-  /*padding: 0;*/
+  background-color: #f4f0e6;
+  text-align: center;
 }
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  /*background-color: #E9EEF3;*/
+  /*color: #333;*/
   /*text-align: center;*/
   /*line-height: 160px;*/
   padding: 0;
+  background-color: #f4f0e6;
   /*height: 100%;*/
 }
 body > .el-container {
@@ -89,7 +87,7 @@ body > .el-container {
   padding: 0;
   margin: 0;
   /*margin-bottom: 20px;*/
-  padding-top: 20px;
+  padding-top: 15px;
   /*margin-left: 0px;*/
 }
 .el-col {
@@ -100,13 +98,13 @@ body > .el-container {
   border-radius: 4px;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
 }
 .bg-purple {
-  background: #d3dce6;
+  /*background: #d3dce6;*/
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
 }
 .grid-content {
   border-radius: 4px;
@@ -114,6 +112,6 @@ body > .el-container {
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 </style>

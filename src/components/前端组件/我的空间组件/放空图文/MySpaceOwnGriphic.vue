@@ -1,9 +1,9 @@
 <template>
   <el-row :gutter="20">
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有图文')">所有图文</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的图文')">审批通过的图文</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的图文')">待审批的图文</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的图文')">审批不通过的图文</div></el-col>
+    <el-col :span="4" :offset="1"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有图文')">所有图文</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的图文')">审批通过的图文</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的图文')">待审批的图文</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的图文')">审批不通过的图文</div></el-col>
     <!--    <el-col :span="6"><div class="grid-content bg-purple" /></el-col>-->
   </el-row>
   <div v-if="imageData.length" class="tableContent">
@@ -132,13 +132,16 @@ export default {
   justify-items: center;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
+  background-color: #d9d9f3;
 }
 .bg-purple {
-  background: #d3dce6;
+  /*background: #d3dce6;*/
+  background-color: #d9d9f3;
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
+  background-color: #d9d9f3;
 }
 .grid-content {
   border-radius: 4px;
@@ -146,18 +149,19 @@ export default {
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 .tableContent {
   margin-top: 10px;
 }
 .card {
   padding: 10px;
-  background-color: white;
+  /*background-color: white;*/
   border-radius: 3px;
   color: #666;
   line-height: 1.5;
   word-break: break-all;
+  background-color: #fffcf0;
 }
 .card .img {
   width: 100%;

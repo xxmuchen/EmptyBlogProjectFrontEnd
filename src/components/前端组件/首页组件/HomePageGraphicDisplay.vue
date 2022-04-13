@@ -1,6 +1,5 @@
 <template>
   <el-container>
-
     <el-container>
       <el-main>
         <el-carousel :interval="4000"  arrow="always" height="260px">
@@ -16,8 +15,8 @@
           </el-carousel-item>
         </el-carousel>
       </el-main>
-      <el-footer>
-        <div class="homePageInfoExample">
+      <el-footer >
+        <div class="homePageInfoExample" >
           <ul>
             <li style="font: 16px Medium" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}</li>
           </ul>
@@ -29,10 +28,10 @@
       <!--      <div class="setFloat">-->
 
       <div class="homePageInfoContent">
-        <div style="font: 16px Medium" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
+        <div style="font-size: 20px;font-family: 华文楷体" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
       </div>
       <router-link :to="{name: 'GriphicPage'}"><div class="homePageInfoType">
-        <div style="font: 20px Extra large">{{ homePageDisplayType }}<br /></div>
+        <div style="font-size: 30px;font-family: 华文行楷;">{{ homePageDisplayType }}<br /></div>
       </div></router-link>
 
       <!--      </div>-->
@@ -71,34 +70,18 @@ export default {
 </script>
 <style scoped>
 .el-header, .el-footer {
-  background-color: #B3C0F1;
-  color: #333;
-  /*text-align: center;*/
-  /*line-height: 60px;*/
+
   height: 230px;
   padding: 0;
   margin: 0;
 }
 
-.el-aside {
-  background-color: #D3DCE6;
-  color: #333;
-  /*float: left;*/
-  /*text-align: center;*/
-  /*line-height: 200px;*/
-}
 
 .homePageInfoType {
-  width: 60%;
+  width: 20%;
   height: 100%;
-  background: red;
   float: left;
-  /*padding-left: 100px;*/
-  /*padding-left: 20px;*/
-  /*padding-top: 100px;*/
-
   display:flex;
-  /*justify-content:center;*/
   align-items:center;
 
 }
@@ -106,7 +89,7 @@ export default {
   /*margin-top: 170px;*/
   /*margin-left: 180px;*/
   margin-left: 20px;
-  background: green;
+  /*background: green;*/
   width: 10%;
   height: 120px;
   word-wrap: break-word;
@@ -119,7 +102,7 @@ export default {
   /*margin-left: 0;*/
 }
 .homePageInfoContent {
-  background: yellow;
+  /*background: yellow;*/
   width: 40%;
   height: 100%;
   float: left;
@@ -133,9 +116,9 @@ export default {
 }
 .homePageInfoContent > div {
   /*margin-top: 120px;*/
-  margin-left: 120px;
+  margin-left: 42px;
 
-  background: orange;
+  /*background: orange;*/
   width: 10%;
   height: auto;
 
@@ -150,8 +133,8 @@ export default {
 }
 
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  /*background-color: #E9EEF3;*/
+  /*color: #333;*/
   /*text-align: center;*/
   /*padding: 0;*/
   /*margin: 0;*/
@@ -195,7 +178,7 @@ export default {
 /*}*/
 
 .homePageInfoExample {
-  background: blue;
+  /*background: blue;*/
   width: 500px;
   height: auto;
   /*background: green;*/
@@ -206,8 +189,8 @@ export default {
   margin-top: 30px;
 }
 .homePageInfoExample > ul {
-  background: purple;
-  background: orange;
+  /*background: purple;*/
+  /*background: orange;*/
   width: 100%;
   height: auto;
   padding-left: 0;
@@ -245,11 +228,11 @@ li:before {
 }
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+  /*background-color: #99a9bf;*/
 }
 
 .el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
+  /*background-color: #d3dce6;*/
 }
 .demo-image {
   width: 100%;

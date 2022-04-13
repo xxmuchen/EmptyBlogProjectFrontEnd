@@ -5,7 +5,7 @@
             :row-key="tableData.id"
             style="width: 100%"
             :show-header="true"
-            :row-style="{height: '70px',background: '#88a9bf'}"
+            :row-style="{height: '70px',background: '#f3e8d6'}"
             :lazy="true"
         >
           <el-table-column

@@ -1,7 +1,8 @@
 <template>
-  <el-container>
+<!--  <el-container>-->
 <!--    <el-header></el-header>-->
-    <el-main>
+<!--    <el-main>-->
+  <div class="mainContent">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/' }">放空日记</el-breadcrumb-item>
         <el-breadcrumb-item v-if="typeof $route.query.diaryType !== 'undefined'">{{ $route.query.diaryType }}</el-breadcrumb-item>
@@ -14,8 +15,9 @@
           :data="tableData"
           :row-key="tableData.id"
           style="width: 100%"
+
           :show-header="false"
-          :row-style="{height: '70px',background: '#88a9bf'}"
+          :row-style="{height: '70px',background: '#f3e8d6'}"
           :lazy="true"
           v-on:row-click="justToDiaryDetail"
       >
@@ -48,10 +50,10 @@
           </el-pagination>
         </div>
       </div>
+</div>
 
-
-    </el-main>
-  </el-container>
+<!--    </el-main>-->
+<!--  </el-container>-->
 </template>
 <script>
   // import axios from "axios";
@@ -138,13 +140,17 @@
   }
 </script>
 <style scoped>
+.mainContent {
+  padding-left: 100px;
+  padding-right: 100px;
+}
 .el-container {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
   padding-left: 100px;
   padding-right: 100px;
 }
 .el-header, .el-footer {
-  background-color: #B3C0D1;
+  /*background-color: #B3C0D1;*/
   color: #333;
   /*text-align: center;*/
   /*line-height: 60px;*/
@@ -153,7 +159,7 @@
 
 
 .el-main {
-  background-color: #E9EEF3;
+  /*background-color: #E9EEF3;*/
   color: #333;
   padding: 0;
   margin: 0;

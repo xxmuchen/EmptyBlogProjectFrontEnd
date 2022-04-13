@@ -2,6 +2,8 @@
   <!--  <div class="observeWhole">-->
   <el-container>
     <el-main>
+      <el-form>
+        <el-form-item>
       <div class="parentCommentSection">
         <div class="avatarAndInputBox">
           <div class="demo-avatar demo-basic">
@@ -22,13 +24,16 @@
           </div>
 
         </div>
+        <el-form-item>
         <div class="rootObserveSubmit">
+
           <el-button type="primary" @click="addRootObserve" :disabled="isDisabled">Submit</el-button>
           <el-button @click="removeRootObserveTextContent" :disabled="isDisabled">Cancel</el-button>
         </div>
-
+        </el-form-item>
       </div>
-      <el-divider></el-divider>
+        </el-form-item>
+        <el-divider></el-divider>
       <div class="commentsShow">
         <el-tree
             :data="dataSource"
@@ -39,54 +44,58 @@
 
         >
           <template class="custom-tree-node" #default="{ node , data }">
-            <div class="observeDisplayWhole">
-              <div class="observeHead">
-                <div class="demo-avatar demo-basic">
-                  <div class="demo-basic--circle">
-                    <div class="block">
-                      <el-avatar size="default" :src="data.user.avatar"></el-avatar>
+            <el-form-item>
+              <div class="observeDisplayWhole">
+                <div class="observeHead">
+                  <div class="demo-avatar demo-basic">
+                    <div class="demo-basic--circle">
+                      <div class="block">
+                        <el-avatar size="default" :src="data.user.avatar"></el-avatar>
+                      </div>
                     </div>
                   </div>
+                  <div class="userName">
+                    <span v-text="data.user.userName"></span>
+                    <span class="DistinguishFatherAndSon" v-if="data.lastId === null">回复了博主</span>
+                    <span class="DistinguishFatherAndSon" v-else>回复了博主——<span
+                        v-text="node.parent.data.user.userName"></span> </span>
+                  </div>
+                  <div class="observeTime">
+                    <div v-text="data.createTime"></div>
+                  </div>
+                  <div class="observeTag">
+                    <el-tag @click="expandTheReplyCommentTextarea(data.id)">评论</el-tag>
+                  </div>
                 </div>
-                <div class="userName">
-                  <span v-text="data.user.userName"></span>
-                  <span class="DistinguishFatherAndSon" v-if="data.lastId === null">回复了博主</span>
-                  <span class="DistinguishFatherAndSon" v-else>回复了博主——<span
-                      v-text="node.parent.data.user.userName"></span> </span>
+                <div class="observeContent">
+                  <div class="ObserveContentTextArea">
+                    <span v-text="data.observeContent"></span>
+                  </div>
                 </div>
-                <div class="observeTime">
-                  <div v-text="data.createTime"></div>
-                </div>
-                <div class="observeTag">
-                  <el-tag @click="expandTheReplyCommentTextarea(data.id)">评论</el-tag>
-                </div>
-              </div>
-              <div class="observeContent">
-                <div class="ObserveContentTextArea">
-                  <span v-text="data.observeContent"></span>
-                </div>
-              </div>
-              <div class="observeContentReplySubmit" v-show="this.isShow === data.id">
+                <div class="observeContentReplySubmit" v-show="this.isShow === data.id">
 
-                <div class="ObserveContentReplyTextArea">
-                  <el-input
-                      v-model="replyObserveContent"
-                      :rows="2"
-                      type="replyObserveContent"
-                      placeholder="Please input"
-                      :disabled="isDisabled"
-                  />
-                </div>
-                <div class="ObserveContentReplySubmitButton">
-                  <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisabled">Submit</el-button>
-                  <el-button @click="closeObserveContentReplySubmit" :disabled="isDisabled">Cancel</el-button>
+                  <div class="ObserveContentReplyTextArea">
+                    <el-input
+                        v-model="replyObserveContent"
+                        :rows="2"
+                        type="replyObserveContent"
+                        placeholder="Please input"
+                        :disabled="isDisabled"
+                    />
+                  </div>
+                  <el-form-item><div class="ObserveContentReplySubmitButton">
+                    <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisabled">Submit</el-button>
+                    <el-button @click="closeObserveContentReplySubmit" :disabled="isDisabled">Cancel</el-button>
+                  </div></el-form-item>
                 </div>
               </div>
-            </div>
+            </el-form-item>
+
           </template>
         </el-tree>
 
       </div>
+      </el-form>
     </el-main>
   </el-container>
 
@@ -234,8 +243,8 @@ export default {
 
 .common-layout .el-header,
 .common-layout .el-footer {
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
+  /*background-color: #b3c0d1;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 60px;*/
 }
@@ -245,15 +254,15 @@ export default {
 }
 
 .common-layout .el-aside {
-  background-color: #d3dce6;
-  color: var(--el-text-color-primary);
+  /*background-color: #d3dce6;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
-  background-color: #e9eef3;
-  color: var(--el-text-color-primary);
+  /*background-color: #e9eef3;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 160px;*/
 }

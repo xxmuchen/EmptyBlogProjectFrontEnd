@@ -24,6 +24,7 @@
 <style scoped>
 .demo-image {
   width: 80%;
+  margin-top: -5px;
   /*margin-top: 20px;*/
   /*margin-left: 20px;*/
 }

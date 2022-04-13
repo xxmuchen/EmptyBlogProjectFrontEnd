@@ -1,9 +1,9 @@
 <template>
   <el-row :gutter="20">
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有句子')">所有句子</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的句子')">审批通过的句子</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的句子')">待审批的句子</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的句子')">审批不通过的句子</div></el-col>
+    <el-col :span="4" :offset="1"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有句子')">所有句子</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的句子')">审批通过的句子</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的句子')">待审批的句子</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的句子')">审批不通过的句子</div></el-col>
     <!--    <el-col :span="6"><div class="grid-content bg-purple" /></el-col>-->
   </el-row>
   <div class="tableContent">
@@ -12,7 +12,7 @@
         :row-key="tableData.id"
         style="width: 100%"
         :show-header="true"
-        :row-style="{height: '70px',background: '#88a9bf'}"
+        :row-style="{height: '70px',background: '#f3e8d6'}"
         :lazy="true"
     >
       <el-table-column
@@ -176,13 +176,14 @@ export default {
   justify-items: center;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
 }
 .bg-purple {
-  background: #d3dce6;
+  /*background: #d3dce6;*/
+  background-color: #d9d9f3;
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
 }
 .grid-content {
   border-radius: 4px;
@@ -190,7 +191,7 @@ export default {
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 .tableContent {
   margin-top: 10px;

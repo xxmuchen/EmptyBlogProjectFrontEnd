@@ -162,7 +162,7 @@ export default {
       options: reactive({
         width: '700px', //播放器高度
         height: '350px', //播放器高度
-        color: "#409eff", //主题色
+        // color: "#409eff", //主题色
         title: '', //视频名称
         // src: "", //视频源
         muted: false, //静音

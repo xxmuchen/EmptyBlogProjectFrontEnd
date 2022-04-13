@@ -1,10 +1,11 @@
 <template>
-  <el-container>
+<!--  <el-container>-->
 <!--    <el-header>-->
 
 <!--    </el-header>-->
-    <el-main>
+<!--    <el-main>-->
 <!--      轮播图-->
+  <div class="mainContent">
       <el-carousel :interval="5000" arrow="always" height="240px">
         <el-carousel-item v-for="item in 4" :key="item">
           <div class="demo-image">
@@ -26,12 +27,12 @@
               <router-link :to="{name:'DiaryPageDiaryDisplay' , query:{diaryType: '最新日记'}}"><el-tag class="newDiaryMore">更多 >></el-tag></router-link>
             </div>
             <div class="newDiaryContent" v-for="item in newDiaryDisplayThreePieces" :key="item.id">
-              <router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">
+
                 <el-row :gutter="20">
-                <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
-                <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
+
+                    <el-col :span="6" :offset="1"><div class="grid-content bg-purple"><router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">{{ item.title }}</router-link></div></el-col>
+                    <el-col :span="3" :offset="14"><div class="grid-content bg-purple"><router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">{{ item.authorName }}</router-link></div></el-col>
                 </el-row>
-              </router-link>
             </div>
         </div>
 <!--      推荐日记-->
@@ -58,7 +59,7 @@
             </div>
           </router-link>
           <div class="recommendDiaryPickSentence">
-            {{ recommendedDiaryDisplay.content }}
+            <span v-html="recommendedDiaryDisplay.content"></span>
           </div>
         </div>
 
@@ -75,7 +76,7 @@
           <router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">
             <el-row :gutter="20">
               <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
-              <el-col :span="3" :offset="13"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
+              <el-col :span="3" :offset="14"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
             </el-row>
           </router-link>
         </div>
@@ -83,8 +84,9 @@
         <!--          </div>-->
 
       </div>
-    </el-main>
-  </el-container>
+  </div>
+<!--    </el-main>-->
+<!--  </el-container>-->
 </template>
 <script>
   import axios from "axios";
@@ -128,13 +130,20 @@
   }
 </script>
 <style scoped>
+.mainContent {
+  padding-left: 200px;
+  padding-right: 200px;
+  margin-top: 20px;
+  font-family: 华文楷体;
+  font-size: 18px;
+}
   .el-container {
-    background: #99a9bf;
+    /*background: #99a9bf;*/
     padding-left: 100px;
     padding-right: 100px;
   }
   .el-header, .el-footer {
-    background-color: #C4D1F1;
+    /*background-color: #C4D1F1;*/
     color: #333;
     padding: 0;
     margin: 0;
@@ -150,20 +159,20 @@
 
 
   .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
+    /*background-color: #99a9bf;*/
     width: 100%;
     height: 100%;
   }
 
   .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
+    /*background-color: #d3dce6;*/
     width: 100%;
     height: 100%;
   }
 
 
   .el-main {
-    background-color: #EBEEF3;
+    /*background-color: #EBEEF3;*/
     color: #333;
     padding: 0;
     margin: 0;
@@ -236,13 +245,13 @@
     line-height: 35px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    /*background: #99a9bf;*/
   }
   .bg-purple {
-    background: #d3dce6;
+    /*background: #d3dce6;*/
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    /*background: #e5e9f2;*/
   }
   .grid-content {
     border-radius: 4px;
@@ -250,7 +259,7 @@
   }
   .row-bg {
     /*padding: 10px 0;*/
-    background-color: #f9fafc;
+    /*background-color: #f9fafc;*/
   }
 
   .demo-image {
@@ -275,17 +284,18 @@
   .recommendDiaryTitle {
     width: 50%;
     height: auto;
-    background: red;
+    /*background: red;*/
     margin-top: 30px;
+    margin-left: 150px;
     /*clear: both;*/
     /*float: right;*/
   }
   .recommendDiaryPickSentence{
-    width: 50%;
-    height: 110px;
-    background: red;
+    width: 80%;
+    height: 140px;
+    /*background: red;*/
     text-indent: 2em;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
 
 
     display: -webkit-box;

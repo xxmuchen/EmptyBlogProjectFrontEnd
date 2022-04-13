@@ -20,12 +20,15 @@ export default {
 </script>
 <style scoped>
   .el-header {
-    background: red;
+    /*background: red;*/
+    background-color: #9dd3a8;
   }
   .el-main {
     /*background: #4F8EFF;*/
+    background-color: #ceefe4;
   }
   .el-aside {
-    background: yellow;
+    /*background: yellow;*/
+    background-color: #d9d9f3;
   }
 </style>

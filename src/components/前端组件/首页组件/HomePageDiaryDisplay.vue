@@ -4,14 +4,14 @@
       <router-link :to="{
           name: 'DiaryPage'
         }"><div class="homePageInfoType">
-        <div style="font: 20px Extra large">{{ homePageDisplayType }}<br /></div>
+        <div style="font-size: 30px;font-family: 华文行楷">{{ homePageDisplayType }}<br /></div>
       </div></router-link>
       <div class="homePageInfoContent">
-        <div style="font: 16px Medium" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
+        <div style="font-size: 20px;font-family: 华文楷体" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
       </div>
       <div class="homePageInfoExample">
         <ul>
-          <li style="font: 16px Medium" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}</li>
+          <li style="font-size: 18px;font-family: 华文楷体;font-weight: bold" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}</li>
         </ul>
       </div>
     </el-aside>
@@ -68,7 +68,7 @@
 </script>
 <style scoped>
   .el-aside {
-    background-color: #D3DCE6;
+    /*background-color: #D3DCE6;*/
     color: #333;
     /*text-align: center;*/
   /*  line-height: 200px;*/
@@ -77,12 +77,12 @@
   .homePageInfoType {
     width: 150px;
     height: auto;
-    background: red;
+    /*background: red;*/
     margin-left: 160px;
     margin-top: 100px;
   }
   .homePageInfoType > div {
-    background: green;
+    /*background: green;*/
     width: 100%;
     height: auto;
     /*background: green;*/
@@ -91,7 +91,7 @@
     /*margin-left: 0;*/
   }
   .homePageInfoContent {
-    background: yellow;
+    /*background: yellow;*/
     width: 500px;
     height: auto;
     /*background: green;*/
@@ -99,14 +99,14 @@
     margin-top: 30px;
   }
   .homePageInfoContent > div {
-    background: orange;
+    /*background: orange;*/
     width: 100%;
     height: auto;
     /*background: green;*/
     padding-top: 10px;
   }
   .homePageInfoExample {
-    background: blue;
+    /*background: blue;*/
     width: 500px;
     height: auto;
     /*background: green;*/
@@ -114,8 +114,8 @@
     margin-top: 70px;
   }
   .homePageInfoExample > ul {
-    background: purple;
-    background: orange;
+    /*background: purple;*/
+    /*background: orange;*/
     width: 100%;
     height: auto;
     padding-left: 0;
@@ -141,8 +141,8 @@
 
 
   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
+    /*background-color: #E9EEF3;*/
+    /*color: #333;*/
     /*text-align: center;*/
     /*padding: 0;*/
     /*margin: 0;*/
@@ -168,13 +168,13 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    /*background: #99a9bf;*/
   }
   .bg-purple {
-    background: #d3dce6;
+    /*background: #d3dce6;*/
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    /*background: #e5e9f2;*/
   }
   .grid-content {
     border-radius: 4px;
@@ -182,7 +182,7 @@
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #f9fafc;
+    /*background-color: #f9fafc;*/
   }
   .el-carousel {
     padding-top: 55px;
@@ -196,11 +196,11 @@
   }
 
   .el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
+    /*background-color: #99a9bf;*/
   }
 
   .el-carousel__item:nth-child(2n+1) {
-    background-color: #d3dce6;
+    /*background-color: #d3dce6;*/
   }
   .demo-image {
     width: 100%;

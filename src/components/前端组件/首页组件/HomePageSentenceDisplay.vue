@@ -2,12 +2,12 @@
   <el-container>
     <el-aside width="400px">
 <!--      <div class="setFloat">-->
-      <router-link :to="{name:'SentencePage'}"><div class="homePageInfoType">
-          <div style="font: 20px Extra large">{{ homePageDisplayType }}<br /></div>
+      <div class="homePageInfoType">
+          <div style="font-size: 30px;font-family: 华文行楷;width: 30px"><router-link :to="{name:'SentencePage'}">{{ homePageDisplayType }}</router-link><br /></div>
         </div>
-      </router-link>
+
         <div class="homePageInfoContent">
-          <div style="font: 16px Medium" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
+          <div style="font-size: 20px;font-family: 华文楷体" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
         </div>
 <!--      </div>-->
     </el-aside>
@@ -15,7 +15,7 @@
       <el-header>
         <div class="homePageInfoExample">
         <ul>
-          <li style="font: 16px Medium" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}</li>
+          <li style="font-size: 18px;font-family: 华文楷体;font-weight: bold" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}</li>
         </ul>
       </div>
       </el-header>
@@ -68,8 +68,8 @@ export default {
 </script>
 <style scoped>
 .el-header, .el-footer {
-  background-color: #B3C0F1;
-  color: #333;
+  /*background-color: #B3C0F1;*/
+  /*color: #333;*/
   /*text-align: center;*/
   /*line-height: 60px;*/
   height: 230px;
@@ -78,8 +78,8 @@ export default {
 }
 
 .el-aside {
-  background-color: #D3DCE6;
-  color: #333;
+  /*background-color: #D3DCE6;*/
+  /*color: #333;*/
   /*float: left;*/
   /*text-align: center;*/
   /*line-height: 200px;*/
@@ -88,7 +88,7 @@ export default {
 .homePageInfoType {
   width: 60%;
   height: 100%;
-  background: red;
+  /*background: red;*/
   float: left;
   /*padding-left: 100px;*/
   /*padding-left: 20px;*/
@@ -102,7 +102,7 @@ export default {
 .homePageInfoType > div {
   /*margin-top: 170px;*/
   margin-left: 180px;
-  background: green;
+  /*background: green;*/
   width: 10%;
   height: 120px;
   word-wrap: break-word;
@@ -115,7 +115,7 @@ export default {
   /*margin-left: 0;*/
 }
 .homePageInfoContent {
-  background: yellow;
+  /*background: yellow;*/
   width: 40%;
   height: 100%;
   float: left;
@@ -131,7 +131,7 @@ export default {
   /*margin-top: 120px;*/
   margin-left: 10px;
 
-  background: orange;
+  /*background: orange;*/
   width: 10%;
   height: auto;
 
@@ -146,8 +146,8 @@ export default {
 }
 
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  /*background-color: #E9EEF3;*/
+  /*color: #333;*/
   /*text-align: center;*/
   /*padding: 0;*/
   /*margin: 0;*/
@@ -191,8 +191,8 @@ export default {
 /*}*/
 
 .homePageInfoExample {
-  background: blue;
-  width: 500px;
+  /*background: blue;*/
+  width: 560px;
   height: auto;
   /*background: green;*/
   /*padding-left: 160px;*/
@@ -201,8 +201,8 @@ export default {
   margin-top: 50px;
 }
 .homePageInfoExample > ul {
-  background: purple;
-  background: orange;
+  /*background: purple;*/
+  /*background: orange;*/
   width: 100%;
   height: auto;
   padding-left: 0;
@@ -239,11 +239,11 @@ li:before {
 }
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+  /*background-color: #99a9bf;*/
 }
 
 .el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
+  /*background-color: #d3dce6;*/
 }
 .demo-image {
   width: 100%;

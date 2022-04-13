@@ -151,13 +151,14 @@ export default {
 <style scoped>
 .common-layout .el-header,
 .common-layout .el-footer {
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
+  /*background-color: #b3c0d1;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 60px;*/
   /*padding: 0;*/
   /*margin: 0;*/
   /*height: auto;*/
+  background-color: #f4f0e6;
 }
 
 .common-layout .el-footer {
@@ -165,20 +166,21 @@ export default {
 }
 
 .common-layout .el-aside {
-  background-color: #d3dce6;
-  color: var(--el-text-color-primary);
+  /*background-color: #d3dce6;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
-  background-color: #e9eef3;
-  color: var(--el-text-color-primary);
+  /*background-color: #e9eef3;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 160px;*/
   /*padding: 0;*/
   /*padding-left: 240px;*/
   /*padding-right: 240px;*/
+  background-color: #f4f0e6;
 }
 
 .common-layout > .el-container {
@@ -212,7 +214,7 @@ export default {
 }
 
 .type {
-  width: 75%;
+  width: 73%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,7 +244,7 @@ export default {
 }
 
 .vlog-uploader .el-upload:hover {
-  border-color: #409eff;
+  /*border-color: #409eff;*/
 }
 
 .el-icon.vlog-uploader-icon {

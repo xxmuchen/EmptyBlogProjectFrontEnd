@@ -15,6 +15,6 @@ export default {
 
 <style>
 #app {
-
+  /*font-family: 华文行楷;*/
 }
 </style>

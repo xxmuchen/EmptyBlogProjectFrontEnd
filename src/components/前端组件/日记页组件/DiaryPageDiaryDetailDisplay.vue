@@ -69,7 +69,7 @@
             this.hasAlreadLike(diary_id)
             this.hasAlreadCollect(diary_id)
             console.log(this.diary)
-            this.BgColor = { background: this.diary.bgColor}
+            // this.BgColor = { background: this.diary.bgColor}
             // console.log(this.BgColor)
           })
         }
@@ -163,12 +163,12 @@
 </script>
 <style scoped>
   .el-container {
-    background: #99a9bf;
+    /*background: #99a9bf;/*/
     /*padding-left: 100px;*/
     /*padding-right: 100px;*/
   }
   .el-main {
-    background-color: #E9EEF3;
+    /*background-color: #E9EEF3;*/
     color: #333;
     padding: 0;
     margin: 0;
@@ -198,7 +198,7 @@
   .headInfo {
     width: 100%;
     height: 100px;
-    background: gray;
+    /*background: gray;*/
     padding: 0;
     margin: 0;
     /*padding-top: 30px;*/

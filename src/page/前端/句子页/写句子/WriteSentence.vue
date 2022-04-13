@@ -45,9 +45,9 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="背景色">
-              <el-color-picker v-model="ruleForm.bgColor" show-alpha />
-            </el-form-item>
+<!--            <el-form-item label="背景色">-->
+<!--              <el-color-picker v-model="ruleForm.bgColor" show-alpha />-->
+<!--            </el-form-item>-->
             <el-form-item label="公开">
               <el-switch
                   v-model="ruleForm.public"
@@ -215,13 +215,14 @@ export default {
 <style scoped>
 .common-layout .el-header,
 .common-layout .el-footer {
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
+  /*background-color: #b3c0d1;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 60px;*/
   /*padding: 0;*/
   /*margin: 0;*/
   /*height: auto;*/
+  background-color: #f4f0e6;
 }
 
 .common-layout .el-footer {
@@ -229,20 +230,21 @@ export default {
 }
 
 .common-layout .el-aside {
-  background-color: #d3dce6;
-  color: var(--el-text-color-primary);
+  /*background-color: #d3dce6;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
-  background-color: #e9eef3;
-  color: var(--el-text-color-primary);
+  /*background-color: #e9eef3;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 160px;*/
   /*padding: 0;*/
   padding-left: 240px;
   padding-right: 240px;
+  background-color: #f4f0e6;
 }
 
 .common-layout > .el-container {
@@ -278,7 +280,7 @@ export default {
 
 
 .type {
-  width: 77%;
+  width: 73%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -303,6 +305,7 @@ export default {
 .el-form-item {
   /*width: auto;*/
   /*padding: 0;*/
+  margin-left: 30px;
 }
 
 .diaryConfiguration {
@@ -327,6 +330,7 @@ export default {
 .submit {
   /*margin-left: 240px;*/
   margin-top: 5px;
+  margin-left: 30px;
 }
 .el-select {
   min-width: 300px;

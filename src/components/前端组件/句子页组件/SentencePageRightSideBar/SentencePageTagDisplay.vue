@@ -4,12 +4,10 @@
       <el-row :gutter="20" v-for="(items , index) in sentenceTagList" :key="index">
 
           <el-col :span="6" v-for="item in items" :key="item.id" >
-            <router-link :to="{name: 'SentencePageHomeDisplay' , query: {tag: item.tagName}}">
-              <div class="grid-content bg-purple" v-text="item.tagName">
-              </div>
-            </router-link>
+              <div class="grid-content bg-purple">
+                <router-link :to="{name: 'SentencePageHomeDisplay' , query: {tag: item.tagName}}">{{ item.tagName }}
+              </router-link></div>
           </el-col>
-
       </el-row>
     </div>
   </div>
@@ -56,11 +54,14 @@
     align-content: center;
     justify-items: center;
     justify-content: center;
+    /*background-color: #d9d9f3;*/
+    /*padding-left: 100px;*/
+    /*padding-right: 100px;*/
   }
   .sentencePageTag {
-    width: 60%;
+    width: 80%;
     height: 100%;
-    background: red;
+    /*background: red;*/
   }
   /*.firstRow {*/
   /*  margin-top: 30px;*/
@@ -76,13 +77,13 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    /*background: #99a9bf;*/
   }
   .bg-purple {
-    background: #d3dce6;
+    /*background: #d3dce6;*/
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    /*background: #e5e9f2;*/
   }
   .grid-content {
     border-radius: 4px;
@@ -90,7 +91,7 @@
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #f9fafc;
+    /*background-color: #f9fafc;*/
   }
   .el-col div {
     display: flex;

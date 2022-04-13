@@ -18,8 +18,8 @@
           </div>
           <div class="rightSide">
             <div class="controlVideo">
-              <div v-on:click="nextToNextVideo" class="nextToNextVideo">next</div>
-              <div v-on:click="prevToLastVideo" class="prevToLastVideo">prev</div>
+              <div v-on:click="nextToNextVideo" class="nextToNextVideo"><i class="iconfont icon-up"></i></div>
+              <div v-on:click="prevToLastVideo" class="prevToLastVideo"><i class="iconfont icon-down"></i></div>
             </div>
             <div class="avator">
               <div class="block"><el-avatar :size="50" :src="item.authorAvatar"></el-avatar></div>
@@ -251,15 +251,15 @@
 </script>
 <style scoped>
 .el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
+  /*background-color: #B3C0D1;*/
+  /*color: #333;*/
   text-align: center;
   line-height: 40px;
   height: auto;
 }
 .el-main {
-  background-color: #E9EEF3;
-  color: #333;
+  /*background-color: #E9EEF3;*/
+  /*color: #333;*/
   padding: 0;
   margin: 0;
   /*text-align: center;*/
@@ -292,11 +292,11 @@ body > .el-container {
 
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+  /*background-color: #99a9bf;*/
 }
 
 .el-carousel__item:nth-child(2n+1) {
-  background-color: #d3dce6;
+  /*background-color: #d3dce6;*/
 }
 .el-carousel-item {
   width: 100%;
@@ -321,7 +321,7 @@ video-play {
 .controlVideo {
   width: 50px;
   height: 140px;
-  background: greenyellow;
+  /*background: greenyellow;*/
   border-radius: 50px;
   position: absolute;
   /*top: 30px;*/

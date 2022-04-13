@@ -180,7 +180,7 @@ export default {
 
 
 .el-main {
-  background-color: #E9EEF3;
+  /*background-color: #E9EEF3;*/
   color: #333;
   padding: 0;
   margin: 0;
@@ -188,7 +188,7 @@ export default {
   height: 100%;
   padding-left: 130px;
   padding-right: 130px;
-  background: green;
+  /*background: green;*/
   padding-bottom: 40px;
 
   display: flex;
@@ -211,13 +211,13 @@ body > .el-container {
 .leftContent {
   /*width: 60%;*/
   /*height: auto;*/
-  background: gray;
+  /*background: gray;*/
 }
 
 .sentenceContentSingle {
   width: 100%;
   height: auto;
-  background: #B3C0F1;
+  /*background: #B3C0F1;*/
   margin-top: 30px;
   border-radius: 10px;
 }
@@ -250,6 +250,11 @@ body > .el-container {
   width: 100%;
   min-height: 280px;
   height: auto;
+  background-color: #ceefe4;
+  border-bottom: 2px solid lightgray;
+  border-right: 2px solid lightgray;
+  box-shadow: 0px 0px 1px 1px lightgray;
+  /*border: 2px solid lightgray;*/
 }
 .sentenceContent {
   width: 100%;
@@ -283,7 +288,7 @@ body > .el-container {
   /*padding-left: 10px;*/
   /*background: red;*/
   /*justify-content:center;*/
-  border-bottom: 1px solid lightgray;
+  /*border: 1px solid lightgray;*/
 }
 .operation {
   width: 50px;
@@ -302,12 +307,14 @@ body > .el-container {
 .sentenceFooter {
   width: 100%;
   height: auto;
-  background: aqua;
+  /*background: aqua;*/
   display: flex;
   /*实现垂直居中*/
   align-items: center;
   /*实现水平居中*/
   justify-content: center;
+  background-color: #F8F4E3;
+  margin-top: 10px;
 }
 ::v-deep(.demo-basic) {
   width: 8.5%;
@@ -345,7 +352,7 @@ body > .el-container {
   width: 25%;
   height: auto;
   /*float: left;*/
-  background: red;
+  /*background: red;*/
   margin-top: 30px;
   border-radius: 10px;
   margin-left: 50px;
@@ -353,6 +360,7 @@ body > .el-container {
   /*top: 30px;*/
   left: 60%;
   word-break:break-all;
+  background-color: #d9d9f3;
   /*padding-left: ;*/
 }
 .sentenceType {
@@ -362,7 +370,7 @@ body > .el-container {
 .sentenceTypeHeader {
   width: 100%;
   min-height: 30px;
-  background: greenyellow;
+  /*background: greenyellow;*/
   display: flex;
   align-items: center;
   /*justify-content: center;*/
@@ -393,13 +401,13 @@ body > .el-container {
   border-radius: 4px;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
 }
 .bg-purple {
-  background: #d3dce6;
+  /*background: #d3dce6;*/
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
 }
 .grid-content {
   border-radius: 4px;
@@ -407,7 +415,7 @@ body > .el-container {
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 .grid-content {
   display: flex;

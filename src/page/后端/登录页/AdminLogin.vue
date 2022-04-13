@@ -8,8 +8,7 @@
                 ref="ruleFormRef"
                 :model="ruleForm"
                 :rules="rules"
-                class="demo-ruleForm"
-                :size="formSize"
+                size="default"
             >
               <el-form-item>
                 <div class="administratorLoginFont">管理员登录</div>
@@ -68,6 +67,11 @@
     }
 </script>
 <style scoped>
+  .common-layout {
+    background-color: #9dd3a8;
+    font-family: 华文行楷;
+
+  }
   .el-main {
     display: flex;
     /*align-items: center;*/
@@ -77,9 +81,13 @@
     margin-top: 150px;
   }
   .mangerLogin {
-    width: 500px;
-    height: 300px;
-    background: red;
+    width: 600px;
+    height: 400px;
+    /*background: red;*/
+
+    background-color: #ceefe4;
+    box-shadow: 5px 5px lightgray;
+
     display: flex;
     align-items: center;
     align-content: center;
@@ -91,9 +99,16 @@
     height: auto;
     /*padding-top: 10px;*/
   }
+  .el-form {
+    font-size: 30px;
+  }
   .el-form-item {
     margin-top: 20px;
     width: 100%;
+
+  }
+  ::v-deep(label) {
+    font-size: 18px;
   }
   .administratorLoginFont {
     width: 100%;
@@ -103,6 +118,8 @@
     align-content: center;
     justify-content: center;
     justify-items: center;
+    font-size: 27px;
+
   }
   .loginButton {
     width: 100%;

@@ -60,12 +60,24 @@
               <router-link :to="{name : 'MySpaceOwnCollectGriphic'}"><el-menu-item index="4-3">收藏的图文</el-menu-item></router-link>
             </el-menu-item-group>
           </el-sub-menu>
-          <router-link :to="{ name: 'MySpaceOwnSetting'}"><el-menu-item index="5">
+
+<!--          <router-link :to="{ name: 'MySpaceOwnSetting'}"><el-sub-menu index="5">-->
+<!--            <template #title>-->
+<!--              <el-icon>-->
+<!--                <i class="iconfont icon-31tuwenxiangqing"></i>-->
+<!--              </el-icon>-->
+<!--              <span>设置</span>-->
+<!--            </template>-->
+<!--          </el-sub-menu></router-link>-->
+
+
+          <router-link :to="{ name: 'MySpaceOwnSetting'}">
+            <el-menu-item index="5">
             <el-icon>
               <setting/>
             </el-icon>
             <span>设置</span>
-          </el-menu-item></router-link>
+            </el-menu-item></router-link>
         </el-menu>
       </el-aside>
       <el-main>
@@ -244,8 +256,8 @@ export default {
 <style scoped>
 .common-layout .el-header,
 .common-layout .el-footer {
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
+  /*background-color: #b3c0d1;*/
+  /*color: var(--el-text-color-primary);*/
   text-align: center;
   /*line-height: 60px;*/
 }
@@ -254,15 +266,15 @@ export default {
 }
 
 .common-layout .el-aside {
-  background-color: #d3dce6;
-  color: var(--el-text-color-primary);
+  /*background-color: #d3dce6;*/
+  /*color: var(--el-text-color-primary);*/
   text-align: center;
   /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
-  background-color: #e9eef3;
-  color: var(--el-text-color-primary);
+  /*background-color: #e9eef3;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 160px;*/
 }
@@ -283,6 +295,15 @@ export default {
   width: 100%;
 }
 
+.el-menu {
+  background-color: #fffcf0;
+}
+.el-menu-item-group {
+  background-color: #fffcf0;
+}
+.el-menu-item {
+  background-color: #fffcf0;
+}
 .userInfo {
   width: auto;
   display: flex;

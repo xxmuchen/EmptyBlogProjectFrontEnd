@@ -148,5 +148,9 @@ export default {
   .el-menu {
     width: 100%;
     height: 100%;
+    background-color: #f4f0e6;
+  }
+  .el-menu-item {
+    background-color: #f4f0e6;
   }
 </style>

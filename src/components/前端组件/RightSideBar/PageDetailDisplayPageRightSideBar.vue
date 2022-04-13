@@ -43,11 +43,12 @@
 .authorInformation {
   margin-left: 25px;
   margin-right: 25px;
+  /*background-color: #d9d9f3;*/
 }
 .sentenceAuthorInformationHeader {
   width: 100%;
   min-height: 30px;
-  background: greenyellow;
+  /*background: greenyellow;*/
   display: flex;
   align-items: center;
   /*justify-content: center;*/
@@ -55,7 +56,7 @@
 .authorInformationContent {
   width: 100%;
   height: auto;
-  background: #B3C0F1;
+  /*background: #B3C0F1;*/
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -94,13 +95,13 @@
   border-radius: 4px;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
 }
 .bg-purple {
-  background: #d3dce6;
+  /*background: #d3dce6;*/
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
 }
 .grid-content {
   border-radius: 4px;
@@ -108,6 +109,6 @@
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 </style>

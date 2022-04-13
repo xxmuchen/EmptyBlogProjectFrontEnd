@@ -31,11 +31,15 @@
                 <div class="sentenceContentAuthor" v-text="item.originalAuthor"></div>
               </div>
             </router-link>
-            <div class="sentenceFooter">
-              <div class="commentSection">
-                <el-input v-model="rootObserveContent" :disabled="isDisable" placeholder="请输入内容" @keyup.enter="addRootObserve(item.id)"></el-input>
-              </div>
-            </div>
+            <el-form>
+              <el-form-item>
+                <div class="sentenceFooter">
+                  <div class="commentSection">
+                    <el-input v-model="rootObserveContent" :disabled="isDisable" placeholder="请输入内容" @keyup.enter="addRootObserve(item.id)"></el-input>
+                  </div>
+                </div>
+              </el-form-item>
+            </el-form>
           </div>
         </li>
       </ul>
@@ -149,19 +153,19 @@ export default {
   padding: 0;
   padding-left: 130px;
   padding-right: 130px;
-  background: red;
+  /*background: red;*/
 }
 
 
 .el-main {
-  background-color: #E9EEF3;
+  /*background-color: #E9EEF3;*/
   color: #333;
   padding: 0;
   margin: 0;
 
   padding-left: 130px;
   padding-right: 130px;
-  background: green;
+  /*background: green;*/
   padding-bottom: 40px;
 
   display: flex;
@@ -185,7 +189,7 @@ body > .el-container {
 .leftContent {
   width: 60%;
   height: 100%;
-  background: gray;
+  /*background: gray;*/
 }
 
 
@@ -202,13 +206,14 @@ body > .el-container {
   padding: 0;
   margin: 0;
   list-style: none;
+  /*background-color: #ceefe4;*/
 }
 .infinite-list .infinite-list-item {
   display: flex;
   align-items: center;
   justify-content: center;
   /*height: 50px;*/
-  background: var(--el-color-primary-light-9);
+  /*background: var(--el-color-primary-light-9);*/
   margin: 10px;
   /*margin-top: 25px;*/
   color: var(--el-color-primary);
@@ -220,7 +225,7 @@ body > .el-container {
 .sentenceContentSingle {
   width: 100%;
   height: auto;
-  background: #B3C0F1;
+  /*background: #B3C0F1;*/
   /*margin-top: 30px;*/
   border-radius: 10px;
 }
@@ -229,7 +234,9 @@ body > .el-container {
   width: 100%;
   height: 50px;
   /*background: #4F8EFF;*/
+  background-color: #ceefe4;
   border-bottom: 1px solid lightgray;
+
 }
 
 .demo-basic--circle {
@@ -268,7 +275,9 @@ body > .el-container {
   min-height: 280px;
   height: auto;
   /*background: yellow;*/
-
+  background-color: #ceefe4;
+  border-bottom: 2px solid lightgray;
+  /*background-color: #9dd3a8;*/
   /*padding-left: 30px;*/
 }
 
@@ -331,12 +340,13 @@ body > .el-container {
 .sentenceFooter {
   width: 100%;
   height: 50px;
-  background: aqua;
+  /*background: aqua;*/
   display: flex;
   /*实现垂直居中*/
   align-items: center;
   /*实现水平居中*/
   justify-content: center;
+  background-color: #ceefe4;
 }
 
 .commentSection {
@@ -390,7 +400,7 @@ body > .el-container {
   width: 25%;
   height: auto;
   /*float: left;*/
-  background: red;
+  /*background: red;*/
   margin-top: 30px;
   border-radius: 10px;
   margin-left: 50px;
@@ -398,6 +408,7 @@ body > .el-container {
   /*top: 30px;*/
   left: 60%;
   word-break: break-all;
+  background-color: #d9d9f3;
   /*padding-left: ;*/
 }
 

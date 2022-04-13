@@ -82,11 +82,12 @@ export default {
 }
 .card {
   padding: 10px;
-  background-color: white;
+  /*background-color: white;*/
   border-radius: 3px;
   color: #666;
   line-height: 1.5;
   word-break: break-all;
+  background-color: #fffcf0;
 }
 .card .img {
   width: 100%;

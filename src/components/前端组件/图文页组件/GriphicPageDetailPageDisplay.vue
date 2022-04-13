@@ -177,12 +177,12 @@ export default {
   padding-left: 130px;
   padding-right: 130px;
   /*padding-bottom: 130px;*/
-  background: red;
+  /*background: red;*/
 }
 
 
 .el-main {
-  background-color: #E9EEF3;
+  /*background-color: #E9EEF3;*/
   color: #333;
   padding: 0;
   margin: 0;
@@ -214,7 +214,7 @@ body > .el-container {
 /*  width: 60%;*/
   /*height: 100%;*/
   /*min-height: 300px;*/
-  background: red;
+  /*background: red;*/
 
   /*margin-bottom: 100px;*/
   /*padding-bottom: 40px;*/
@@ -268,6 +268,7 @@ body > .el-container {
   width: 100%;
   min-height: 280px;
   height: auto;
+  background-color: #ceefe4;
   /*background: yellow;*/
 
   /*padding-left: 30px;*/
@@ -277,6 +278,7 @@ body > .el-container {
   min-height: 140px;
   height: auto;
   display: flex;
+
   /*padding-left: 30px;*/
   /*align-items: end;!*实现水平居中*!*/
   /*justify-content:center;*/
@@ -328,7 +330,7 @@ body > .el-container {
   width: 25%;
   height: auto;
   /*float: left;*/
-  background: red;
+  /*background: red;*/
   margin-top: 30px;
   border-radius: 10px;
   margin-left: 50px;
@@ -336,6 +338,7 @@ body > .el-container {
   /*top: 30px;*/
   left: 60%;
   word-break:break-all;
+  background-color: #d9d9f3;
   /*padding-left: ;*/
 }
 .sentenceType {
@@ -345,7 +348,7 @@ body > .el-container {
 .sentenceTypeHeader {
   width: 100%;
   min-height: 30px;
-  background: greenyellow;
+  /*background: greenyellow;*/
   display: flex;
   align-items: center;
   /*justify-content: center;*/
@@ -376,13 +379,13 @@ body > .el-container {
   border-radius: 4px;
 }
 .bg-purple-dark {
-  background: #99a9bf;
+  /*background: #99a9bf;*/
 }
 .bg-purple {
-  background: #d3dce6;
+  /*background: #d3dce6;*/
 }
 .bg-purple-light {
-  background: #e5e9f2;
+  /*background: #e5e9f2;*/
 }
 .grid-content {
   border-radius: 4px;
@@ -390,7 +393,7 @@ body > .el-container {
 }
 .row-bg {
   padding: 10px 0;
-  background-color: #f9fafc;
+  /*background-color: #f9fafc;*/
 }
 .grid-content {
   display: flex;
@@ -428,13 +431,15 @@ body > .el-container {
 .sentenceFooter {
   width: 100%;
   height: auto;
-  background: aqua;
+  /*background: aqua;*/
   display: flex;
   /*实现垂直居中*/
   align-items: center;
   /*实现水平居中*/
   justify-content: center;
   padding: 0;
+  background-color: #F8F4E3;
+  margin-top: 10px;
 }
 ::v-deep(.demo-basic) {
   width: 8.5%;

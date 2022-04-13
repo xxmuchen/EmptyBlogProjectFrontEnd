@@ -88,34 +88,37 @@
         this.getLatestNoticeInfo()
       },
       getLatestNoticeInfo() {
-        axios.get("/getLatestNoticeInfo").then(response => {
-          if (response.data !== "") {
-            // console.log(response)
-            ElMessageBox.confirm(
-                response.data.content,
-                '公告',
-                {
-                  confirmButtonText: '确认',
-                  cancelButtonText: '取消',
-                  // type: 'warning',
-                }
-            )
-                .then(() => {
-                  axios.post("/confirmNotice" , {
-                    noticeId: response.data.id
-                  })
-                  ElMessage({
-                    type: 'success',
-                    message: '公告确认成功',
-                  })
-                }).catch(() => {
-              ElMessage({
-                type: 'error',
-                message: '公告确认失败',
+        let eleToken = localStorage.getItem('eleToken')
+        if (eleToken !== null) {
+          axios.get("/getLatestNoticeInfo").then(response => {
+            if (response.data !== "") {
+              // console.log(response)
+              ElMessageBox.confirm(
+                  response.data.content,
+                  '公告',
+                  {
+                    confirmButtonText: '确认',
+                    cancelButtonText: '取消',
+                    // type: 'warning',
+                  }
+              )
+                  .then(() => {
+                    axios.post("/confirmNotice", {
+                      noticeId: response.data.id
+                    })
+                    ElMessage({
+                      type: 'success',
+                      message: '公告确认成功',
+                    })
+                  }).catch(() => {
+                ElMessage({
+                  type: 'error',
+                  message: '公告确认失败',
+                })
               })
-            })
-          }
-        })
+            }
+          })
+        }
       }
     },
     mounted() {
@@ -130,6 +133,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  margin-top: -10px;
+  font-size: 20px;
+  font-family: 华文行楷;
 }
 .demo-basic .sub-title {
   /*margin-bottom: 10px;*/

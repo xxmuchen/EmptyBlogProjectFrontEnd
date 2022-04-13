@@ -302,8 +302,8 @@ export default {
 <style scoped>
 .common-layout .el-header,
 .common-layout .el-footer {
-  background-color: #b3c0d1;
-  color: var(--el-text-color-primary);
+  /*background-color: #b3c0d1;*/
+  /*color: var(--el-text-color-primary);*/
   text-align: center;
   /*line-height: 60px;*/
 }
@@ -312,15 +312,15 @@ export default {
 }
 
 .common-layout .el-aside {
-  background-color: #d3dce6;
-  color: var(--el-text-color-primary);
+  /*background-color: #d3dce6;*/
+  /*color: var(--el-text-color-primary);*/
   text-align: center;
   /*line-height: 200px;*/
 }
 
 .common-layout .el-main {
-  background-color: #e9eef3;
-  color: var(--el-text-color-primary);
+  /*background-color: #e9eef3;*/
+  /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 160px;*/
 }

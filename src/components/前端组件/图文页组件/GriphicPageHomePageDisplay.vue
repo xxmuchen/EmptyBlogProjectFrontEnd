@@ -125,9 +125,9 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 body {
-  background-color: #f2f3f8;
+  //background-color: #f2f3f8;
 }
 .el-breadcrumb {
    margin-top: 30px;
@@ -139,11 +139,12 @@ body {
 }
 .card {
   padding: 10px;
-  background-color: white;
+  //background-color: white;
   border-radius: 3px;
   color: #666;
   line-height: 1.5;
   word-break: break-all;
+  background-color: #fffcf0;
   .img {
     width: 100%;
     margin-bottom: 5px;

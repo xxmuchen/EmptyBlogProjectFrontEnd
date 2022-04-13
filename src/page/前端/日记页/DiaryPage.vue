@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header height="auto">
-      <el-row :gutter="20">
+      <el-row :gutter="20" style="font-family: 华文行楷;font-size: 20px">
         <el-col :span="3" :offset="1">
           <TopLogo></TopLogo>
         </el-col>
@@ -72,20 +72,21 @@
 </script>
 <style scoped>
   .el-header, .el-footer {
-    background-color: #B3C0D1;
-    color: #333;
+    /*background-color: #B3C0D1;*/
+    /*color: #333;*/
     text-align: center;
-    line-height: 40px;
+    /*line-height: 40px;*/
     height: auto;
-
+    background-color: #f4f0e6;
   }
   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
+    /*background-color: #E9EEF3;*/
+    /*color: #333;*/
     /*text-align: center;*/
     /*line-height: 160px;*/
     padding: 0;
     margin: 0;
+    background-color: #f4f0e6;
     /*height: 100%;*/
   }
 
@@ -118,13 +119,13 @@
 
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    /*background: #99a9bf;*/
   }
   .bg-purple {
-    background: #d3dce6;
+    /*background: #d3dce6;*/
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    /*background: #e5e9f2;*/
   }
   .grid-content {
     border-radius: 4px;
@@ -132,6 +133,6 @@
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #f9fafc;
+    /*background-color: #f9fafc;*/
   }
 </style>

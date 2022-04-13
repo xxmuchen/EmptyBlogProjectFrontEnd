@@ -1,10 +1,9 @@
 <template>
   <el-row :gutter="20">
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有日记')">所有日记</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的日记')">审批通过的日记</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的日记')">待审批的日记</div></el-col>
-    <el-col :span="6"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的日记')">审批不通过的日记</div></el-col>
-<!--    <el-col :span="6"><div class="grid-content bg-purple" /></el-col>-->
+    <el-col :span="4" :offset="1"><div class="grid-content bg-purple" @click="switchingAuditStatus('所有日记')">所有日记</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批通过的日记')">审批通过的日记</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('待审批的日记')">待审批的日记</div></el-col>
+    <el-col :span="4" :offset="2"><div class="grid-content bg-purple" @click="switchingAuditStatus('审批不通过的日记')">审批不通过的日记</div></el-col>
   </el-row>
       <div class="tableContent">
         <el-table
@@ -12,7 +11,8 @@
             :row-key="tableData.id"
             style="width: 100%"
             :show-header="true"
-            :row-style="{height: '70px',background: '#88a9bf'}"
+            :row-style="{height: '70px',background: '#f3e8d6'}"
+
             :lazy="true"
         >
           <el-table-column
@@ -156,17 +156,35 @@ export default {
 }
 </script>
 <style scoped>
-.el-scrollbar{
-  height: 500px;
-}
 .el-row {
   margin-bottom: 20px;
-
-  /*display: flex;*/
-
 }
 .el-row:last-child {
   margin-bottom: 0;
+}
+.el-col {
+  border-radius: 4px;
+
+}
+.bg-purple-dark {
+  /*background: #99a9bf;*/
+  background-color: #d9d9f3;
+}
+.bg-purple {
+  /*background: #d3dce6;*/
+  background-color: #d9d9f3;
+}
+.bg-purple-light {
+  /*background: #e5e9f2;*/
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  /*background-color: #f9fafc;*/
+  background-color: #d9d9f3;
 }
 .grid-content {
   display: flex;
@@ -175,23 +193,12 @@ export default {
   justify-content: center;
   justify-items: center;
 }
-.bg-purple-dark {
-  background: #99a9bf;
-}
-.bg-purple {
-  background: #d3dce6;
-}
-.bg-purple-light {
-  background: #e5e9f2;
-}
+
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
 }
-.row-bg {
-  padding: 10px 0;
-  background-color: #f9fafc;
-}
+
 .tableContent {
   margin-top: 10px;
 }

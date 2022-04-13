@@ -1,17 +1,20 @@
 <template>
   <el-container>
     <el-header>
-      <router-link :to="{name: 'VLogPage'}">
+
         <div class="homePageInfoType">
-          <div style="font: 20px Extra large">{{ homePageDisplayType }}<br /></div>
+          <div style="font-size: 28px;font-family: 华文行楷">
+            <router-link :to="{name: 'VLogPage'}">{{ homePageDisplayType }}</router-link>
+            <br />
+          </div>
         </div>
-      </router-link>
+
       <div class="homePageInfoContent">
-        <div style="font: 16px Medium" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
+        <div style="font-size: 20px;font-family: 华文楷体" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
       </div>
     </el-header>
     <el-main>
-      <el-carousel  :autoplay="false" height="350px"
+      <el-carousel  :autoplay="false" height="450px"
 
                    @change="getIndex"
                    ref="carousel">
@@ -107,8 +110,8 @@
 </script>
 <style scoped>
   .el-header, .el-footer {
-    background-color: #D2C3E1;
-    color: #333;
+    /*background-color: #D2C3E1;*/
+    /*color: #333;*/
     /*text-align: center;*/
     /*line-height: 60px;*/
     height: 150px;
@@ -128,7 +131,7 @@
     /*padding-top: 100px;*/
   }
   .homePageInfoType > div {
-    background: green;
+    /*background: green;*/
     width: 300px;
     height: auto;
     text-align:center
@@ -150,7 +153,7 @@
     margin-top: 35px;
   }
   .homePageInfoContent > div {
-    background: orange;
+    /*background: orange;*/
     width: 300px;
     height: auto;
     /*background: green;*/
@@ -158,8 +161,8 @@
     text-align:center
   }
   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
+    /*background-color: #E9EEF3;*/
+    /*color: #333;*/
     /*padding: 0;*/
     /*margin: 0;*/
     /*text-align: center;*/

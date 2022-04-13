@@ -2,10 +2,10 @@
   <el-container>
     <el-aside width="700px">
       <div class="homePageInfoContent">
-        <div style="font: 20px Extra large" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
+        <div style="font-size: 30px;font-family: 华文行楷" v-for="item in homePageInfoContent" :key="item.id">{{ item.content }}<br /></div>
       </div>
       <div class="homePageInfoExample">
-        <div style="font: 16px Medium" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}<br /></div>
+        <div style="font-size: 20px;font-family: 华文楷体" v-for="item in homePageInfoExample" :key="item.id">{{ item.content }}<br /></div>
       </div>
     </el-aside>
 
@@ -64,7 +64,7 @@
 
 
   .el-aside {
-    background-color: #D3DCE6;
+    /*background-color: #D3DCE6;*/
     color: #333;
     /*text-align: center;*/
     /*line-height: 200px;*/
@@ -73,7 +73,7 @@
   .homePageInfoContent{
     width: 300px;
     height: auto;
-    background: red;
+    /*background: red;*/
     padding-left: 160px;
     padding-top: 120px;
   }
@@ -103,7 +103,7 @@
   }
 
   .el-main {
-    background-color: #E9EEF3;
+    /*background-color: #E9EEF3;*/
     color: #333;
     /*text-align: center;*/
     /*line-height: 160px;*/
@@ -133,13 +133,13 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    /*background: #99a9bf;*/
   }
   .bg-purple {
-    background: #d3dce6;
+    /*background: #d3dce6;*/
   }
   .bg-purple-light {
-    background: #e5e9f2;
+    /*background: #e5e9f2;*/
   }
   .grid-content {
     border-radius: 4px;
@@ -147,7 +147,7 @@
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #f9fafc;
+    /*background-color: #f9fafc;*/
   }
 
  .el-carousel {
@@ -162,11 +162,11 @@
  }
 
  .el-carousel__item:nth-child(2n) {
-   background-color: #99a9bf;
+   /*background-color: #99a9bf;*/
  }
 
  .el-carousel__item:nth-child(2n+1) {
-   background-color: #d3dce6;
+   /*background-color: #d3dce6;*/
  }
  .demo-image {
    width: 100%;

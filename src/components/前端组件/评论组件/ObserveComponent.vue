@@ -3,7 +3,7 @@
   <el-container>
     <el-main>
       <el-form>
-        <el-form-item>
+<!--        <el-form-item>-->
       <div class="parentCommentSection">
         <div class="avatarAndInputBox">
           <div class="demo-avatar demo-basic">
@@ -14,6 +14,7 @@
             </div>
           </div>
           <div class="rootObserveContent">
+            <el-form-item>
             <el-input
                 v-model="rootObserveContent"
                 :rows="2"
@@ -21,6 +22,7 @@
                 placeholder="Please input"
                 :disabled="isDisabled"
             />
+            </el-form-item>
           </div>
 
         </div>
@@ -32,7 +34,7 @@
         </div>
         </el-form-item>
       </div>
-        </el-form-item>
+<!--        </el-form-item>-->
         <el-divider></el-divider>
       <div class="commentsShow">
         <el-tree

@@ -29,7 +29,7 @@
 
         <div class="sentenceFooter">
           <div class="commentSection">
-            <ObserveComponent :obj_id="sentence.id" objType='放空句子' v-if="sentence.id != null"></ObserveComponent>
+            <ObserveComponent :obj_id="sentence.id" :objType='放空句子' v-if="sentence.id != null"></ObserveComponent>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
 
     <!--        这部分要拆分成一个新的组件-->
     <div class="rightContent">
-      <PageDetailDisplayPageRightSideBar></PageDetailDisplayPageRightSideBar>
+      <PageDetailDisplayPageRightSideBar :user_id="sentence.authorId" v-if="sentence.id != null"></PageDetailDisplayPageRightSideBar>
     </div>
   </el-main>
   <!--  </el-container>-->
@@ -165,6 +165,7 @@ export default {
   },
   mounted() {
     this.getencounterLoverSentence()
+
   }
 }
 </script>

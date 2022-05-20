@@ -6,12 +6,12 @@
     <div class="authorInformationContent">
         <div class="avatarAndInfo">
           <div class="demo-basic--circle">
-            <div class="block"><el-avatar size="large" :src="circleUrl"></el-avatar></div>
+            <div class="block"><el-avatar size="large" :src="userBlogInfo.userAvatar"></el-avatar></div>
           </div>
           <div class="userName">
-            wcx
+            {{ userBlogInfo.userName }}
             <div class="IndividualitySignature">
-              你是我独一无二的玫瑰cccccccccccccccc
+              {{ userBlogInfo.userSynopsis }}
             </div>
           </div>
 
@@ -19,23 +19,38 @@
         <div class="workInfomation">
           <el-row :gutter="20">
             <el-col :span="6"><div class="grid-content bg-purple">
-              日记<br>3
+              日记<br>{{ userBlogInfo.userDiaryCount }}
             </div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">句子<br>3</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">Vlog<br>3</div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple">图文<br>3</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">句子<br>{{ userBlogInfo.userSentenceCount }}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">Vlog<br>{{ userBlogInfo.userVlogCount }}</div></el-col>
+            <el-col :span="6"><div class="grid-content bg-purple">图文<br>{{ userBlogInfo.userGriphicCount }}</div></el-col>
           </el-row>
         </div>
     </div>
   </div>
 </template>
 <script>
+    import axios from "axios";
+
     export default {
       name: 'PageDetailDisplayPageRightSideBar',
+      props:['user_id'],
       data() {
         return {
-          circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+          // circleUrl: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+          userBlogInfo: {}
         }
+      },
+      methods: {
+        getUserInfoByUserId() {
+          axios.get('/getUserBlogInfoByUserId?userId=' + this.user_id).then(response => {
+              this.userBlogInfo = response.data
+          })
+        }
+      },
+      mounted() {
+        // console.log("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww" + this.user_id)
+        this.getUserInfoByUserId()
       }
     }
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <div class="common-layout">
+<!--  {{mySpaceBackgroundColor}}-->
+  <div class="common-layout" :style="mySpaceBackgroundColor">
+<!--  <div class="common-layout">-->
     <el-container>
       <el-aside width="200px">
         <h5 class="mb-2">我的空间</h5>
@@ -130,6 +132,7 @@ export default {
       }, 100)
     };
     return {
+      mySpaceBackgroundColor: {},
       dialogTableSeeInfoVisible: false,
       dialogFormModifyInfoVisible: false,
       formLabelWidth: '140px',
@@ -194,7 +197,12 @@ export default {
     }
   },
   methods: {
-
+    // updateBlogColor () {
+    //   this.$mybus.on('mySpaceColor' , data => {
+    //     this.mySpaceBackgroundColor = data
+    //     // console.log(data)
+    //   })
+    // },
     handleAvatarSuccess(res) {
       this.userInfo.avatar = res;
       // this.imageUrl = URL.createObjectURL(file.raw);
@@ -250,6 +258,10 @@ export default {
   },
   mounted() {
     this.getUserById()
+    this.$mybus.on('mySpaceColor' , (data) => {
+      // console.log(data)
+      this.mySpaceBackgroundColor = data
+    })
   }
 }
 </script>
@@ -269,6 +281,7 @@ export default {
   /*background-color: #d3dce6;*/
   /*color: var(--el-text-color-primary);*/
   text-align: center;
+  background-color: #fffcf0;
   /*line-height: 200px;*/
 }
 
@@ -277,6 +290,9 @@ export default {
   /*color: var(--el-text-color-primary);*/
   /*text-align: center;*/
   /*line-height: 160px;*/
+  /*margin: 0;*/
+  /*padding: 0;*/
+  padding-top: 0;
 }
 
 .common-layout > .el-container {

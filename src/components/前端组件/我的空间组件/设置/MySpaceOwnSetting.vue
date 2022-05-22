@@ -124,7 +124,29 @@
       </el-dialog>
     </div>
     <el-divider></el-divider>
-
+    <div class="settingSection">
+      <div class="mySpaceColor">
+        <div>我的空间颜色</div><br />
+        <el-form>
+          <el-form-item>
+           <el-color-picker v-model="mySpaceColor" show-alpha />
+          </el-form-item>
+        </el-form>
+      </div><br />
+      <div>
+       <div>博客撰写</div><br />
+        <el-row :gutter="20">
+          <el-col :span="6"><router-link :to="{name: 'WriteDiary'}"><div class="grid-content bg-purple">写日记</div></router-link></el-col>
+        <el-col :span="6"><router-link :to="{name: 'WriteSentence'}"><div class="grid-content bg-purple">写句子</div></router-link></el-col>
+        <el-col :span="6"><router-link :to="{name: 'WriteVlog'}"><div class="grid-content bg-purple">上传vlog</div></router-link></el-col>
+        <el-col :span="6"><router-link :to="{name: 'WriteGriphic'}"><div class="grid-content bg-purple">上传图文</div></router-link></el-col>
+      </el-row>
+      </div><br />
+      <div>
+        <div>退出登录</div><br />
+        <el-button type="danger" size="large" @click="logOut">退出登录</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -133,7 +155,7 @@ import axios from "axios";
 import {regionData, CodeToText} from 'element-china-area-data'
 import {reactive} from "vue";
 // import axios from "axios";
-import {ElMessage} from "element-plus";
+import {ElMessage, ElMessageBox} from "element-plus";
 export default {
   name: "MySpaceOwnSetting",
   data() {
@@ -222,20 +244,61 @@ export default {
       }),
       // imageUrl: '',
       options: regionData,
+      mySpaceColor: ''
     }
   },
   computed: {
     userLocation() {
-      console.log(this.userInfo.location)
+      // console.log(this.userInfo.location)
       if (this.userInfo.location.length === 3) {
         return CodeToText[this.userInfo.location[0]] + CodeToText[this.userInfo.location[1]] + CodeToText[this.userInfo.location[2]]
       } else {
         return ''
       }
+    },
+  },
+  watch: {
+    mySpaceColor: {
+      immediate:true,
+      handler(newValue,oldValue) {
+        console.log(oldValue)
+        let mySpaceColorStyle = 'background: ' + newValue
+        if (newValue !== ''){
+          axios.put('/updateUserSpaceColor' , {
+            mySpaceColorStyle
+          }).then(() => {
+            this.getUserById()
+            this.$mybus.emit("mySpaceColor" , this.userInfo.mySpaceColor)
+            // console.log(this)
+          })
+        }
+      }
     }
   },
   methods: {
-
+    logOut() {
+      ElMessageBox.confirm(
+          '请问您确定要退出登录吗？',
+          'Warning',
+          {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning',
+          }
+      ).then(() => {
+        localStorage.removeItem('eleToken');
+        ElMessage({
+          type: 'success',
+          message: '退出登录成功',
+        })
+        this.$router.go(0)
+      }).catch(() => {
+        ElMessage({
+          type: 'info',
+          message: '退出登录取消',
+        })
+      })
+    },
     handleAvatarSuccess(res) {
       this.userInfo.avatar = res;
       axios.post('/updateUserAvatar', {
@@ -267,6 +330,9 @@ export default {
           if (this.userInfo.location !== null) {
             this.userInfo.location = this.userInfo.location.split(',')
           }
+          // console.log(response.data.mySpaceColor)
+          // this.mySpaceColor = response.data.mySpaceColor
+          this.$mybus.emit("mySpaceColor" , response.data.mySpaceColor)
         })
       }
     },
@@ -296,6 +362,14 @@ export default {
   },
   mounted() {
     this.getUserById()
+    // this.mySpaceColor = this.userInfo.mySpaceColor.substring()
+    // console.log(this.userInfo.mySpaceColor.substr(8 , 10))
+    setTimeout(() => {
+      this.mySpaceColor = this.userInfo.mySpaceColor.substring(12)
+      // console.log(this.userInfo.mySpaceColor.substring(12))
+
+    } , 1000)
+
   }
 }
 </script>
@@ -339,6 +413,9 @@ export default {
 }
 .main {
   width: 100%;
+  padding: 0;
+  margin: 0;
+  /*background: rg;*/
 }
 
 .userInfo {
@@ -384,5 +461,25 @@ export default {
 
 .el-tag {
   margin-left: 10px;
+}
+.el-row {
+  margin-bottom: 20px;
+}
+.el-row:last-child {
+  margin-bottom: 0;
+}
+.el-col {
+  border-radius: 4px;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+  background-color: rgba(219, 224, 174, 1);
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 </style>

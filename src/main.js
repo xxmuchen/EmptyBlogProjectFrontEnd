@@ -26,13 +26,15 @@ import "vue3-video-play/dist/style.css"; // 引入css
 import axios from "@/http/http";
 
 import store from '@/store/index'
-import mitt from "mitt";
+import mitt from 'mitt';
 import * as echarts from 'echarts'
 // import wangEditor from "wangeditor/src/wangEditor";
 
 
 
 const app = createApp(App)
+
+app.config.globalProperties.$mybus = new mitt()
 
 app.config.globalProperties.$echarts = echarts
 
@@ -49,7 +51,7 @@ app.use(vue3videoPlay)
 
 app.use(ElementPlus)
 
-app.config.globalProperties.$bus = new mitt()
+
 //在组件A中使用事务总线触发某个动作
 // this.$bus.emit("EVENTTYPE");
 //

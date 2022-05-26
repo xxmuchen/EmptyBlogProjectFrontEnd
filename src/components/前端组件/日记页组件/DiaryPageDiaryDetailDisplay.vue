@@ -18,6 +18,9 @@
             </div>
           </div>
         </div>
+        <div class="musicDiv" v-if="diary.musicUrl !== null && diary.musicUrl !== ''">
+          <center><audio :src="diary.musicUrl" controls></audio></center>
+        </div>
         <div class="mainInfo">
           <div class="diaryContent" v-html="diary.content">
 
@@ -278,5 +281,8 @@
     /*margin-right: 10px;*/
     /*margin-right: 100px;*/
   }
-
+  .musicDiv {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
 </style>

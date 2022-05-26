@@ -53,6 +53,24 @@
               <el-input v-model="ruleForm.title" placeholder="请输入标题"  clearable />
             </el-form-item>
           </div>
+          <div class="musicBox">
+            <el-form-item label="音乐">
+              <el-upload
+                  class="upload-demo"
+                  action="http://localhost:8080/diaryMusicFileUpLoadAndReturnUrl"
+                  name="myMusicFileName"
+                  :show-file-list="false"
+                  :on-success="handleMusicSuccess"
+                  :before-upload="handleMusicBeforeUpload"
+              >
+                <el-button type="primary">Click to upload</el-button>
+              </el-upload>
+            </el-form-item>
+            <div class="musicDiv">
+              <audio controls :src="ruleForm.musicUrl" v-if="ruleForm.musicUrl !== ''"></audio>
+            </div>
+
+          </div>
           <el-form-item>
             <div class="editor">
               <div ref="WangEditor" class="wangeditor"></div>
@@ -74,21 +92,17 @@ import { ElMessage } from "element-plus";
 import axios from "axios";
 import TopLogo from "@/components/前端组件/logo组件/TopLogo";
 import UserLoginAvatarAndNameDisplay from "@/components/前端组件/用户登录信息组件/UserLoginAvatarAndNameDisplay";
-// import axios from "axios";
-// import { ElMessage } from "@element-plus/icons-vue";
-// import axios from "axios";
-// 或者 const editor = new E( document.getElementById('div1') )
-// editor.create()
+
 export default {
   name: 'WriteDiary',
-  components: {UserLoginAvatarAndNameDisplay, TopLogo},
+  components: {UserLoginAvatarAndNameDisplay, TopLogo },
   data() {
     return {
       url: 'https://s4.ax1x.com/2022/02/11/HUfWjA.png',
       ruleForm: {
         mood: '',
         weather: '',
-        bgColor: '',
+        musicUrl: '',
         public: true,
         title: '',
         content: ''
@@ -133,9 +147,18 @@ export default {
 
       this.editor.$textElem.elems[0].style.background = this.ruleForm.bgColor
     },
-    colorChange(){
-      // console.log(this.$store.state.user)
-
+    handleMusicBeforeUpload(rawFile) {
+      if (rawFile.type !== 'audio/midi' && rawFile.type !== 'audio/mpeg'
+          && rawFile.type !== 'audio/webm' && rawFile.type !== 'audio/ogg'
+          && rawFile.type !== 'audio/wav') {
+        ElMessage.error("上传的不是音乐文件")
+        return false
+      }
+      return true
+    },
+    handleMusicSuccess(response) {
+      console.log(response)
+      this.ruleForm.musicUrl = response
     },
     onSubmit() {
       this.ruleForm.content = this.editor.txt.html()
@@ -147,6 +170,7 @@ export default {
         weather: this.ruleForm.weather,
         bgColor: this.ruleForm.bgColor,
         see: this.ruleForm.public,
+        musicUrl: this.ruleForm.musicUrl
         // author_id: this.$store.getters.user
       }).then(response => {
         ElMessage({
@@ -272,5 +296,12 @@ export default {
   /*margin-left: 240px;*/
   margin-top: 5px;
 }
-
+.musicBox {
+  display: flex;
+}
+.musicDiv {
+  height: 60%;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
 </style>

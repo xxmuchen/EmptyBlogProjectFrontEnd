@@ -5,7 +5,7 @@
         <el-upload
             name="userAvatarFile"
             class="avatar-uploader"
-            action="http://localhost:8081/api/avatarUpload"
+            action="http://localhost:8081/avatarUpload"
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
         >

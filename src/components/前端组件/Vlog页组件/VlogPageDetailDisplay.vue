@@ -53,7 +53,7 @@
 
           <!--        <el-aside width="500px">-->
           <div class="rightSection">
-            <PageDetailDisplayPageRightSideBar></PageDetailDisplayPageRightSideBar>
+            <PageDetailDisplayPageRightSideBar :user_id="vlogData.authorId" v-if="vlogData.id != null"></PageDetailDisplayPageRightSideBar>
           </div>
         </div>
         <!--          </el-scrollbar>-->
@@ -245,7 +245,8 @@ export default {
 }
 
 .el-row {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
+  margin-top: 10px;
 }
 
 .el-row:last-child {

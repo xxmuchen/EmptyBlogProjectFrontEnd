@@ -82,7 +82,7 @@
           <el-button type="primary" @click="onSubmit">写好了</el-button>
         </div>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>Copyright 2020-2025 © 放空blog all rights reserved</el-footer>
     </el-container>
   </div>
 </template>
@@ -177,6 +177,7 @@ export default {
           message: response.data,
           type: 'success'
         })
+        this.$router.push({name: 'MySpaceOwnDiary'})
       })
       // console.log(this.ruleForm)
       // console.log(this.editor.txt.html());
@@ -205,6 +206,9 @@ export default {
   /*height: auto;*/
   /*height: auto;*/
   background-color: #f4f0e6;
+}
+.el-footer {
+  color: lightslategray;
 }
 .common-layout .el-footer {
   /*line-height: 60px;*/

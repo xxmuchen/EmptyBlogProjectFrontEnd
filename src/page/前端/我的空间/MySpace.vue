@@ -276,7 +276,9 @@ export default {
 .common-layout .el-footer {
   /*line-height: 60px;*/
 }
-
+.el-footer {
+  color: lightslategray;
+}
 .common-layout .el-aside {
   /*background-color: #d3dce6;*/
   /*color: var(--el-text-color-primary);*/

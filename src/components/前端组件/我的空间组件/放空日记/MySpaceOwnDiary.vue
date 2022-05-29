@@ -157,7 +157,10 @@ export default {
 </script>
 <style scoped>
 .el-row {
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
+  /*padding-top: 20px;*/
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 .el-row:last-child {
   margin-bottom: 0;

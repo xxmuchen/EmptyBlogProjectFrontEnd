@@ -116,8 +116,8 @@ export default {
   min-height: 90vh;
 }
 .el-row {
-  margin-bottom: 20px;
-
+  margin-bottom: 10px;
+  margin-top: 20px;
   /*display: flex;*/
 
 }

@@ -3,7 +3,7 @@
     <div class="mainTop">
       <div>
         <div class="userInfoManageFont">日记管理</div>
-        <div class="userSearch">
+<!--        <div class="userSearch">
           <div class="userInfoSearchTimeSelect">
             <el-date-picker
                 v-model="searchDate"
@@ -20,18 +20,18 @@
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-          <!--          <div class="diaryState">-->
-          <!--            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '待审批'}}"><el-button>待审批</el-button></router-link>-->
-          <!--            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批通过'}}"><el-button>审批通过</el-button></router-link>-->
-          <!--              <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批不通过'}}"><el-button>审批不通过</el-button></router-link>-->
-          <!--          </div>-->
+          &lt;!&ndash;          <div class="diaryState">&ndash;&gt;
+          &lt;!&ndash;            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '待审批'}}"><el-button>待审批</el-button></router-link>&ndash;&gt;
+          &lt;!&ndash;            <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批通过'}}"><el-button>审批通过</el-button></router-link>&ndash;&gt;
+          &lt;!&ndash;              <router-link :to="{name: 'DiaryInfoManage' , query: {state: '审批不通过'}}"><el-button>审批不通过</el-button></router-link>&ndash;&gt;
+          &lt;!&ndash;          </div>&ndash;&gt;
           <div class="userInfoSearchInput">
             <el-input></el-input>
             <div class="userInfoSearchInputButton">
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="mainTable">

@@ -30,7 +30,7 @@
 
                 <el-row :gutter="20">
 
-                    <el-col :span="6" :offset="1"><div class="grid-content bg-purple"><router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">{{ item.title }}</router-link></div></el-col>
+                    <el-col :span="6" :offset="1"><div class="grid-content bg-purple diaryTitle"><router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">{{ item.title }}</router-link></div></el-col>
                     <el-col :span="3" :offset="14"><div class="grid-content bg-purple"><router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">{{ item.authorName }}</router-link></div></el-col>
                 </el-row>
             </div>
@@ -75,7 +75,7 @@
         <div class="newDiaryContent" v-for="item in topGuestDiaryDisplay" :key="item.id">
           <router-link :to="{name: 'DiaryPageDiaryDetailDisplay' , query:{diaryId: item.id}}">
             <el-row :gutter="20">
-              <el-col :span="6" :offset="1"><div class="grid-content bg-purple">{{ item.title }}</div></el-col>
+              <el-col :span="6" :offset="1"><div class="grid-content bg-purple diaryTitle">{{ item.title }}</div></el-col>
               <el-col :span="3" :offset="14"><div class="grid-content bg-purple">{{ item.authorName }}</div></el-col>
             </el-row>
           </router-link>
@@ -282,17 +282,17 @@
     margin-right: 80px;
   }
   .recommendDiaryTitle {
-    width: 50%;
+    width: 70%;
     height: auto;
     /*background: red;*/
     margin-top: 30px;
-    margin-left: 150px;
+    margin-left: 120px;
     /*clear: both;*/
     /*float: right;*/
   }
   .recommendDiaryPickSentence{
     width: 80%;
-    height: 140px;
+    height: 145px;
     /*background: red;*/
     text-indent: 2em;
     /*margin-top: 50px;*/
@@ -305,5 +305,12 @@
     overflow: hidden;/*超出部分进行隐藏*/
     /*clear: both;*/
     /*float: right;*/
+  }
+  .diaryTitle {
+    width: 350px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
   }
 </style>

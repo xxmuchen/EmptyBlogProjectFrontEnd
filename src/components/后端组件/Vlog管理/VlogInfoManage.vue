@@ -3,7 +3,7 @@
     <div class="mainTop">
       <div>
         <div class="userInfoManageFont">Vlog管理</div>
-        <div class="userSearch">
+<!--        <div class="userSearch">
           <div class="userInfoSearchTimeSelect">
             <el-date-picker
                 v-model="searchDate"
@@ -26,7 +26,7 @@
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <div class="mainTable">

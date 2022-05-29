@@ -36,7 +36,6 @@
               <div class="block" @click="justToVlogPageDetailDisplay(item.id)"><i class="iconfont icon-xiangqing"></i></div>
             </div>
           </div>
-
         </el-carousel-item>
       </el-carousel>
 
@@ -50,7 +49,6 @@
         </router-link>
       </div>
     </el-main>
-    <el-footer>Footer</el-footer>
   </el-container>
 </template>
 <script>
@@ -117,6 +115,7 @@
         // console.log(nowIndex, oldIndex)
         //用户可能在上个视频未播放完毕就切换
         //此时需要暂停上个视频并把时间归零，否则影响对当前视频的监听逻辑
+        this.getScreenHeightAndWidth()
         let myOldVideo = this.$refs['vue3-video-player' + oldIndex];
         myOldVideo[0].pause();
         myOldVideo[0].currentTime = 0
@@ -128,9 +127,11 @@
       },
       nextToNextVideo() {
           // this.$refs.carousel.
+        this.getScreenHeightAndWidth()
           this.$refs.carousel.next()
       },
       prevToLastVideo() {
+        this.getScreenHeightAndWidth()
         this.$refs.carousel.prev();
       },
       getScreenHeightAndWidth() {
@@ -141,17 +142,20 @@
           return (() => {
             window.fullHeight = document.documentElement.clientHeight;
             window.fullWidth = document.documentElement.clientWidth;
-            that.screenHeight = window.fullHeight - 40 + 'px'; // 高
+            // that.screenHeight = window.fullHeight - 40 + 'px'; // 高
+            that.screenHeight = window.fullHeight + 'px'; // 高
             that.windowWidth = window.fullWidth; // 宽
           })()
         };
       },
       getAllVlog() {
+
         axios.get('/getAllVlog').then(response => {
             this.vlogs = response.data
             this.$forceUpdate()
           // console.log(this.vlogs)
         })
+        this.getScreenHeightAndWidth()
       },
 
       saveDiaryStar(vlogId) {
@@ -235,7 +239,7 @@
       }
     },
     mounted() {
-     this.getScreenHeightAndWidth()
+      // this.getScreenHeightAndWidth()
       this.getAllVlog()
     },
     watch: {
@@ -250,18 +254,29 @@
   }
 </script>
 <style scoped>
+.el-container {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
 .el-header, .el-footer {
   /*background-color: #B3C0D1;*/
   /*color: #333;*/
   text-align: center;
-  line-height: 40px;
-  height: auto;
+  /*line-height: 40px;*/
+  height: 100%;
+  width: 100%;
 }
+
 .el-main {
   /*background-color: #E9EEF3;*/
   /*color: #333;*/
   padding: 0;
   margin: 0;
+  height: 100%;
+  width: 100%;
+
   /*text-align: center;*/
   /*line-height: 160px;*/
 }
@@ -290,7 +305,16 @@ body > .el-container {
   /*line-height: 320px;*/
 }
 
-
+.el-carousel {
+  width: 100%;
+  height: 100%;
+}
+::v-deep(.el-carousel__container) {
+  width: 100%;
+  /*height: 100%;*/
+  height: 100%;
+  min-height: 100%;
+}
 .el-carousel__item:nth-child(2n) {
   /*background-color: #99a9bf;*/
 }

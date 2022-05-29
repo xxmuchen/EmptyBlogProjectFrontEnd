@@ -426,6 +426,8 @@ body > .el-container {
 .el-breadcrumb {
   /*margin-top: 30px;*/
   margin-left: 12px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 </style>

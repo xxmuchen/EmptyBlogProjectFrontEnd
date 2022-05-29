@@ -24,7 +24,7 @@
         <router-view></router-view>
 
     </el-main>
-    <el-footer>Footer</el-footer>
+    <el-footer>Copyright 2020-2025 © 放空blog all rights reserved</el-footer>
   </el-container>
 </template>
 
@@ -63,6 +63,9 @@ export default {
   height: auto;
   background-color: #f4f0e6;
   text-align: center;
+}
+.el-footer {
+  color: lightslategray;
 }
 .el-main {
   /*background-color: #E9EEF3;*/

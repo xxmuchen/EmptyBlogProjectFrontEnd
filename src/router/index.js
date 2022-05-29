@@ -75,6 +75,7 @@ import SentencePageTagDisplay from "@/components/前端组件/句子页组件/Se
 import ManagerInfoManage from "@/components/后端组件/管理员管理/一级管理员管理/ManagerInfoManage";
 import SuperManagerInfoManage from "@/components/后端组件/管理员管理/二级管理员管理/SuperManagerInfoManage";
 import AdminNoticeManage from "@/components/后端组件/公告管理/公告管理/AdminNoticeManage";
+import SensitiveWordsManage from "@/components/后端组件/敏感词汇管理/SensitiveWordsManage";
 
 // 2. 定义路由配置
 const routes = [
@@ -233,6 +234,7 @@ const routes = [
             { name: 'ManagerInfoManage' , path: 'ManagerInfoManage' , component: ManagerInfoManage },
             { name: 'SuperManagerInfoManage' , path: 'SuperManagerInfoManage' , component: SuperManagerInfoManage },
             { name: 'AdminNoticeManage' , path: 'AdminNoticeManage' , component: AdminNoticeManage },
+            { name: 'SensitiveWordsManage' , path: 'SensitiveWordsManage' , component: SensitiveWordsManage },
         ]
     }
 ];

@@ -52,7 +52,7 @@
     </div>
     <!--        这部分要拆分成一个新的组件-->
     <div class="rightContent">
-      <SentencePageDetailDisplayPageRighSideBar></SentencePageDetailDisplayPageRighSideBar>
+      <SentencePageDetailDisplayPageRighSideBar :user_id="griphicData.authorId" v-if="griphicData.id != null"></SentencePageDetailDisplayPageRighSideBar>
     </div>
   </el-main>
   <!--  </el-container>-->

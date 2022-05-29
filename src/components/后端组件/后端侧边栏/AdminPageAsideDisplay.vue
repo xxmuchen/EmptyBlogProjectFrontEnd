@@ -69,38 +69,7 @@
         <router-link :to="{name: 'BlogStarInfoVisualizationDisplay'}"><el-menu-item index="6-2-3">博客点赞</el-menu-item></router-link>
         <router-link :to="{name: 'BlogCollectInfoVisualizationDisplay'}"><el-menu-item index="6-2-4">博客收藏</el-menu-item></router-link>
       </el-sub-menu>
-<!--      <el-sub-menu index="6-3">-->
-<!--        <template #title>-->
-<!--          &lt;!&ndash;          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>&ndash;&gt;-->
-<!--          <span>放空句子</span>-->
-<!--        </template>-->
-<!--        <router-link :to="{name: 'SentenceWriteInfoVisualizationDisplay'}"><el-menu-item index="6-3-1">句子撰写</el-menu-item></router-link>-->
-<!--        <router-link :to="{name: 'SentenceObserveInfoVisualizationDisplay'}"><el-menu-item index="6-3-1">用户评论</el-menu-item></router-link>-->
-<!--        <router-link :to="{name: 'SentenceStarAndCollectInfoVisualizationDisplay'}"><el-menu-item index="6-3-1">用户点赞、收藏</el-menu-item></router-link>-->
-<!--      </el-sub-menu>-->
-<!--      <el-sub-menu index="6-4">-->
-<!--        <template #title>-->
-<!--          &lt;!&ndash;          <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>&ndash;&gt;-->
-<!--          <span>放空Vlog</span>-->
-<!--        </template>-->
-<!--        <router-link :to="{name: 'VlogWriteInfoVisualizationDisplay'}"><el-menu-item index="6-4-1">Vlog上传</el-menu-item></router-link>-->
-<!--        <router-link :to="{name: 'VlogObserveInfoVisualizationDisplay'}"><el-menu-item index="6-4-1">用户评论</el-menu-item></router-link>-->
-<!--        <router-link :to="{name: 'VlogStarAndCollectInfoVisualizationDisplay'}"><el-menu-item index="6-4-1">用户点赞、收藏</el-menu-item></router-link>-->
-<!--      </el-sub-menu>-->
-<!--      <el-sub-menu index="6-5">-->
-<!--        <template #title>-->
-<!--          <span>放空图文</span>-->
-<!--        </template>-->
-<!--        <router-link :to="{name: 'GriphicWriteInfoVisualizationDisplay'}"><el-menu-item index="6-5-1">图文撰写</el-menu-item></router-link>-->
-<!--        <router-link :to="{name: 'GriphicObserveInfoVisualizationDisplay'}"><el-menu-item index="6-5-1">用户评论</el-menu-item></router-link>-->
-<!--        <router-link :to="{name: 'GriphicStarAndCollectInfoVisualizationDisplay'}"><el-menu-item index="6-5-1">用户点赞、收藏</el-menu-item></router-link>-->
-<!--      </el-sub-menu>-->
-<!--      <router-link :to="{name: ''}"><el-menu-item index="6-2">用户注册可视化</el-menu-item></router-link>-->
-<!--      <router-link :to="{name: ''}"><el-menu-item index="6-2">日记可视化</el-menu-item></router-link>-->
-<!--      <router-link :to="{name: ''}"><el-menu-item index="6-3">句子可视化</el-menu-item></router-link>-->
-<!--      <router-link :to="{name: ''}"><el-menu-item index="6-4">Vlog可视化</el-menu-item></router-link>-->
-<!--      <router-link :to="{name: ''}"><el-menu-item index="6-5">图文可视化</el-menu-item></router-link>-->
-      <!--      <el-menu-item index="5-2">图文信息可视化展示</el-menu-item>-->
+
     </el-sub-menu>
     <el-sub-menu index="7" v-if="adminPermission > 0">
       <template #title>
@@ -115,9 +84,19 @@
         <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>
         <span>公告管理</span>
       </template>
-      <router-link :to="{name: 'AdminNoticeManage'}"><el-menu-item index="8-1-1">公告管理</el-menu-item></router-link>
+      <router-link :to="{name: 'AdminNoticeManage'}"><el-menu-item index="8-1">公告管理</el-menu-item></router-link>
+    </el-sub-menu>
+    <el-sub-menu index="9" v-if="adminPermission > 0">
+      <template #title>
+        <el-icon><i class="iconfont icon-31tuwenxiangqing"></i></el-icon>
+        <span>敏感词管理</span>
+      </template>
+      <router-link :to="{name: 'SensitiveWordsManage'}"><el-menu-item index="9-1-1">敏感词管理</el-menu-item></router-link>
     </el-sub-menu>
   </el-menu>
+
+
+
 </template>
 <script>
 import axios from "axios";

@@ -168,8 +168,8 @@ export default {
   height: 500px;
 }
 .el-row {
-  margin-bottom: 20px;
-
+  margin-bottom: 10px;
+  margin-top: 20px;
   /*display: flex;*/
 
 }

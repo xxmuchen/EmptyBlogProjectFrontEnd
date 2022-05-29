@@ -7,9 +7,9 @@
               name="userAvatarFile"
               action="http://localhost:8081/api/avatarUpload"
               :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
-          >
+              :on-success="handleAvatarSuccess">
+<!--              :before-upload="beforeAvatarUpload"-->
+
             <img v-if="imageUrl" :src="imageUrl" class="avatar" />
             <el-icon v-else class="avatar-uploader-icon"><plus /></el-icon>
           </el-upload>
@@ -63,8 +63,9 @@
                 <el-input
                     type="textarea"
                     :rows="2"
+                    resize="none"
                     placeholder="请输入个性签名"
-                    autosize
+
                     v-model.trim="ruleForm.synopsis">
                 </el-input>
               </el-form-item>
@@ -241,18 +242,18 @@
         this.ruleForm.avatar = res;
         this.imageUrl = URL.createObjectURL(file.raw);
       },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传头像图片只能是 JPG 格式!');
-        }
-        if (!isLt2M) {
-          this.$message.error('上传头像图片大小不能超过 2MB!');
-        }
-        return isJPG && isLt2M;
-      },
+      // beforeAvatarUpload(file) {
+      //   const isJPG = file.type === 'image/jpeg';
+      //   const isLt2M = file.size / 1024 / 1024 < 2;
+      //
+      //   if (!isJPG) {
+      //     this.$message.error('上传头像图片只能是 JPG 格式!');
+      //   }
+      //   if (!isLt2M) {
+      //     this.$message.error('上传头像图片大小不能超过 2MB!');
+      //   }
+      //   return isJPG && isLt2M;
+      // },
 
       onSubmit() {
         // console.log(this.ruleForm.avatar)
@@ -294,6 +295,7 @@
   padding: 0;
   /*height: 100%;*/
   width: 100%;
+  /*height: ;*/
   /*display:flex;*/
   /*justify-content:center;*/
   /*align-items:center;*/

@@ -45,7 +45,7 @@
     <el-main>
         <router-view></router-view>
     </el-main>
-    <el-footer>Footer</el-footer>
+    <el-footer>Copyright 2020-2025 © 放空blog all rights reserved</el-footer>
   </el-container>
 </template>
 <script>
@@ -72,6 +72,9 @@ export default {
   background-color: #f4f0e6;
   font-family: 华文行楷;
   font-size: 20px;
+}
+.el-footer {
+  color: lightslategray;
 }
 .el-main {
   /*background-color: #E9EEF3;*/

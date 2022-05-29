@@ -78,7 +78,7 @@
 
         </div>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>Copyright 2020-2025 © 放空blog all rights reserved</el-footer>
     </el-container>
   </div>
 </template>
@@ -147,6 +147,7 @@ export default {
         type: this.ruleForm.type
       }).then(response => {
         ElMessage.success("上传成功", response)
+        this.$router.push({name: 'MySpaceOwnGriphic'})
       })
     }
   }
@@ -165,6 +166,9 @@ export default {
   /*margin: 0;*/
   /*height: auto;*/
   background-color: #f4f0e6;
+}
+.el-footer {
+  color: lightslategray;
 }
 .common-layout .el-footer {
   /*line-height: 60px;*/

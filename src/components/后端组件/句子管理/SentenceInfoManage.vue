@@ -3,7 +3,7 @@
     <div class="mainTop">
       <div>
         <div class="userInfoManageFont">句子管理</div>
-        <div class="userSearch">
+<!--        <div class="userSearch">
           <div class="userInfoSearchTimeSelect">
             <el-date-picker
                 v-model="searchDate"
@@ -27,33 +27,33 @@
               <el-button type="primary">搜索</el-button>
             </div>
           </div>
-          <!--          <div class="addUser">-->
-          <!--            <div class="userInfoSearchInputButton">-->
-          <!--              <el-button type="primary" @click="dialogAddUserVisible = true">添加用户</el-button>-->
-          <!--            </div>-->
-          <!--            <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="30%">-->
-          <!--              <el-form :model="userAddForm">-->
-          <!--                <el-form-item label="昵称" :label-width="formLabelWidth">-->
-          <!--                  <el-input v-model="userAddForm.userName" autocomplete="off"></el-input>-->
-          <!--                </el-form-item>-->
-          <!--                <el-form-item label="邮箱" :label-width="formLabelWidth">-->
-          <!--                  <el-input v-model="userAddForm.userEmail" autocomplete="off"></el-input>-->
-          <!--                </el-form-item>-->
-          <!--                <el-form-item label="密码" :label-width="formLabelWidth">-->
-          <!--                  <el-input v-model="userAddForm.userPassword" show-password type="password" autocomplete="off"></el-input>-->
-          <!--                </el-form-item>-->
-          <!--              </el-form>-->
-          <!--              <template #footer>-->
-          <!--      <span class="dialog-footer">-->
-          <!--        <el-button @click="dialogAddUserVisible = false">Cancel</el-button>-->
-          <!--        <el-button type="primary" @click="dialogAddUserVisible = false"-->
-          <!--        >Confirm</el-button-->
-          <!--        >-->
-          <!--      </span>-->
-          <!--              </template>-->
-          <!--            </el-dialog>-->
-          <!--          </div>-->
-        </div>
+          &lt;!&ndash;          <div class="addUser">&ndash;&gt;
+          &lt;!&ndash;            <div class="userInfoSearchInputButton">&ndash;&gt;
+          &lt;!&ndash;              <el-button type="primary" @click="dialogAddUserVisible = true">添加用户</el-button>&ndash;&gt;
+          &lt;!&ndash;            </div>&ndash;&gt;
+          &lt;!&ndash;            <el-dialog v-model="dialogAddUserVisible" title="添加用户" width="30%">&ndash;&gt;
+          &lt;!&ndash;              <el-form :model="userAddForm">&ndash;&gt;
+          &lt;!&ndash;                <el-form-item label="昵称" :label-width="formLabelWidth">&ndash;&gt;
+          &lt;!&ndash;                  <el-input v-model="userAddForm.userName" autocomplete="off"></el-input>&ndash;&gt;
+          &lt;!&ndash;                </el-form-item>&ndash;&gt;
+          &lt;!&ndash;                <el-form-item label="邮箱" :label-width="formLabelWidth">&ndash;&gt;
+          &lt;!&ndash;                  <el-input v-model="userAddForm.userEmail" autocomplete="off"></el-input>&ndash;&gt;
+          &lt;!&ndash;                </el-form-item>&ndash;&gt;
+          &lt;!&ndash;                <el-form-item label="密码" :label-width="formLabelWidth">&ndash;&gt;
+          &lt;!&ndash;                  <el-input v-model="userAddForm.userPassword" show-password type="password" autocomplete="off"></el-input>&ndash;&gt;
+          &lt;!&ndash;                </el-form-item>&ndash;&gt;
+          &lt;!&ndash;              </el-form>&ndash;&gt;
+          &lt;!&ndash;              <template #footer>&ndash;&gt;
+          &lt;!&ndash;      <span class="dialog-footer">&ndash;&gt;
+          &lt;!&ndash;        <el-button @click="dialogAddUserVisible = false">Cancel</el-button>&ndash;&gt;
+          &lt;!&ndash;        <el-button type="primary" @click="dialogAddUserVisible = false"&ndash;&gt;
+          &lt;!&ndash;        >Confirm</el-button&ndash;&gt;
+          &lt;!&ndash;        >&ndash;&gt;
+          &lt;!&ndash;      </span>&ndash;&gt;
+          &lt;!&ndash;              </template>&ndash;&gt;
+          &lt;!&ndash;            </el-dialog>&ndash;&gt;
+          &lt;!&ndash;          </div>&ndash;&gt;
+        </div>-->
       </div>
     </div>
     <div class="mainTable">

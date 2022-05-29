@@ -29,8 +29,8 @@
         <el-form-item>
         <div class="rootObserveSubmit">
 
-          <el-button type="primary" @click="addRootObserve" :disabled="isDisabled">Submit</el-button>
-          <el-button @click="removeRootObserveTextContent" :disabled="isDisabled">Cancel</el-button>
+          <el-button type="primary" @click="addRootObserve" :disabled="isDisabled">提交</el-button>
+          <el-button @click="removeRootObserveTextContent" :disabled="isDisabled">取消</el-button>
         </div>
         </el-form-item>
       </div>
@@ -46,7 +46,7 @@
 
         >
           <template class="custom-tree-node" #default="{ node , data }">
-            <el-form-item>
+
               <div class="observeDisplayWhole">
                 <div class="observeHead">
                   <div class="demo-avatar demo-basic">
@@ -86,12 +86,12 @@
                     />
                   </div>
                   <el-form-item><div class="ObserveContentReplySubmitButton">
-                    <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisabled">Submit</el-button>
-                    <el-button @click="closeObserveContentReplySubmit" :disabled="isDisabled">Cancel</el-button>
+                    <el-button type="primary" @click="addReplyObserve(data.id)" :disabled="isDisabled">提交</el-button>
+                    <el-button @click="closeObserveContentReplySubmit" :disabled="isDisabled">取消</el-button>
                   </div></el-form-item>
                 </div>
               </div>
-            </el-form-item>
+
 
           </template>
         </el-tree>
